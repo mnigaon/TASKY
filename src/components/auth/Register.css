@@ -1,104 +1,72 @@
-/* src/components/auth/Register.css */
+/* src/components/auth/Login.css */
+.auth-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #f9f9f9;
+  padding: 20px;
+}
 
-.register-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh; /* 화면 꽉 채움 */
-    background-color: #f9f9f9; /* 기본 배경색 */
-    padding: 20px;
-    box-sizing: border-box;
-  }
-  
-  .register-card {
-    background-color: white;
-    border-radius: 12px;
-    padding: 40px 30px;
-    max-width: 400px;
-    width: 100%;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-  }
-  
-  .register-title {
-    font-size: 28px;
-    font-weight: 800;
-    color: #111;
-    margin-bottom: 25px;
-    text-align: center;
-  }
-  
-  .register-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  .register-form input {
-    padding: 12px 14px;
-    font-size: 16px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    outline: none;
-    transition: border-color 0.2s;
-  }
-  
-  .register-form input:focus {
-    border-color: #111;
-  }
-  
-  .register-button {
-    padding: 12px 0;
-    background-color: black;
-    color: white;
-    font-size: 16px;
-    font-weight: 600;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    margin-top: 10px;
-    transition: opacity 0.2s;
-  }
-  
-  .register-button:hover {
-    opacity: 0.85;
-  }
-  
-  .register-footer {
-    margin-top: 20px;
-    text-align: center;
-    font-size: 14px;
-    color: #555;
-  }
-  
-  .register-footer a {
-    color: black;
-    text-decoration: none;
-    font-weight: 600;
-  }
-  
-  .register-footer a:hover {
-    text-decoration: underline;
-  }
-  
-  /* 반응형 */
-  @media (max-width: 480px) {
-    .register-card {
-      padding: 30px 20px;
-    }
-  
-    .register-title {
-      font-size: 24px;
-    }
-  
-    .register-form input {
-      font-size: 15px;
-    }
-  
-    .register-button {
-      font-size: 15px;
-    }
-  }
+.auth-card {
+  background: white;
+  padding: 50px 40px;
+  border-radius: 12px;
+  box-shadow: 0 6px 25px rgba(0,0,0,0.1);
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+
+.auth-card h1 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  color: #111;
+}
+
+.auth-card input {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 20px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.auth-button {
+  width: 100%;
+  padding: 14px 0;
+  background: black;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.auth-button.google {
+  background: #4285F4;
+  margin-bottom: 15px;
+}
+
+.auth-button:hover {
+  opacity: 0.85;
+}
+
+.auth-card p {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #555;
+}
+
+.auth-link {
+  color: #111;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
   
