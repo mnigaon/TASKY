@@ -1,0 +1,19 @@
+/* src/components/dashboard/WorkspaceTasksView.css */
+.workspace-tasks-view {
+    padding: 1rem;
+  }
+  .workspace-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  .delete-btn {
+    background-color: #ff4d4f;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 0.25rem 0.5rem;
+    cursor: pointer;
+  }
+  

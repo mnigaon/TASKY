@@ -1,0 +1,15 @@
+/* src/components/dashboard/WorkspaceCard.css */
+.workspace-card {
+    background-color: #f7f7f7;
+    border-radius: 8px;
+    padding: 1rem;
+    cursor: pointer;
+    flex: 0 0 150px;
+    text-align: center;
+    transition: all 0.2s;
+  }
+  .workspace-card:hover {
+    background-color: #e0f7ff;
+    transform: scale(1.03);
+  }
+  

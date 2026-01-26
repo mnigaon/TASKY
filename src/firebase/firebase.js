@@ -1,6 +1,8 @@
 // src/firebase/firebase.js
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 
 // Firebase 프로젝트 설정 (Firebase 콘솔에서 복사)
 const firebaseConfig = {
@@ -21,3 +23,8 @@ const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
 export { auth, provider };
+
+// Firestore
+export const db = getFirestore(app);
+
+export const storage = getStorage(app);

@@ -1,6 +1,6 @@
 // src/firebase/AuthContext.jsx
 import { createContext, useContext, useEffect, useState } from "react";
-import { auth } from "./firebase"; // src/firebase/firebase.js에서 auth export 필요
+import { auth } from "./firebase"; 
 import { onAuthStateChanged } from "firebase/auth";
 
 const AuthContext = createContext();

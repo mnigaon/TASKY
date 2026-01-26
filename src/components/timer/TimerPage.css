@@ -1,0 +1,115 @@
+/* src/components/timer/TimerPage.css */
+
+/* 전체 페이지 중앙 정렬 */
+.timer-page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    font-family: 'Arial', sans-serif;
+    margin-right: 130px;
+  }
+  
+  /* 위 제목과 모드 */
+  .timer-header {
+    text-align: center;
+    font-weight: bold;
+  }
+  
+  .timer-header h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  .pomodoro-sentence {
+    text-align: center;
+    font-weight: bold;
+    color: #333;
+  }
+
+  .pomodoro-info {
+    margin-bottom: 25px;
+  }
+  
+  .timer-header p.mode {
+    font-size: 1.1rem;
+    margin-top: 0.3rem;
+    color: #333;
+  }
+  
+  .timer-circle {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-color: #648CFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 3rem;
+    font-weight: bold;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    margin: 1rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .timer-circle::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    padding: 5px; /* 링 두께 */
+    background: conic-gradient(
+      rgba(255,255,255,0.5) var(--progress, 0deg),
+      rgba(255,255,255,0.1) 0deg
+    );
+    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 5px), black calc(100% - 5px));
+    mask: radial-gradient(farthest-side, transparent calc(100% - 5px), black calc(100% - 5px));
+    transform: rotate(-90deg);
+    transition: background 0.2s linear; /* 부드러운 진행률 업데이트 */
+  }
+  
+  /* 버튼 */
+  .timer-controls {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .timer-controls button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    margin-top: 20px;
+    border: none;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+  }
+  
+  .timer-controls button:hover {
+    transform: scale(1.05);
+    background-color: #506fcc;
+  }
+  
+  /* 오늘 집중 시간 */
+  .focused-time {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    margin-top: 10px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+  }
+  
+  /* Pomodoro 설명 */
+  .pomodoro-info {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #666;
+    text-align: center;
+  }
+  

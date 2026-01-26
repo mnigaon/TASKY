@@ -1,0 +1,118 @@
+/* src/components/dashboard/WorkspaceList.css */
+
+/* 전체 컨테이너 */
+.workspace-list-container {
+    padding: 1rem;
+  }
+  
+  /* 워크스페이스 추가 영역 */
+  .workspace-add {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .workspace-add input {
+    flex: 1;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+  }
+  
+  .workspace-add button {
+    padding: 0.5rem 1rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border-radius: 6px;
+    border: none;
+    background-color: #648CFF;
+    color: white;
+    transition: background 0.2s;
+  }
+  
+  .workspace-add button:hover {
+    background-color: #5172e3; /* 살짝 어둡게 */
+  }
+  
+  /* 워크스페이스 카드 목록 */
+  .workspace-cards {
+    margin-top: 55px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  /* 개별 카드 */
+  .workspace-card {
+    position: relative;
+    background-color: #648CFF; /* 기본 카드 색상 */
+    color: white;
+    padding: 1rem;
+    flex: 0 0 250px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-height: 150px;
+  }
+  
+  /* 카드 호버 */
+  .workspace-card:hover {
+    background-color: white;
+    color: black;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  }
+  
+  /* 아이콘 */
+  .workspace-card .icon {
+    font-size: 32px;
+    margin-bottom: 10px;
+  }
+  
+  /* 워크스페이스 이름 */
+  .workspace-card .name {
+    font-weight: bold;
+    font-size: 22px;
+    word-break: break-word;
+  }
+  
+  /* 카드 버튼 컨테이너 */
+  .workspace-card .workspace-card-buttons {
+    position: absolute; /* 카드 오른쪽 상단 */
+    top: 10px;
+    right: 10px;
+    display: flex;
+    gap: 0.5rem; /* 버튼 사이 간격 */
+  }
+  
+  /* 버튼 기본 스타일 */
+  .workspace-card .workspace-card-buttons button {
+    border: none;
+    border-radius: 4px;
+    padding: 0.2rem 0.5rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    white-space: nowrap;
+  }
+  
+  /* 핀 버튼 */
+  .workspace-card .workspace-card-buttons .pin-btn {
+    background-color: #ffcc00;
+    color: #333;
+  }
+  
+  /* 삭제 버튼 */
+  .workspace-card .workspace-card-buttons .delete-btn {
+    background-color: red;
+    color: white;
+  }
+  
+  /* 버튼 호버 */
+  .workspace-card .workspace-card-buttons button:hover {
+    opacity: 0.8;
+  }
+  

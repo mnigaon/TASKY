@@ -1,0 +1,163 @@
+/* Tasks.css */
+
+.tasks {
+  padding: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+  font-family: 'Inter', sans-serif;
+}
+
+.tasks h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 20px;
+}
+
+/* 입력 폼 */
+.tasks-input {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 24px;
+  background: #fff;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.tasks-input input[type="text"],
+.tasks-input input[type="date"] {
+  flex: 1 1 200px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+}
+
+.tasks-input input[type="text"]:focus,
+.tasks-input input[type="date"]:focus {
+  outline: none;
+  border-color: #648CFF;
+}
+
+.tasks-input input[type="file"] {
+  flex: 0 0 auto;
+}
+
+.tasks-input button {
+  background: #648CFF;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tasks-input button:hover {
+  background: #4f76e8;
+  transform: translateY(-2px);
+}
+
+/* Task 카드 리스트 */
+.tasks-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 16px;
+}
+
+.tasks-list li {
+  background: #fff;
+  padding: 16px 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  transition: transform 0.15s, box-shadow 0.15s;
+  cursor: pointer;
+}
+
+.tasks-list li:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+}
+
+.tasks-list li.completed {
+  opacity: 0.7;
+}
+
+.tasks-list li span {
+  flex: 1;
+}
+
+.tasks-list li span strong {
+  font-size: 16px;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 4px;
+  color: #111;
+}
+
+.tasks-list li span small {
+  display: block;
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.tasks-list li span p {
+  font-size: 14px;
+  color: #444;
+  margin: 0 0 8px 0;
+}
+
+.tasks-list li span a {
+  font-size: 13px;
+  color: #648CFF;
+  text-decoration: none;
+}
+
+.tasks-list li span a:hover {
+  text-decoration: underline;
+}
+
+/* 버튼 그룹 */
+.task-buttons {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.task-buttons button {
+  background: #fff;
+  color: #648CFF;
+  border: 1px solid #648CFF;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.task-buttons button:hover {
+  background: #648CFF;
+  color: #fff;
+}
+
+/* 반응형 */
+@media (max-width: 600px) {
+  .tasks-input {
+    flex-direction: column;
+  }
+
+  .task-buttons {
+    margin-top: 10px;
+  }
+}
+ 

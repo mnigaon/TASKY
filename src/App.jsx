@@ -1,9 +1,7 @@
-//App.jsx
+// src/App.jsx
 import { Routes, Route, useLocation } from "react-router-dom";
-
 import Header from "./components/Headerr";
 import Footer from "./components/Footer";
-
 import Hero from "./components/Hero";
 import Logoslider from "./components/Logoslider";
 import FeatureCard from "./components/FeatureCards";
@@ -11,14 +9,14 @@ import FeatureRows from "./components/FeatureRows";
 import TestimonialWall from "./components/TestimonialWall";
 import FAQ from "./components/FAQ";
 import HeroGradient from "./components/HeroGradient";
-
 import ContactSales from "./components/ContactSales";
-
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
-
 import Dashboard from "./components/dashboard/Dashboard";
 import PrivateRoute from "./components/dashboard/PrivateRoute";
+
+import { TimerProvider } from "./context/TimerContext";
+import TimerPage from "./components/timer/TimerPage";
 
 function Home() {
   return (
@@ -36,9 +34,7 @@ function Home() {
 
 function App() {
   const location = useLocation();
-
-  // 헤더를 숨길 경로
-  const hideHeaderRoutes = ["/auth", "/auth/register", "/dashboard"];
+  const hideHeaderRoutes = ["/auth", "/auth/register", "/dashboard", "/timer"];
   const shouldShowHeader = !hideHeaderRoutes.includes(location.pathname);
 
   return (
@@ -46,7 +42,7 @@ function App() {
       {shouldShowHeader && <Header />}
 
       <Routes>
-        {/* 메인 홈 */}
+        {/* 홈 */}
         <Route
           path="/"
           element={
@@ -72,12 +68,24 @@ function App() {
           }
         />
 
-        {/* 로그인 유저 전용 */}
+        {/* 타이머 페이지 */}
         <Route
-          path="/dashboard"
+          path="/timer"
+          element={
+            <TimerProvider>
+              <TimerPage />
+            </TimerProvider>
+          }
+        />
+
+        {/* 대시보드 */}
+        <Route
+          path="/dashboard/*"
           element={
             <PrivateRoute>
-              <Dashboard />
+              <TimerProvider>
+                <Dashboard />
+              </TimerProvider>
             </PrivateRoute>
           }
         />

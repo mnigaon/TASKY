@@ -1,0 +1,35 @@
+/* src/components/timer/FloatingTimer.css */
+
+  .floating-timer {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background-color: transparent;  /* 배경 제거 */
+    font-size: 3rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 999;
+    animation: bounce 1s infinite;
+    transition: transform 0.2s, color 0.2s, border-color 0.2s;
+  }
+
+  .floating-timer:hover {
+    color: #557ce0;
+    border-color: #557ce0;
+    transform: scale(1.1);
+  }
+
+  
+  /* 위아래로 살짝 튀는 애니메이션 */
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+  
+  
+  
