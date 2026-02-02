@@ -1,7 +1,9 @@
 # Dayzzy
 
-🚀 Live Demo  
-https://tasky.web.app
+A daily task & focus management web app.
+
+🚀 Live Demo
+https://dayzzy.web.app
 
 # Getting Started with Create React App
 
