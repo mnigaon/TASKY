@@ -7,30 +7,39 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 68px;               /* 🔥 살짝 슬림 */
+  height: 100px;
+  /* 🔥 늘어난 헤더 높이 */
 
-  background: rgba(255,255,255,0.9); /* 🔥 살짝 투명 → 고급 */
-  backdrop-filter: blur(8px);        /* 🔥 SaaS 유리 느낌 */
+  background-color: #3d2b1f;
+  /* Dark Leather Base - 사이드바와 동일 */
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px),
+    url("https://www.transparenttextures.com/patterns/leather.png");
+  /* 가죽 텍스처 */
 
   z-index: 1000;
 
-  border-bottom: 1px solid #eceef3;
+  border-bottom: 4px solid #2d1b0f;
+  /* 사이드바와 동일한 테두리 */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  /* 사이드바와 유사한 그림자 */
+  transition: background 0.3s ease, border-color 0.3s ease;
 }
-
 
 /* =========================
    Inner
 ========================= */
 
 .header-inner {
-  max-width: 1200px;
+  max-width: 1600px;
   margin: 0 auto;
 
   height: 100%;
-  padding: 0 28px;
+  padding: 0 80px;
 
   display: flex;
   justify-content: space-between;
+  /* Logo Left, Nav Right */
   align-items: center;
 }
 
@@ -39,19 +48,42 @@
    Logo
 ========================= */
 
-.logo {
-  font-size: 22px;        /* 🔥 30 → 22 (세련) */
+.header .logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  font-size: 22px;
   font-weight: 800;
   letter-spacing: 1.5px;
 
   text-decoration: none;
-  color: #111;
+  color: #d7ccc8;
+  /* 사이드바와 동일한 밝은 색상 */
 
-  transition: opacity 0.15s ease;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  cursor: pointer;
+  opacity: 0.85;
+  /* 기본 상태를 약간 연하게 */
+  margin-left: -30px;
+  /* 로고를 왼쪽으로 이동 */
 }
 
-.logo:hover {
-  opacity: 0.65;
+.header .logo-img {
+  width: 250px;
+  height: auto;
+  object-fit: contain;
+  transition: transform 0.2s ease;
+  filter: drop-shadow(1px 1px 1px rgba(255, 255, 255, 0.1));
+  /* 사이드바 로고와 동일한 필터 */
+}
+
+.header .logo:hover {
+  opacity: 1;
+  /* 호버 시 원본처럼 진해지도록 */
+  transform: scale(1.02);
+  color: #fff;
+  /* 호버 시 하얀게 */
 }
 
 
@@ -59,10 +91,12 @@
    Nav
 ========================= */
 
-.nav {
+.header .nav {
   display: flex;
   gap: 38px;
   align-items: center;
+  margin-right: -30px;
+  /* 네비게이션을 오른쪽으로 이동 */
 }
 
 
@@ -70,19 +104,23 @@
    Links
 ========================= */
 
-.nav-link {
+.header .nav-link {
   text-decoration: none;
 
   font-size: 14px;
   font-weight: 500;
 
-  color: #666;
+  color: #d7ccc8;
+  /* 사이드바와 동일한 밝은 색상 */
 
   transition: color 0.15s ease;
+
+  margin-right: 20px;
 }
 
-.nav-link:hover {
-  color: #111;
+.header .nav-link:hover {
+  color: #fff;
+  /* 호버 시 하얀게 */
 }
 
 
@@ -90,27 +128,31 @@
    🔥 Primary Button
 ========================= */
 
-.nav-button {
-  padding: 9px 18px;
-
-  background: #111;
-  color: white;
-
-  border-radius: 10px;
+.header .nav-button {
+  padding: 10px 24px;
+  background: #fdfbf7;
+  /* 사이드바 active tab과 동일 */
+  color: #3e2723 !important;
+  /* 사이드바 active tab과 동일 */
+  border-radius: 8px;
+  /* Slightly sharper but still soft */
   text-decoration: none;
-
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
-
-  transition: all 0.18s ease;
+  transition: all 0.2s ease;
+  box-shadow: -2px 2px 8px rgba(0, 0, 0, 0.2);
+  /* 사이드바 active tab과 유사 */
 }
 
-.nav-button:hover {
+.header .nav-button:hover {
   transform: translateY(-2px);
   opacity: 0.92;
+  background: #fff;
+  /* 호버 시 더 밝게 */
+  color: #3e2723 !important;
 }
 
-.nav-button:active {
+.header .nav-button:active {
   transform: translateY(0);
 }
 
@@ -124,11 +166,11 @@
     padding: 0 18px;
   }
 
-  .nav {
+  .header .nav {
     gap: 12px;
   }
 
-  .logo {
+  .header .logo {
     font-size: 18px;
   }
 }

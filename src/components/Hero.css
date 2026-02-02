@@ -1,129 +1,439 @@
+/* Hero.css - Floating Planner Concept (Pastel 3D) */
+
 .hero {
   width: 100%;
-  height: 100vh;
-  padding: 0;
-
-  background: url('../assets/hero-bg.jpg') no-repeat center center;
-  background-size: cover;
-
+  min-height: 100vh;
+  padding: 80px 20px 0;
+  background: #fdfbf7;
+  /* Warm creamy background */
+  background-image:
+    linear-gradient(#e5e7eb 1px, transparent 1px),
+    linear-gradient(90deg, #e5e7eb 1px, transparent 1px);
+  background-size: 50px 50px;
+  /* Soft grid */
   display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-
-  position: relative;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
-  color: white;
+  box-sizing: border-box;
 }
 
-
-/* =========================
-   Gradient (기존 유지)
-========================= */
-
-.hero::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
+.hero-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   width: 100%;
-  height: 30%;
-  background: linear-gradient(
-    to bottom,
-    rgba(0,0,0,0) 0%,
-    rgba(249,249,249,1) 100%
-  );
-  pointer-events: none;
+  max-width: 1200px;
+  gap: 40px;
+  margin-top: -60px;
 }
 
 
-/* =========================
-   텍스트 영역
-========================= */
-
+/* Text Section (Reused but adjusted for warmth) */
 .hero-text {
-  position: relative;
-
-  padding: 120px 140px;
-  max-width: 560px;
-
-  color: #111;
-  margin-top: 60px;
+  flex: 1;
+  max-width: 500px;
+  text-align: left;
+  z-index: 10;
 }
-
-
-/* =========================
-   🔥 타이틀 (Tasky 컨셉: 깔끔/집중)
-========================= */
 
 .hero-title {
-  font-size: 54px;          /* 🔥 65 → 54 (덜 부담) */
+  font-size: 56px;
   font-weight: 800;
   line-height: 1.1;
-  letter-spacing: -1px;     /* 🔥 SaaS 감성 */
-  margin-bottom: 18px;
+  letter-spacing: -1.5px;
+  color: #3d2b1f;
+  /* 다크 레더 - 헤더/푸터와 동일 */
+  margin-bottom: 24px;
 }
 
-
-/* =========================
-   🔥 서브타이틀 (가독성 ↑)
-========================= */
+.text-gradient {
+  /* 키치한 핑크 그라디언트 */
+  background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
 .hero-subtitle {
-  font-size: 18px;          /* 🔥 23 → 18 (더 세련) */
+  font-size: 18px;
   line-height: 1.6;
-  color: #444;              /* 🔥 부드러운 대비 */
-  margin-bottom: 42px;
+  color: #666;
+  /* 가독성 좋은 회색 */
+  margin-bottom: 40px;
   font-weight: 400;
 }
 
-
-/* =========================
-   🔥 CTA 버튼 (프로 느낌 업)
-========================= */
-
+/* 빈티지 플래너 버튼 */
 .hero-button {
-  padding: 12px 22px;
-
-  background: #111;
+  padding: 16px 36px;
+  background: #3d2b1f;
+  /* 다크 레더 - 헤더/푸터와 동일 */
   color: white;
-
   border: none;
-  border-radius: 10px;
-
-  font-size: 15px;
+  border-radius: 12px;
+  /* 대시보드 버튼과 동일 */
+  font-size: 16px;
   font-weight: 600;
-
   cursor: pointer;
-
-  transition: all 0.18s ease;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(61, 43, 31, 0.2);
 }
 
-/* hover */
 .hero-button:hover {
   transform: translateY(-2px);
-  opacity: 0.92;
+  box-shadow: 0 8px 20px rgba(61, 43, 31, 0.3);
+  background: #2d1b0f;
+  /* 더 어두운 레더 */
 }
 
-/* active */
-.hero-button:active {
-  transform: translateY(0);
-  opacity: 0.85;
+
+/* =========================
+   Right: Floating Planner Visual
+========================= */
+
+.hero-visual {
+  flex: 1.2;
+  height: 600px;
+  position: relative;
+  perspective: 1000px;
 }
-  
-  /* 반응형 */
-  @media (max-width: 768px) {
-    .hero-text {
-      padding: 40px 20px;
-      text-align: center;
-      max-width: 100%;
-    }
-  
-    .hero-title {
-      font-size: 36px;
-    }
-  
-    .hero-button {
-      padding: 8px 12px;
-    }
+
+.planner-scene {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  /* Slight rotation for isometric feel */
+}
+
+/* Common Claymorphism Style - 빈티지 3D 효과 강화 */
+.float-item {
+  position: absolute;
+  box-shadow:
+    15px 15px 40px rgba(61, 43, 31, 0.15),
+    /* 다크 레더 톤 그림자 */
+    -10px -10px 40px rgba(255, 255, 255, 0.9),
+    inset 2px 2px 0 rgba(255, 255, 255, 0.6);
+  border-radius: 24px;
+  transition: all 0.3s ease;
+}
+
+/* 호버 효과 - 인터랙티브 강화 */
+.float-item:hover {
+  transform: scale(1.05);
+  box-shadow:
+    20px 20px 50px rgba(61, 43, 31, 0.2),
+    -15px -15px 50px rgba(255, 255, 255, 0.95),
+    inset 2px 2px 0 rgba(255, 255, 255, 0.7);
+}
+
+
+/* 1. Clipboard */
+.clipboard {
+  width: 240px;
+  height: 320px;
+  background: #f5ebe0;
+  /* 따뜻한 베이지 - 빈티지 느낌 */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-5deg);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 50px;
+  border: 4px solid #fff;
+  animation: floatMain 6s ease-in-out infinite;
+}
+
+.clip-top {
+  position: absolute;
+  top: -15px;
+  width: 100px;
+  height: 40px;
+  background: #ee9ca7;
+  /* 키치한 핑크 클립 */
+  border-radius: 12px;
+  border: 4px solid white;
+}
+
+.paper {
+  width: 80%;
+  height: 85%;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.paper .line {
+  height: 8px;
+  background: #f0f0f0;
+  border-radius: 4px;
+}
+
+.paper .title {
+  width: 50%;
+  height: 12px;
+  background: #ffb7d5;
+  /* 부드러운 핑크 */
+  margin-bottom: 10px;
+}
+
+.check-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.check-row .box {
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  background: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 12px;
+}
+
+.check-row .box.checked {
+  background: #96f2d7;
+  /* Mint */
+}
+
+.check-row .line {
+  flex: 1;
+}
+
+
+/* 2. Calendar */
+.calendar {
+  width: 180px;
+  height: 180px;
+  background: white;
+  top: 15%;
+  right: 15%;
+  transform: rotate(10deg);
+  z-index: 1;
+  border-radius: 24px;
+  overflow: hidden;
+  border: 4px solid #fff;
+  animation: floatCal 7s ease-in-out infinite 1s;
+}
+
+.cal-header {
+  height: 50px;
+  background: #f093fb;
+  /* 키치한 핑크/보라 헤더 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cal-month {
+  color: white;
+  font-weight: 800;
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+
+.cal-grid {
+  padding: 15px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.cal-day {
+  height: 40px;
+  background: #f3f0ff;
+  border-radius: 8px;
+}
+
+.cal-day.active {
+  background: #ffa8d5;
+  /* 밝은 핑크 액센트 */
+}
+
+
+/* 3. Sticky Notes */
+.sticky-note {
+  width: 90px;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  color: white;
+  font-size: 18px;
+  transform: rotate(-12deg);
+  z-index: 3;
+}
+
+.sticky-note.pink {
+  background: #ffb4a2;
+  /* 부드러운 피치 */
+  bottom: 18%;
+  left: 15%;
+  animation: floatNote1 5s ease-in-out infinite 0.5s;
+}
+
+.sticky-note.yellow {
+  background: #ffe8a3;
+  /* 따뜻한 버터 에로우 */
+  width: 70px;
+  height: 70px;
+  top: 20%;
+  left: 20%;
+  transform: rotate(-25deg);
+  z-index: 0;
+  font-size: 24px;
+  animation: floatNote2 8s ease-in-out infinite 1.5s;
+}
+
+
+/* 4. Pencil */
+.pencil {
+  width: 160px;
+  height: 24px;
+  background: #d4a574;
+  /* 빈티지 우드 톤 */
+  border-radius: 12px;
+  position: absolute;
+  top: 40%;
+  right: 5%;
+  transform: rotate(45deg);
+  z-index: 4;
+  box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  padding: 0 4px;
+  animation: floatPencil 6s ease-in-out infinite 2s;
+}
+
+.pencil .eraser {
+  width: 30px;
+  height: 20px;
+  background: #e57373;
+  /* 부드러운 레드 */
+  border-radius: 8px;
+}
+
+.pencil .body {
+  flex: 1;
+}
+
+.pencil .tip {
+  width: 0;
+  height: 0;
+  border-left: 15px solid #d4a574;
+  /* 연필 본체와 동일 */
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  margin-right: -10px;
+}
+
+
+/* Animations */
+@keyframes floatMain {
+
+  0%,
+  100% {
+    transform: translate(-50%, -50%) rotate(-5deg) translateY(0);
   }
-  
+
+  50% {
+    transform: translate(-50%, -50%) rotate(-5deg) translateY(-15px);
+  }
+}
+
+@keyframes floatCal {
+
+  0%,
+  100% {
+    transform: rotate(10deg) translateY(0);
+  }
+
+  50% {
+    transform: rotate(10deg) translateY(-20px);
+  }
+}
+
+@keyframes floatNote1 {
+
+  0%,
+  100% {
+    transform: rotate(-12deg) translateY(0);
+  }
+
+  50% {
+    transform: rotate(-12deg) translateY(-10px);
+  }
+}
+
+@keyframes floatNote2 {
+
+  0%,
+  100% {
+    transform: rotate(-25deg) translateY(0);
+  }
+
+  50% {
+    transform: rotate(-25deg) translateY(10px);
+  }
+}
+
+@keyframes floatPencil {
+
+  0%,
+  100% {
+    transform: rotate(45deg) translateY(0);
+  }
+
+  50% {
+    transform: rotate(45deg) translateY(-15px);
+  }
+}
+
+
+/* Responsive */
+@media (max-width: 900px) {
+  .hero-container {
+    flex-direction: column;
+    margin-top: 0;
+    text-align: center;
+    gap: 40px;
+  }
+
+  .hero-text {
+    max-width: 100%;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .hero-title {
+    font-size: 42px;
+  }
+
+  .hero-visual {
+    height: 400px;
+    width: 100%;
+  }
+
+  .clipboard {
+    width: 200px;
+    height: 280px;
+  }
+
+  .calendar {
+    width: 140px;
+    height: 140px;
+    right: 5%;
+  }
+}

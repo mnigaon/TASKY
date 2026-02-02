@@ -3,12 +3,18 @@ import { doc, updateDoc, collection, getDocs, query, where } from "firebase/fire
 import { db } from "../../firebase/firebase";
 import { useAuth } from "../../firebase/AuthContext";
 import KanbanBoard from "./KanbanBoard";
+import CategoryList from "./CategoryList"; // Import CategoryList
 import TaskModal from "../dashboard/TaskModal";
 import "./KanbanPage.css";
 
-export default function KanbanPage({ workspaceId = null }) {
+export default function KanbanPage({
+  workspaceId = null,
+  setActiveTab,
+  setActiveWorkspace
+}) {
   const { currentUser } = useAuth();
 
+  const [selectedCategory, setSelectedCategory] = useState(null); // Track selected category
   const [selectedTask, setSelectedTask] = useState(null);
 
   /* ✅ workspace 이름 매핑 */
@@ -50,25 +56,48 @@ export default function KanbanPage({ workspaceId = null }) {
   return (
     <div className="kanban-page">
       <div className="kanban-header">
-        <h2>{workspaceId ? "📁 Workspace Board" : "🧑 Individual Board"}</h2>
+        <h2>
+          {selectedCategory ? (
+            <>
+              <span
+                className="back-arrow"
+                onClick={() => setSelectedCategory(null)}
+                style={{ cursor: 'pointer', marginRight: '10px', fontSize: '0.8em', color: '#888' }}
+              >
+                ◀ Categories
+              </span>
+              {selectedCategory.name} Board
+            </>
+          ) : (
+            workspaceId ? "📁 Workspace Board" : "📂 My Categories"
+          )}
+        </h2>
       </div>
 
-      <KanbanBoard
-        workspaceId={workspaceId}
-        onSelectTask={setSelectedTask}
-        onDropTask={handleDropTask}
-      />
+      {!selectedCategory && !workspaceId ? (
+        <CategoryList onSelectCategory={setSelectedCategory} />
+      ) : (
+        <KanbanBoard
+          workspaceId={workspaceId}
+          categoryId={selectedCategory?.id} // Pass category ID
+          onSelectTask={setSelectedTask}
+          onDropTask={handleDropTask}
+        />
+      )}
 
       {selectedTask && (
         <TaskModal
           task={selectedTask}
           currentUser={currentUser}
-          /* ✅ ⭐ 여기 핵심 수정 */
           workspaceTitle={
             selectedTask.workspaceId
               ? workspaceMap[selectedTask.workspaceId] || "Workspace"
               : "Individual"
           }
+          workspaceMap={workspaceMap}
+          setActiveTab={setActiveTab}
+          setActiveWorkspace={setActiveWorkspace}
+          categoryId={selectedCategory?.id} // Pass current category for new task default
           onClose={() => setSelectedTask(null)}
         />
       )}

@@ -11,10 +11,10 @@ function FeatureRows() {
       {/* ================= Row 1 ================= */}
       <div className="feature-row">
         <div className="feature-block feature-text">
-          <h2>Organize Your Tasks Clearly</h2>
+          <h2>Design Your Perfect Day</h2>
           <p>
-            Create tasks, group them into workspaces, and manage everything
-            visually with an intuitive Kanban board. Stay organized without the clutter.
+            Organization doesn't have to be boring. Use our kitsch Kanban boards
+            to drag, drop, and decorate your way to a more productive you.
           </p>
         </div>
         <div className="feature-block feature-image">
@@ -29,10 +29,10 @@ function FeatureRows() {
           <img src={feature2} alt="Focus timer" />
         </div>
         <div className="feature-block feature-text">
-          <h2>Stay Focused with Built-in Timer</h2>
+          <h2>Grow Your Focus Garden</h2>
           <p>
-            Use the Pomodoro timer to work in distraction-free sessions,
-            track your time, and build productive habits every day.
+            Plant seeds of productivity with our aesthetic Pomodoro timer.
+            Watch your focus bloom into beautiful results.
           </p>
         </div>
       </div>
@@ -41,10 +41,10 @@ function FeatureRows() {
       {/* ================= Row 3 ================= */}
       <div className="feature-row">
         <div className="feature-block feature-text">
-          <h2>Separate Workspaces for Better Structure</h2>
+          <h2>Curated Workspaces</h2>
           <p>
-            Keep personal, study, and side projects organized with dedicated
-            workspaces so nothing gets mixed up.
+            Create unique zones for your hobbies, studies, and life.
+            Every space is a fresh canvas for your creativity.
           </p>
         </div>
         <div className="feature-block feature-image">
@@ -59,10 +59,10 @@ function FeatureRows() {
           <img src={feature4} alt="Reports and stats" />
         </div>
         <div className="feature-block feature-text">
-          <h2>Track Your Progress Over Time</h2>
+          <h2>Celebrate Your Zazzy Stats</h2>
           <p>
-            View simple reports and statistics to see how much you’ve completed
-            and build consistent productivity habits.
+            Track your journey with pretty charts and reports.
+            See how much you've grown and keep that momentum going!
           </p>
         </div>
       </div>

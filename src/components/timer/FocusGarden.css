@@ -1,0 +1,1385 @@
+/* src/components/timer/FocusGarden.css - Vintage Journal Edition */
+.focus-garden-container {
+    /* 📜 Old Paper Background */
+    background-color: #fdfbf7;
+    background-image:
+        linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+    background-size: 20px 20px;
+
+    border-radius: 4px;
+    /* More paper-like */
+    padding: 30px;
+    box-shadow:
+        1px 1px 0 rgba(0, 0, 0, 0.1),
+        3px 3px 0 rgba(0, 0, 0, 0.1),
+        0 10px 20px rgba(0, 0, 0, 0.15);
+    /* Slight lift */
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 500px;
+    position: relative;
+    /* overflow: hidden; Removed to allow feet and tape to stick out */
+    flex: 1;
+    width: 100%;
+
+    /* Paper Tape Top Center */
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* 🏷️ Masking Tape Element - Moved to independent div */
+.garden-tape {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%) rotate(1deg);
+    width: 120px;
+    height: 30px;
+    background: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    z-index: 5;
+    pointer-events: none;
+}
+
+/* 🦶 Independent Feet (Brown Dots) - Exact Match with Timer Card */
+.focus-garden-container::after,
+.focus-garden-container::before {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    width: 20px;
+    height: 20px;
+    background: #5d4037;
+    border-radius: 50%;
+    z-index: -1;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
+}
+
+.focus-garden-container::before {
+    left: 40px;
+    /* Left Foot */
+}
+
+.focus-garden-container::after {
+    right: 40px;
+    /* Right Foot */
+    background: #5d4037;
+    /* Reset background */
+    filter: none;
+    /* Reset filter */
+}
+
+.garden-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 2px dashed #d7ccc8;
+    padding-bottom: 10px;
+}
+
+.garden-title {
+    font-size: 20px;
+    font-weight: 400;
+    font-family: 'Indie Flower', 'Chewy', cursive;
+    /* Handwritten feel */
+    color: #4e342e;
+    /* Ink Color */
+    transform: rotate(-1deg);
+}
+
+.garden-inventory-btn {
+    background: transparent;
+    border: 2px solid #8d6e63;
+    color: #5d4037;
+    padding: 6px 14px;
+    border-radius: 20px;
+    /* Oval stamp shape */
+    cursor: pointer;
+    font-size: 14px;
+    font-family: 'Patrick Hand', cursive;
+    transition: all 0.2s;
+    font-weight: 700;
+}
+
+.garden-inventory-btn:hover {
+    background: #8d6e63;
+    color: white;
+    transform: scale(1.05);
+}
+
+/* Plant Display Area - Sketch Circle */
+.plant-stage {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+}
+
+/* Pencil Circle Background */
+.plant-stage::before {
+    content: '';
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border: 2px dashed #a1887f;
+    border-radius: 50%;
+    opacity: 0.3;
+    z-index: -1;
+    animation: rotateCircle 60s linear infinite;
+}
+
+@keyframes rotateCircle {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.plant-emoji {
+    font-size: 110px;
+    line-height: 1;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+    filter: drop-shadow(2px 5px 5px rgba(0, 0, 0, 0.15)) sepia(0.2);
+}
+
+.plant-emoji:hover {
+    transform: scale(1.1) rotate(5deg);
+}
+
+/* Grow Animation */
+@keyframes grow {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.plant-emoji.growing {
+    animation: grow 0.6s ease-out;
+}
+
+.plant-label {
+    margin-top: 20px;
+    font-size: 20px;
+    font-family: 'Patrick Hand', cursive;
+    /* Handwritten */
+    color: #3e2723;
+    border-bottom: 2px solid #8d6e63;
+    /* Underline */
+    padding: 0 10px 2px;
+}
+
+/* Controls Area */
+.garden-controls {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    z-index: 1;
+    margin-top: 20px;
+}
+
+.water-status {
+    font-size: 16px;
+    color: #0277bd;
+    font-family: 'Patrick Hand', cursive;
+    background: transparent;
+    border: 1px dotted #0277bd;
+    padding: 6px 16px;
+    border-radius: 4px;
+    /* Tag shape */
+}
+
+.action-btn {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 4px;
+    /* Slightly rounded rect */
+    font-size: 16px;
+    font-weight: 400;
+    font-family: 'Chewy', cursive;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Water Button - Blue Ink Stamp */
+.btn-water {
+    background: transparent;
+    color: #0277bd;
+    border: 2px solid #0277bd;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    box-shadow: 0 2px 0 rgba(2, 119, 189, 0.2);
+}
+
+.btn-water::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: var(--fill-percent, 0%);
+    background: rgba(2, 119, 189, 0.1);
+    /* Water fill tint */
+    transition: height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: -1;
+}
+
+.btn-water span {
+    position: relative;
+    z-index: 2;
+}
+
+.btn-water.ready {
+    background: #0277bd;
+    color: white;
+    box-shadow: 0 4px 10px rgba(2, 119, 189, 0.3);
+    animation: rubberBand 2s infinite;
+    /* Attention seeker */
+}
+
+@keyframes rubberBand {
+    0% {
+        transform: scale3d(1, 1, 1);
+    }
+
+    30% {
+        transform: scale3d(1.15, 0.85, 1);
+    }
+
+    40% {
+        transform: scale3d(0.85, 1.15, 1);
+    }
+
+    50% {
+        transform: scale3d(1.05, 0.95, 1);
+    }
+
+    65% {
+        transform: scale3d(0.98, 1.02, 1);
+    }
+
+    75% {
+        transform: scale3d(1.02, 0.98, 1);
+    }
+
+    100% {
+        transform: scale3d(1, 1, 1);
+    }
+}
+
+.btn-water:hover:not(:disabled) {
+    transform: rotate(-1deg) scale(1.02);
+}
+
+.btn-water:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background: #e0e0e0;
+    border-color: #bbb;
+    color: #999;
+}
+
+/* Harvest Button - Green Ink Stamp */
+.btn-harvest {
+    background: white;
+    color: #2e7d32;
+    border: 2px solid #2e7d32;
+    box-shadow: 0 2px 0 rgba(46, 125, 50, 0.2);
+}
+
+.btn-harvest:hover {
+    background: #2e7d32;
+    color: white;
+    transform: rotate(1deg) scale(1.02);
+    box-shadow: 0 4px 10px rgba(46, 125, 50, 0.3);
+}
+
+/* Inventory Overlay UI - Vintage Botanical Journal Edition */
+.inventory-view {
+    position: absolute;
+    inset: 0;
+    /* 📜 Old Paper Texture */
+    background-color: #fdfbf7;
+    background-image:
+        linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+    background-size: 20px 20px;
+    z-index: 20;
+    padding: 24px;
+    padding-left: 34px;
+    /* Space for binding */
+    display: flex;
+    flex-direction: column;
+    animation: fadeInPage 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    border-radius: 35px;
+    /* Match container */
+    overflow: hidden;
+    box-shadow: inset 10px 0 20px rgba(0, 0, 0, 0.1);
+    /* Page depth */
+}
+
+/* 📒 Leather Binding Effect (Left Side) */
+.inventory-view::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 24px;
+    background: #5d4037;
+    /* Leather Brown */
+    border-right: 2px solid #3e2723;
+    z-index: 30;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Page Turn Animation */
+@keyframes fadeInPage {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.inventory-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #d7ccc8;
+    /* Faded line */
+    position: relative;
+    z-index: 31;
+}
+
+.inventory-title {
+    font-size: 24px;
+    font-weight: 400;
+    margin: 0;
+    font-family: 'Chewy', cursive;
+    color: #4e342e;
+    text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.inventory-title::before {
+    content: '🌿';
+    filter: sepia(0.6);
+}
+
+.inventory-count-badge {
+    font-size: 13px;
+    color: #fff;
+    background: #795548;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-family: 'Patrick Hand', cursive;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+    margin-left: 10px;
+}
+
+/* Greener Stats Summary */
+.garden-stats-container {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.garden-stat {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.6);
+    padding: 10px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px dashed #a1887f;
+}
+
+.garden-stat-val {
+    font-size: 20px;
+    font-weight: 700;
+    color: #3e2723;
+    font-family: 'Chewy', cursive;
+}
+
+.garden-stat-lab {
+    font-size: 11px;
+    font-weight: 700;
+    color: #6d4c41;
+    text-transform: uppercase;
+    font-family: 'Patrick Hand', cursive;
+}
+
+/* Enlarged Inventory Grid */
+.inventory-grid.sixth-columns {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    /* 4 Columns fit better */
+    gap: 12px;
+    overflow-y: auto;
+    padding: 8px;
+    flex: 1;
+}
+
+/* 🏷️ Stamp Style Cards */
+.nature-card {
+    aspect-ratio: 1;
+    background: #fff;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* Stamp Perforation Effect using mask */
+    --mask: radial-gradient(12px at 12px 12px, #0000 98%, #000) -12px -12px;
+    -webkit-mask: var(--mask);
+    mask: var(--mask);
+    -webkit-mask-size: 100% 12px, 12px 100%;
+    mask-size: 100% 12px, 12px 100%;
+    /* Top/Bottom, Left/Right */
+    -webkit-mask-composite: source-in;
+    /* Intersect */
+    mask-composite: intersect;
+
+    /* Fallback border for non-supporting browsers */
+    border: 1px solid #d7ccc8;
+    box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.15);
+    padding: 6px;
+}
+
+/* Inner Frame of Stamp */
+.nature-card::after {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    border: 1px dotted #ccc;
+    pointer-events: none;
+}
+
+.nature-emoji {
+    font-size: 36px;
+    z-index: 2;
+    filter: drop-shadow(1px 2px 2px rgba(0, 0, 0, 0.2));
+    transition: transform 0.2s;
+}
+
+.nature-leaf-decoration {
+    display: none;
+    /* Hide leaf for stamp look */
+}
+
+.nature-card:hover {
+    transform: translateY(-3px) rotate(2deg);
+    z-index: 10;
+    background: #fff;
+}
+
+.nature-card:hover .nature-emoji {
+    transform: scale(1.15);
+}
+
+/* Nature Rarity Effects (Background Colors) */
+.rarity-sprout {
+    background-color: #e8f5e9;
+}
+
+.rarity-leaf {
+    background-color: #c8e6c9;
+}
+
+.rarity-flower {
+    background-color: #ffccbc;
+}
+
+.rarity-ancient {
+    background-color: #fff9c4;
+}
+
+/* Close Icon Button */
+.inventory-close-icon-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    font-family: 'Patrick Hand', cursive;
+    font-size: 24px;
+    color: #8d6e63;
+    cursor: pointer;
+    transition: transform 0.2s;
+    z-index: 100;
+}
+
+.inventory-close-icon-btn:hover {
+    color: #3e2723;
+    transform: scale(1.2) rotate(90deg);
+}
+
+/* Nature Tooltip - Handwritten Note */
+.nature-tooltip {
+    position: fixed;
+    background: #fff9c4;
+    /* Post-it Yellow */
+    padding: 16px;
+    border-radius: 2px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+    width: 200px;
+    z-index: 1000;
+    pointer-events: none;
+    border: none;
+    transform: translate(-50%, -100%) rotate(-2deg);
+    margin-top: -20px;
+    font-family: 'Patrick Hand', cursive;
+}
+
+.nature-tooltip::after {
+    /* Tape effect */
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 15px;
+    background: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.nature-rarity-badge {
+    display: inline-block;
+    padding: 2px 6px;
+    border: 1px solid #3e2723;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    background: transparent;
+    color: #3e2723;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.nature-name {
+    font-weight: 700;
+    color: #3e2723;
+    font-size: 18px;
+    margin-bottom: 4px;
+    display: block;
+    text-decoration: underline;
+    text-decoration-style: wavy;
+    text-decoration-color: #8d6e63;
+}
+
+.nature-desc {
+    color: #5d4037;
+    font-size: 14px;
+    font-style: italic;
+    display: block;
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+
+.nature-tool-footer {
+    border-top: 1px dashed #a1887f;
+    padding-top: 8px;
+}
+
+.nature-date {
+    color: #8d6e63;
+    font-size: 12px;
+}
+
+/* Sorting Bar - Paper Tabs */
+.garden-sort-bar {
+    display: flex;
+    gap: 4px;
+    padding: 0 10px 10px 10px;
+    background: transparent;
+    border-bottom: 1px solid #d7ccc8;
+    z-index: 10;
+    overflow-x: auto;
+}
+
+.sort-tab {
+    padding: 4px 12px;
+    border-radius: 8px 8px 0 0;
+    border: 1px solid #d7ccc8;
+    border-bottom: none;
+    background: #eceff1;
+    font-size: 12px;
+    font-family: 'Patrick Hand', cursive;
+    color: #78909c;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.sort-tab:hover {
+    background: #fff;
+    color: #3e2723;
+}
+
+.sort-tab.active {
+    background: #fdfbf7;
+    border-color: #d7ccc8;
+    color: #3e2723;
+    font-weight: 700;
+    position: relative;
+    top: 1px;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* Rarity Probability Guide */
+.rarity-guide-container {
+    margin-top: 15px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 8px;
+    border: 1px solid #d7ccc8;
+}
+
+.rarity-guide-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #5d4037;
+    font-family: 'Patrick Hand', cursive;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.rarity-guide-items {
+    gap: 4px;
+}
+
+.rarity-guide-item {
+    padding: 4px;
+    border-radius: 4px;
+    color: #3e2723;
+    font-family: 'Patrick Hand', cursive;
+    background: transparent;
+    border: 1px solid transparent;
+}
+
+.rarity-guide-item:hover {
+    background: #fff;
+    border-color: #d7ccc8;
+}
+
+/* Dark Mode Rarity Guide */
+body.dark .inventory-view {
+    background-color: #2b2b2b;
+    background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    color: #ccc;
+}
+
+body.dark .inventory-view::before {
+    background: #3e2723;
+}
+
+/* Darker binding */
+
+body.dark .inventory-title {
+    color: #d7ccc8;
+    text-shadow: none;
+}
+
+body.dark .inventory-header-row {
+    border-bottom-color: #4e342e;
+}
+
+body.dark .nature-card {
+    background: #3e2723;
+    border-color: #5d4037;
+}
+
+body.dark .rarity-sprout {
+    background-color: #1b5e20;
+}
+
+body.dark .rarity-leaf {
+    background-color: #33691e;
+}
+
+body.dark .rarity-flower {
+    background-color: #bf360c;
+}
+
+body.dark .rarity-ancient {
+    background-color: #fbc02d;
+}
+
+body.dark .garden-stat {
+    background: rgba(0, 0, 0, 0.3);
+    border-color: #4e342e;
+}
+
+body.dark .garden-stat-val {
+    color: #d7ccc8;
+}
+
+body.dark .garden-stat-lab {
+    color: #a1887f;
+}
+
+body.dark .sort-tab.active {
+    background: #2b2b2b;
+    color: #d7ccc8;
+    border-color: #4e342e;
+}
+
+body.dark .sort-tab {
+    background: #1e1e1e;
+    color: #757575;
+    border-color: #333;
+}
+
+body.dark .rarity-guide-container {
+    background: rgba(0, 0, 0, 0.3);
+    border-color: #4e342e;
+}
+
+body.dark .rarity-guide-item {
+    color: #a1887f;
+}
+
+body.dark .nature-tooltip {
+    background: #3e2723;
+    color: #d7ccc8;
+}
+
+body.dark .nature-name,
+body.dark .nature-desc,
+body.dark .nature-rarity-badge {
+    color: #d7ccc8;
+    border-color: #a1887f;
+}
+
+/* 🌿 Additional Dark Mode Polish for Garden Elements */
+body.dark .garden-title {
+    color: #d7ccc8;
+    text-shadow: none;
+}
+
+body.dark .garden-tape {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+body.dark .plant-label {
+    color: #d7ccc8;
+    border-bottom-color: #5d4037;
+}
+
+body.dark .water-status {
+    color: #4fc3f7;
+    border-color: #039be5;
+    background: rgba(3, 155, 229, 0.1);
+}
+
+body.dark .btn-water {
+    color: #4fc3f7;
+    border-color: #039be5;
+    background: transparent;
+}
+
+body.dark .btn-water::before {
+    background: rgba(3, 155, 229, 0.2);
+}
+
+body.dark .btn-water:disabled {
+    background: #424242;
+    border-color: #616161;
+    color: #757575;
+}
+
+body.dark .btn-harvest {
+    background: #1b5e20;
+    color: #e8f5e9;
+    border-color: #2e7d32;
+    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.3);
+}
+
+body.dark .btn-harvest:hover {
+    background: #2e7d32;
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(46, 125, 50, 0.5);
+}
+
+/* 🌙 Dark Mode for Main Garden Container */
+body.dark .focus-garden-container {
+    background-color: #2b2b2b;
+    background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    box-shadow: none;
+    border-color: #3e2723;
+}
+
+body.dark .garden-tape {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+body.dark .garden-title {
+    color: #ef9a9a;
+    /* Soft red for dark mode */
+}
+
+body.dark .garden-header {
+    border-bottom-color: #4e342e;
+}
+
+body.dark .garden-inventory-btn {
+    color: #d7ccc8;
+    border-color: #8d6e63;
+}
+
+body.dark .garden-inventory-btn:hover {
+    background: #4e342e;
+    color: #fff;
+}
+
+body.dark .plant-label {
+    color: #d7ccc8;
+    border-bottom-color: #5d4037;
+}
+
+body.dark .plant-emoji {
+    filter: drop-shadow(2px 5px 5px rgba(0, 0, 0, 0.5));
+}
+
+body.dark .water-status {
+    color: #81d4fa;
+    border-color: #29b6f6;
+}
+
+body.dark .btn-water {
+    color: #81d4fa;
+    border-color: #29b6f6;
+}
+
+body.dark .btn-water.ready {
+    background: #0277bd;
+    color: #fff;
+}
+
+body.dark .btn-harvest {
+    background: #2b2b2b;
+    color: #66bb6a;
+    border-color: #388e3c;
+}
+
+body.dark .btn-harvest:hover {
+    background: #1b5e20;
+    color: #fff;
+}
+
+body.dark .inventory-grid::-webkit-scrollbar-thumb {
+    background: #2d4a2d;
+    border-color: #1a2e1a;
+}
+
+.dark .inventory-close-icon-btn {
+    background: rgba(255, 255, 255, 0.05);
+    color: #a0aec0;
+}
+
+.dark .inventory-close-icon-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+/* Floating Tooltip */
+.floating-tooltip {
+    position: fixed;
+    background: white;
+    padding: 12px 16px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    width: 200px;
+    text-align: center;
+    z-index: 1000;
+    pointer-events: none;
+    font-size: 13px;
+    border: 1px solid #f0f0f0;
+    transform: translate(-50%, -100%);
+    margin-top: -15px;
+    /* Spacing above cursor */
+    animation: tooltipFadeIn 0.2s ease-out;
+}
+
+@keyframes tooltipFadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -90%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, -100%);
+    }
+}
+
+.floating-tooltip::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -6px;
+    border-width: 6px;
+    border-style: solid;
+    border-color: white transparent transparent transparent;
+}
+
+.tooltip-name {
+    font-weight: 700;
+    color: #333;
+    font-size: 14px;
+    margin-bottom: 2px;
+    display: block;
+}
+
+.tooltip-desc {
+    color: #555;
+    font-style: italic;
+    display: block;
+    margin-bottom: 4px;
+    line-height: 1.3;
+}
+
+.tooltip-date {
+    color: #999;
+    font-size: 10px;
+}
+
+.dark .floating-tooltip {
+    background: #2a2a2a;
+    border-color: #444;
+}
+
+.dark .floating-tooltip::after {
+    border-color: #2a2a2a transparent transparent transparent;
+}
+
+.dark .tooltip-name {
+    color: #eee;
+}
+
+.dark .tooltip-desc {
+    color: #ccc;
+}
+
+/* =========================
+   🏡 Garden View Mode
+   ========================= */
+
+.secret-garden-view {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    animation: fadeIn 0.3s ease;
+}
+
+.inventory-view-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+/* 🗺️ Grid Map */
+.garden-grid-map {
+    flex: 1;
+    background: #e6fcf5;
+    /* Soft grassy background */
+    border-radius: 12px;
+    margin-bottom: 12px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    gap: 2px;
+    padding: 10px;
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.05);
+    border: 4px solid #b2f2bb;
+    overflow: hidden;
+    /* Keep tiles inside */
+}
+
+.garden-tile {
+    background-color: #d3f9d8;
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.garden-tile:hover {
+    background-color: #b2f2bb;
+    transform: scale(0.95);
+}
+
+.garden-tile.occupied:hover {
+    transform: scale(1.1);
+    z-index: 10;
+}
+
+.tile-plant {
+    font-size: 24px;
+    filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.1));
+    pointer-events: none;
+    user-select: none;
+}
+
+/* 🍱 Placement Tray */
+.garden-placement-tray {
+    height: 100px;
+    background: #fff;
+    border-radius: 12px;
+    padding: 10px 14px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.05);
+    border: 1px solid #eee;
+}
+
+.tray-label {
+    font-size: 13px;
+    color: #666;
+    margin: 0 0 8px 0;
+    font-weight: 700;
+}
+
+.tray-list {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    padding-bottom: 6px;
+    /* Custom Scrollbar for tray */
+    scrollbar-width: thin;
+}
+
+.tray-item {
+    width: 44px;
+    height: 44px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    flex-shrink: 0;
+    transition: all 0.2s;
+}
+
+.tray-item:hover {
+    background: #e9ecef;
+}
+
+.tray-item.selected {
+    border-color: #40c057;
+    background: #e6fcf5;
+    transform: translateY(-4px);
+    box-shadow: 0 4px 8px rgba(64, 192, 87, 0.2);
+}
+
+/* Nav Buttons & Header Controls */
+.garden-nav-btn {
+    background: rgba(0, 0, 0, 0.05);
+    border: none;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #555;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.garden-nav-btn:hover {
+    background: rgba(0, 0, 0, 0.1);
+    color: #333;
+}
+
+.garden-icon-btn {
+    background: transparent;
+    border: 1px solid #ddd;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+    color: #666;
+}
+
+.garden-icon-btn:hover {
+    background: #f0f0f0;
+}
+
+.garden-icon-btn.active {
+    background: #fff3bf;
+    border-color: #fab005;
+    color: #f08c00;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(250, 176, 5, 0.4);
+    }
+
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 6px rgba(250, 176, 5, 0);
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(250, 176, 5, 0);
+    }
+}
+
+/* Dark Mode Overrides */
+.dark .garden-grid-map {
+    background: #2b8a3e;
+    /* Darker grass */
+    border-color: #2f9e44;
+}
+
+.dark .garden-tile {
+    background-color: #37b24d;
+}
+
+.dark .garden-tile:hover {
+    background-color: #40c057;
+}
+
+.dark .garden-placement-tray {
+    background: #252526;
+    border-color: #333;
+}
+
+.dark .tray-label {
+    color: #aaa;
+}
+
+.dark .tray-item {
+    background: #333;
+}
+
+.dark .tray-item.selected {
+    background: #2b8a3e;
+    border-color: #51cf66;
+}
+
+.dark .garden-nav-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ccc;
+}
+
+.dark .garden-nav-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+}
+
+.dark .garden-icon-btn {
+    border-color: #555;
+    color: #ccc;
+}
+
+.dark .garden-icon-btn:hover {
+    background: #444;
+}
+
+.dark .garden-icon-btn.active {
+    background: #5f3dc4;
+    /* Deep purple/indigo for dark mode active */
+    border-color: #7950f2;
+    color: #fff;
+}
+
+/* =========================
+   📱 Mobile Responsive
+========================= */
+@media (max-width: 768px) {
+    .focus-garden-container {
+        padding: 25px !important;
+        min-height: 450px;
+    }
+
+    .garden-title {
+        font-size: 18px;
+    }
+
+    .plant-emoji {
+        font-size: 90px;
+    }
+
+    .plant-label {
+        font-size: 18px;
+    }
+
+    .inventory-grid.sixth-columns {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+    }
+
+    .nature-emoji {
+        font-size: 32px;
+    }
+
+    .inventory-title {
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .focus-garden-container {
+        padding: 20px !important;
+        min-height: 400px;
+    }
+
+    .garden-header {
+        margin-bottom: 15px;
+    }
+
+    .garden-title {
+        font-size: 16px;
+    }
+
+    .garden-inventory-btn {
+        padding: 5px 12px;
+        font-size: 13px;
+    }
+
+    .plant-stage::before {
+        width: 160px;
+        height: 160px;
+    }
+
+    .plant-emoji {
+        font-size: 80px;
+    }
+
+    .plant-label {
+        font-size: 16px;
+        margin-top: 15px;
+    }
+
+    .water-status {
+        font-size: 14px;
+        padding: 5px 12px;
+    }
+
+    .action-btn {
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    .inventory-view {
+        padding: 20px;
+        padding-left: 30px;
+    }
+
+    .inventory-title {
+        font-size: 18px;
+    }
+
+    .inventory-count-badge {
+        font-size: 12px;
+        padding: 3px 8px;
+    }
+
+    .garden-stats-container {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .garden-stat {
+        padding: 8px;
+    }
+
+    .garden-stat-val {
+        font-size: 18px;
+    }
+
+    .inventory-grid.sixth-columns {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+
+    .nature-emoji {
+        font-size: 28px;
+    }
+
+    .nature-tooltip {
+        width: 160px;
+        padding: 12px;
+    }
+
+    .nature-name {
+        font-size: 16px;
+    }
+
+    .nature-desc {
+        font-size: 13px;
+    }
+
+    .sort-tab {
+        font-size: 11px;
+        padding: 3px 10px;
+    }
+}

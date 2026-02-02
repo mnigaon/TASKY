@@ -1,0 +1,305 @@
+.category-list-container {
+    padding: 60px 40px;
+    /* height: 100%; - Removed to allow full page scroll */
+    /* overflow-y: auto; - Removed */
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-bottom: 40px;
+}
+
+/* Sticky Note Base */
+.category-card.sticky-note {
+    background-color: var(--cat-color);
+    width: 100%;
+    height: 220px;
+    padding: 25px;
+    box-shadow:
+        5px 5px 15px rgba(0, 0, 0, 0.15),
+        inset 0 0 20px rgba(0, 0, 0, 0.02);
+    /* Slight inner depth */
+    transform: rotate(var(--rotate, 0deg));
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    border-radius: 2px;
+    /* Sharp corners for notes */
+    border: none;
+    position: relative;
+    font-family: 'Kalam', 'Handlee', cursive;
+    /* Handwritten font feel if available, else fallback */
+}
+
+.category-card.sticky-note:hover {
+    transform: scale(1.05) rotate(0deg) !important;
+    box-shadow: 10px 15px 25px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+}
+
+/* Tape Effect */
+.category-card .tape {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 30px;
+    background-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(2px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Pin Effect for No Category */
+.category-card .pin {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 24px;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+.category-card h3 {
+    font-size: 1.3em;
+    /* Reduced from 1.6em */
+    margin: 25px 0 0 0;
+    /* Increased top margin since tape is there */
+    color: #333;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+/* Create Card - Dashed Note */
+/* Create Card - Icon Only (Minimalist) */
+/* Create Card - Icon Only (Minimalist) */
+.category-card.create-card {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    /* Darker gray */
+    transition: all 0.3s ease;
+    position: relative;
+    /* For tooltip positioning */
+
+    /* Strict Sizing Override */
+    width: 60px !important;
+    height: 60px !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    margin: 20px auto;
+}
+
+.category-card.create-card:hover {
+    border: none;
+    background: transparent;
+    color: #111;
+    /* Almost black */
+    transform: scale(1.1) !important;
+    box-shadow: none;
+    z-index: 20;
+}
+
+/* Tooltip on Hover (Top) */
+.category-card.create-card:hover::after {
+    content: "Create New Category";
+    position: absolute;
+    top: -40px;
+    /* Show ABOVE the icon */
+    bottom: auto;
+    /* Force Reset bottom */
+    left: 50%;
+    transform: translateX(-50%);
+    background: #333;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 13px;
+    white-space: nowrap;
+    opacity: 0;
+    animation: fadeInTooltip 0.2s 0.1s forwards;
+    pointer-events: none;
+    font-family: sans-serif;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes fadeInTooltip {
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+.create-card .plus-icon {
+    font-size: 40px;
+    margin-bottom: 5px;
+}
+
+
+.category-card .open-btn {
+    font-size: 0.85em;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 4px 10px;
+    border-radius: 20px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.category-card:hover .open-btn {
+    opacity: 1;
+}
+
+.category-card .delete-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2em;
+    opacity: 0.4;
+    transition: all 0.2s;
+    z-index: 5;
+}
+
+.delete-btn:hover {
+    opacity: 1;
+    color: #d32f2f;
+    transform: scale(1.2) rotate(90deg);
+}
+
+.cat-footer {
+    display: flex;
+    justify-content: flex-end;
+    /* Changed to flex-end since delete btn is gone from flow */
+    align-items: center;
+    margin-top: auto;
+    font-family: sans-serif;
+}
+
+/* Circular Progress */
+.progress-circle {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    /* above shadow */
+}
+
+.progress-circle svg {
+    transform: rotate(-90deg);
+}
+
+.progress-circle circle.bg {
+    stroke: rgba(0, 0, 0, 0.1);
+}
+
+.progress-circle circle.fg {
+    stroke: #333;
+    /* Dark stroke for pencil feel */
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.5s ease-out;
+}
+
+.progress-circle .progress-text {
+    position: absolute;
+    font-size: 11px;
+    font-weight: 700;
+    color: #333;
+    font-family: sans-serif;
+}
+
+/* Move open-btn to bottom-left to avoid overlap */
+.cat-footer .open-btn {
+    position: absolute;
+    bottom: 25px;
+    left: 20px;
+}
+
+/* =========================
+   📱 Mobile Responsive
+========================= */
+@media (max-width: 768px) {
+    .category-list-container {
+        padding: 50px 30px;
+    }
+
+    .category-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 30px;
+    }
+
+    .category-card.sticky-note {
+        height: 200px;
+        padding: 20px;
+    }
+
+    .category-card h3 {
+        font-size: 1.2em;
+    }
+}
+
+@media (max-width: 480px) {
+    .category-list-container {
+        padding: 40px 20px;
+    }
+
+    .category-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .category-card.sticky-note {
+        height: 180px;
+        padding: 18px;
+    }
+
+    .category-card h3 {
+        font-size: 1.1em;
+        margin: 20px 0 0 0;
+    }
+
+    .category-card .tape {
+        width: 80px;
+        height: 25px;
+    }
+
+    .category-card .open-btn {
+        font-size: 0.8em;
+        padding: 3px 8px;
+    }
+
+    .progress-circle {
+        width: 38px;
+        height: 38px;
+        bottom: 15px;
+        right: 15px;
+    }
+
+    .progress-circle .progress-text {
+        font-size: 10px;
+    }
+
+    .create-card .plus-icon {
+        font-size: 35px;
+    }
+}

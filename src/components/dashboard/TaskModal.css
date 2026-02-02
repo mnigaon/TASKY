@@ -1,484 +1,730 @@
-/* TaskModal.css */
+/* TaskModal.css - Analog Clipboard & Binder Theme */
 
-/* =========================
-   Overlay
-========================= */
+:root {
+  --paper-bg: #fff9e6;
+  /* Creamy Paper */
+  --paper-line: #e2e8f0;
+  --marker-red: #ff5252;
+  --marker-blue: #448aff;
+  --tape-yellow: rgba(255, 235, 59, 0.4);
+  --tape-gray: rgba(200, 200, 200, 0.3);
+}
 
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.45);
+  background: rgba(45, 30, 20, 0.5);
+  /* Warm Walnut Backdrop */
+  backdrop-filter: blur(4px);
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 9999;
+  padding: 40px 20px;
+  /* Space for clips at the top */
 }
-
-/* =========================
-   카드
-========================= */
 
 .modal-content {
-  background: white;
   width: 95%;
-  max-width: 560px;
-
-  padding: 24px;
-  border-radius: 16px;
-
+  max-width: 650px;
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-
-  position: relative;
-
-  /* 🔥 NEW — 모달 길이 제한 + 내부 스크롤 */
-  max-height: 85vh;
-  overflow-y: auto;
+  max-height: 90vh;
+  /* Total height including clip area */
+  overflow: visible;
+  /* To allow the top clip to show outside modal-paper */
+  animation: paperSlide 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* close */
+.modal-paper {
+  background: var(--paper-bg);
+  border: 1px solid #e0dfd5;
+  border-radius: 4px;
+  box-shadow:
+    5px 5px 0px rgba(0, 0, 0, 0.1),
+    15px 15px 35px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  /* THE CLIPPER - strictly contains all tools/logic */
+  flex: 1;
+  position: relative;
+}
+
+.task-modal-scroll-area {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 60px 40px 40px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  border-radius: 4px;
+  min-height: 0;
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+
+  /* 📏 Paper Grid/Line Background - LOCAL so it scrolls */
+  background-image: linear-gradient(var(--paper-line) 1px, transparent 1px);
+  background-size: 100% 32px;
+  background-attachment: local;
+}
+
+/* Custom Scrollbar */
+.task-modal-scroll-area::-webkit-scrollbar {
+  width: 6px;
+}
+
+.task-modal-scroll-area::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+@keyframes paperSlide {
+  from {
+    opacity: 0;
+    transform: translateY(30px) rotate(2deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+/* 📎 Top Metal Clip Decoration */
+.modal-content::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  /* Lifted slightly above the paper edge */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 140px;
+  height: 45px;
+  background: linear-gradient(to bottom, #d1d5db, #9ca3af, #4b5563);
+  border-radius: 8px 8px 4px 4px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  z-index: 100;
+}
+
+/* Clip Hole */
+.modal-content::after {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 12px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  z-index: 101;
+}
+
 .close-x {
   position: absolute;
-  top: 12px;
-  right: 14px;
-  background: none;
-  font-size: 18px;
-  cursor: pointer;
-}
-
-
-/* =========================
-   🔥 NEW — 공통 입력폼 스타일 (핵심)
-   (input / textarea / select 통일)
-========================= */
-
-.task-section input,
-.task-section textarea,
-.task-section select {
-  width: 97%;
-  padding: 12px 14px;
-
-  border-radius: 10px;
-  border: 1px solid #e4e6eb;
-
+  top: 15px;
+  right: 15px;
+  background: transparent;
+  border: 2px dashed #999;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 14px;
-  background: #fff;
-
-  transition: all 0.15s;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'Patrick Hand', cursive;
+  z-index: 20;
 }
 
-.task-section textarea {
-  resize: vertical;
-  min-height: 70px;
+/* 🔍 Google Maps Autocomplete Fix */
+.pac-container {
+  z-index: 10000 !important;
+  font-family: 'Patrick Hand', cursive;
+  border-radius: 8px;
+  margin-top: 5px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-.task-section input:focus,
-.task-section textarea:focus,
-.task-section select:focus {
-  outline: none;
-  border-color: #648cff;
-  box-shadow: 0 0 0 2px rgba(100, 140, 255, 0.15);
+.pac-item {
+  cursor: pointer;
+  padding: 8px 12px;
 }
 
-/* 파일 인풋 살짝 정리 */
-.task-section input[type="file"] {
-  padding: 6px 4px;
-  font-size: 13px;
+.pac-item:hover {
+  background-color: #f7fafc;
 }
 
+.close-x:hover {
+  background: #ff5252;
+  color: white;
+  border-color: transparent;
+  transform: rotate(90deg) scale(1.1);
+}
+
+.modal-workspace-header {
+  font-family: 'Chewy', cursive;
+  font-size: 1.2rem;
+  color: #795548;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.modal-workspace-header.clickable {
+  cursor: pointer;
+  text-decoration: underline dotted;
+}
 
 /* =========================
-   Task
+   Task Inputs
 ========================= */
-
 .task-section {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 20px;
 }
 
-.task-title {
-  font-size: 18px;
-  font-weight: 600;
+.task-title-input {
+  font-family: 'Chewy', cursive;
+  font-size: 2rem;
+  color: #3e2723;
+  background: transparent;
+  border: none;
+  border-bottom: 2px dashed #dcaebb;
+  padding: 8px 0;
+  width: 100%;
+  outline: none;
 }
 
-.task-desc {
-  resize: vertical;
+.task-desc-textarea {
+  font-family: 'Patrick Hand', cursive;
+  font-size: 1.2rem;
+  line-height: var(--line-height, 32px);
+  /* Matches paper grid */
+  color: #4e342e;
+  background: transparent;
+  border: none;
+  min-height: 160px;
+  resize: none;
+  outline: none;
+  padding: 0;
+  margin-top: 4px;
 }
 
 .task-row {
-  display: flex;
-  gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 15px;
+  background: rgba(255, 255, 255, 0.3);
+  padding: 15px;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  /* Post-it area look */
 }
 
-
-/* =========================
-   버튼
-========================= */
-.task-actions {
-  display: flex;
-  justify-content: flex-end; /* ⭐ 여기 */
-  gap: 8px;
+.input-group label {
+  font-family: 'Patrick Hand', cursive;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #8d6e63;
+  margin-bottom: 4px;
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-.btn {
-  margin-top: 10px;
-  padding: 7px 14px;
-  border-radius: 8px;
-  font-size: 13px;
-  font-weight: 600;
-}
-
-
-.btn:hover {
-  transform: translateY(-1px);
-}
-
-.primary {
-  background: white;
-  border: 1px solid black;
-  color: black;
-}
-
-
-.danger {
-  background: black;
-  border: 1px solid black;
-  color: white;
-}
-
-.ghost {
-  background: #eee;
-}
-
-.task-actions {
-  display: flex;
-  gap: 8px;
-}
-
-
-/* status select */
-.task-status-select {
-  margin-top: 8px;
+.task-row input,
+.task-row select {
+  width: 100%;
   padding: 6px 10px;
-  border-radius: 8px;
-}
-
-
-
-.task-section input[type="file"]::file-selector-button {
-  padding: 6px 12px;
-  border: 1px solid #8B97AD;
-  background: transparent;   /* 🔥 투명 */
-  color: #8B97AD;
-
-  border-radius: 8px;
-  font-weight: 600;
-
-  cursor: pointer;
-  margin-right: 10px;
-
-  transition: all 0.15s;
-}
-
-.task-section input[type="file"]::file-selector-button:hover {
-  background: rgba(100, 140, 255, 0.08); /* 살짝만 채움 */
-}
-
-
-
-/* =========================
-   🔥 Add Comment 디자인 개선
-========================= */
-
-.add-comment {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-
-/* 텍스트 입력 */
-.add-comment input[type="text"],
-.add-comment input:not([type]) {
-  flex: 1;
-
-  padding: 9px 12px;
-  border-radius: 10px;
-  border: 1px solid #e4e6eb;
-
-  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: 'Patrick Hand', cursive;
+  font-size: 1.1rem;
   background: #fff;
-
-  transition: all 0.15s;
+  color: #333;
+  box-sizing: border-box;
 }
 
-.add-comment input[type="text"]:focus,
-.add-comment input:not([type]):focus {
-  outline: none;
-  border-color: #8B97AD;
-  box-shadow: 0 0 0 2px rgba(100, 140, 255, 0.15);
-}
-
-
-/* 파일 버튼 (작은 ghost 스타일) */
-.add-comment input[type="file"]::file-selector-button {
-  padding: 6px 10px;
-
-  background: transparent;
-  color: #8B97AD;
-
-  border: 1px solid #8B97AD;
-  border-radius: 8px;
-
-  font-size: 12px;
-  font-weight: 600;
-
-  cursor: pointer;
-  margin-right: 6px;
-
-  transition: all 0.15s;
-}
-
-.add-comment input[type="file"]::file-selector-button:hover {
-  background: rgba(100, 140, 255, 0.08);
-}
-
-
-/* Send 버튼 */
-.add-comment button {
-  padding: 9px 14px;
-
-  border-radius: 10px;
-  border: none;
-
-  background: #8B97AD;
-  color: white;
-
-  font-weight: 600;
-  cursor: pointer;
-
-  transition: all 0.15s;
-}
-
-.add-comment button:hover {
-  background: #8B97AD;
-  transform: translateY(-1px);
-}
-
-
-/* =========================
-   🌙 Dark mode
-========================= */
-
-.dark .add-comment input[type="text"],
-.dark .add-comment input:not([type]) {
-  background: #2a2b31;
-  border: 1px solid #3a3b42;
-  color: white;
-}
-
-
-
-
-/* =========================
-   댓글
-========================= */
-
-.comments-list {
+/* Maps & Location */
+.task-location-container {
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
+.task-location-row {
+  display: flex;
+  gap: 10px;
+}
+
+.task-location-row input {
+  flex: 1;
+  font-family: 'Patrick Hand', cursive;
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 1.1rem;
+}
+
+.map-wrapper {
+  border: 1px solid #ccc;
+  padding: 10px;
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* 🔘 Tape Buttons */
+.btn {
+  font-family: 'Patrick Hand', cursive;
+  font-size: 1.1rem;
+  padding: 8px 20px;
+  border-radius: 2px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn.primary {
+  background: #c6f6d5;
+  /* Light Green Tape */
+  color: #22543d;
+  font-weight: 700;
+  transform: rotate(-1deg);
+}
+
+.btn.primary:hover {
+  background: #9ae6b4;
+  transform: rotate(0deg) scale(1.05);
+}
+
+.btn.danger {
+  background: #fed7d7;
+  color: #822727;
+  transform: rotate(1deg);
+}
+
+.btn.danger:hover {
+  background: #feb2b2;
+  transform: rotate(0deg) scale(1.05);
+}
+
+.btn.ghost {
+  background: #edf2f7;
+  color: #4a5568;
+}
+
+/* 📁 Files Section */
+.file-section {
+  background: rgba(255, 255, 255, 0.4);
+  padding: 15px;
+  border: 1px dashed #ccc;
+  border-radius: 4px;
+}
+
+.file-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  padding: 6px 12px;
+  margin: 4px;
+  border: 1px solid #eee;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+  font-family: 'Patrick Hand', cursive;
+  font-size: 1rem;
+}
+
+.custom-file-upload {
+  display: inline-block;
+  padding: 6px 12px;
+  background: #fff;
+  border: 2px dashed #bbb;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: 'Patrick Hand', cursive;
+  font-weight: 600;
+  color: #777;
+}
+
+/* 🗯️ Comments Section */
+.comments-section h3 {
+  font-family: 'Chewy', cursive;
+  font-size: 1.6rem;
+  color: #3e2723;
+  margin-bottom: 20px;
 }
 
 .comments-list li {
   display: flex;
-  gap: 10px;
-  border: 1px solid #e8e8e8;
-  padding: 10px;
-  border-radius: 10px;
+  gap: 15px;
+  margin-bottom: 25px;
 }
 
 .avatar {
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  background: #648cff;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 40px;
+  height: 48px;
+  background: #e2e8f0;
+  background: linear-gradient(to bottom, #f7fafc, #edf2f7);
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  position: relative;
+}
+
+/* Photo shadow effect */
+.avatar::after {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  background: #cbd5e0;
+  opacity: 0.3;
 }
 
 .comment-body {
   flex: 1;
+  background: #fff;
+  padding: 15px 15px 40px 15px;
+  /* Increased bottom padding */
+  border-radius: 0 8px 8px 8px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.05);
+  position: relative;
+  border-left: 3px solid #ffcc80;
 }
-
-.comment-meta {
-  font-size: 11px;
-  color: #888;
-}
-
-.comment-buttons {
-  margin-top: 4px;
-  display: flex;
-  gap: 8px;
-}
-
-.comment-buttons button {
-  background: none;
-  font-size: 12px;
-  cursor: pointer;
-  color: #648cff;
-}
-
-
-/* 입력 */
-.add-comment {
-  display: flex;
-  gap: 8px;
-}
-
-
-/* =========================
-   댓글 액션 버튼
-========================= */
 
 .comment-actions {
+  position: absolute;
+  bottom: 8px;
+  right: 12px;
   display: flex;
-  justify-content: flex-end; /* ⭐ 우측 정렬 */
   gap: 6px;
 }
 
-
 .icon-btn {
-  width: 28px;
-  height: 28px;
-
+  background: #f7fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  width: 26px;
+  height: 26px;
   display: flex;
   align-items: center;
   justify-content: center;
-
-  border-radius: 6px;
-
-  border: 1px solid #e3e6ee;
-  background: #fff;
-
   cursor: pointer;
-  font-size: 13px;
-
-  transition: all 0.15s;
+  font-size: 12px;
+  transition: all 0.2s;
+  color: #718096;
 }
 
 .icon-btn:hover {
-  background: #f6f8ff;
-  border-color: #cfd6ff;
-  transform: translateY(-1px);
-}
-
-.icon-btn.delete {
-  color: #ff5f5f;
-  border-color: #ffd6d6;
+  background: #edf2f7;
+  transform: scale(1.1);
+  color: #2d3748;
 }
 
 .icon-btn.delete:hover {
-  background: #ffecec;
-  border-color: #ffb3b3;
+  background: #fed7d7;
+  border-color: #feb2b2;
+  color: #822727;
 }
 
-
-/* =========================
-   🌙 Dark mode
-========================= */
-
-.dark .task-section input,
-.dark .task-section textarea,
-.dark .task-section select,
-.dark .task-status-select {
-  background: #2a2b31;
-  color: white;
-  border: 1px solid #3a3b42;
+.comment-meta {
+  font-family: 'Patrick Hand', cursive;
+  font-size: 0.9rem;
+  color: #888;
+  margin-bottom: 6px;
 }
 
-  
-  
-/* =========================
-   Comment Edit Modal Buttons
-========================= */
+.comment-body p {
+  font-family: 'Patrick Hand', cursive;
+  font-size: 1.1rem;
+  color: #333;
+  margin: 0;
+}
 
-.modal-actions {
+.add-comment textarea {
+  width: 100%;
+  padding: 15px;
+  font-family: 'Patrick Hand', cursive;
+  font-size: 1.1rem;
+  background: white;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+  resize: none;
+  margin-bottom: 10px;
+}
+
+/* 🌙 Dark Mode */
+.dark .modal-content {
+  background: #2d2f39;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  color: #eee;
+  border-color: #3f414e;
+}
+
+.dark .task-title-input {
+  color: #fff;
+  border-bottom-color: #4a5568;
+}
+
+.dark .task-desc-textarea {
+  color: #cbd5e0;
+}
+
+.dark .task-row {
+  background: rgba(0, 0, 0, 0.2);
+  border-color: #3f414e;
+}
+
+.dark .comment-body {
+  background: #1a1c23;
+  border-color: #3f414e;
+}
+
+.dark .comment-body p {
+  color: #eee;
+}
+
+.dark .add-comment textarea {
+  background: #2d2f39;
+  border-color: #3f414e;
+  color: #fff;
+}
+
+.task-modal-divider {
+  border: none;
+  border-top: 2px dashed #dcaebb;
+  margin: 30px 0;
+  opacity: 0.5;
+}
+
+.avatar {
   display: flex;
-  justify-content: flex-end; /* 오른쪽 정렬 (보통 모달 UX) */
-  gap: 12px;                 /* 🔥 버튼 사이 간격 */
-  margin-top: 12px;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Patrick Hand', cursive;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: #4a5568;
+}
+
+/* 📁 Additional File & Action Styles */
+.upload-button-wrapper {
+  margin-top: 15px;
+  /* Space between file list and add button */
+}
+
+.add-comment-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.custom-file-upload span {
+  margin-right: 5px;
+}
+
+.custom-file-upload.mini span {
+  font-size: 0.85rem;
+}
+
+.hidden-file-input {
+  display: none;
+}
+
+.custom-file-upload span {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  /* Space between icon/emoji and text */
+}
+
+/* Ensure modal content can scroll if it's too long */
+.modal-overlay {
+  overflow-y: auto;
+  padding: 40px 0;
+}
+
+/* 🌙 Additional Dark Mode Fixes */
+.dark .modal-paper {
+  background: #2d2f39;
+  /* Matches modal-content */
+  border-color: #3f414e;
+}
+
+.dark .task-modal-scroll-area {
+  background-image: linear-gradient(#3f414e 1px, transparent 1px);
+  /* Darker lines */
+}
+
+.dark .task-row input,
+.dark .task-row select,
+.dark .task-location-row input {
+  background: #1a1c23;
+  border-color: #3f414e;
+  color: #fff;
+}
+
+.dark .map-wrapper {
+  background: #1a1c23;
+  border-color: #3f414e;
+}
+
+.dark .file-section {
+  background: rgba(0, 0, 0, 0.2);
+  border-color: #3f414e;
+}
+
+.dark .file-item {
+  background: #2d2f39;
+  border-color: #3f414e;
+  color: #cbd5e0;
+}
+
+.dark .file-item a {
+  color: #9ecbff;
+}
+
+.dark .custom-file-upload {
+  background: #1a1c23;
+  border-color: #4a5568;
+  color: #a0aec0;
+}
+
+.dark .close-x {
+  border-color: #666;
+  color: #888;
+}
+
+.dark .btn.ghost {
+  background: #3f414e;
+  color: #cbd5e0;
 }
 
 /* =========================
-   Comment Edit - Form UI
+   📱 Mobile Responsive
 ========================= */
+@media (max-width: 768px) {
+  .modal-overlay {
+    padding: 30px 15px;
+  }
 
-/* textarea */
-.modal-content textarea {
-  width: 95%;
-  padding: 10px 12px;
+  .modal-content {
+    max-width: 90%;
+  }
 
-  border-radius: 10px;
-  border: 1px solid #e4e6eb;
+  .task-modal-scroll-area {
+    padding: 50px 30px 30px 30px;
+  }
 
-  font-size: 14px;
-  resize: vertical;
+  .task-title-input {
+    font-size: 1.6rem;
+  }
 
-  transition: all 0.15s;
+  .task-desc-textarea {
+    font-size: 1.1rem;
+    min-height: 120px;
+  }
+
+  .task-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 12px;
+  }
+
+  .modal-workspace-header {
+    font-size: 1.1rem;
+  }
 }
 
-.modal-content textarea:focus {
-  outline: none;
-  border-color: #8B97AD;
-  box-shadow: 0 0 0 2px rgba(139, 151, 173, 0.15);
-}
+@media (max-width: 480px) {
+  .modal-overlay {
+    padding: 0;
+  }
 
-/* file input 줄 여백 */
-.modal-content input[type="file"] {
-  margin-top: 8px;
-}
+  .modal-content {
+    width: 100%;
+    max-width: 100%;
+    max-height: 100vh;
+    border-radius: 0;
+  }
 
-/* 선택 파일 텍스트 */
-.modal-content .selected-file {
-  font-size: 12px;
-  color: #666;
-  margin-top: 4px;
-}
+  .modal-paper {
+    border-radius: 0;
+  }
 
+  .modal-content::before {
+    width: 100px;
+    height: 35px;
+  }
 
-/* 버튼 영역 (이미 말한 gap 포함) */
-/* 실제 버튼 부분 */
-.modal-content input[type="file"]::file-selector-button {
-  padding: 6px 12px;
+  .task-modal-scroll-area {
+    padding: 50px 20px 30px 20px;
+    gap: 18px;
+  }
 
-  background: transparent;
-  color: #8B97AD;
+  .task-title-input {
+    font-size: 1.4rem;
+  }
 
-  border: 1px solid #8B97AD;
-  border-radius: 8px;
+  .task-desc-textarea {
+    font-size: 1rem;
+    min-height: 100px;
+  }
 
-  font-weight: 600;
-  cursor: pointer;
+  .task-row {
+    padding: 10px;
+    gap: 10px;
+  }
 
-  margin-right: 10px;
-  transition: all 0.15s;
-}
+  .input-group label {
+    font-size: 0.85rem;
+  }
 
-/* hover */
-.modal-content input[type="file"]::file-selector-button:hover {
-  background: rgba(139, 151, 173, 0.12);
-}
+  .task-row input,
+  .task-row select {
+    padding: 5px 8px;
+    font-size: 1rem;
+  }
 
+  .btn {
+    font-size: 1rem;
+    padding: 7px 16px;
+  }
 
-/* 🌙 Dark */
-.dark .modal-content input[type="file"]::file-selector-button {
-  color: #ccc;
-  border-color: #3a3b42;
-}
+  .comments-section h3 {
+    font-size: 1.4rem;
+  }
 
-.dark .modal-content input[type="file"]::file-selector-button:hover {
-  background: #2a2b31;
+  .comment-body {
+    padding: 12px 12px 35px 12px;
+  }
+
+  .comment-body p {
+    font-size: 1rem;
+  }
+
+  .add-comment textarea {
+    font-size: 1rem;
+    padding: 12px;
+  }
+
+  .close-x {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+  }
 }

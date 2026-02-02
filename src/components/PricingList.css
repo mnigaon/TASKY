@@ -1,101 +1,158 @@
 .pricing-section {
-    width: 100%;
-    padding: 80px 5%;
-    background: #f9f9f9;
-    box-sizing: border-box;
+  width: 100%;
+  padding: 120px 5%;
+  background: white;
+  /* Contrast with lavender sections */
+  box-sizing: border-box;
+}
+
+.pricing-header {
+  text-align: center;
+  font-size: 38px;
+  font-weight: 800;
+  margin-bottom: 60px;
+  color: #111;
+  letter-spacing: -1px;
+}
+
+.pricing-grid {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.pricing-card {
+  background: white;
+  border-radius: 16px;
+  padding: 40px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  flex: 1 1 300px;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  border: 1px solid #f0f0f0;
+  position: relative;
+  overflow: hidden;
+}
+
+.pricing-card:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 20px 60px rgba(155, 89, 120, 0.15);
+  border-color: #9b5978;
+}
+
+.pricing-card::before {
+  content: "";
+  display: none;
+}
+
+.plan-label {
+  font-size: 24px;
+  font-weight: 800;
+  color: #9b5978;
+  margin-bottom: 8px;
+}
+
+.plan-name {
+  font-size: 15px;
+  color: #8b97ad;
+  margin-bottom: 24px;
+  font-weight: 500;
+}
+
+.price {
+  font-size: 48px;
+  font-weight: 800;
+  margin-bottom: 30px;
+  color: #111;
+  letter-spacing: -1px;
+}
+
+.price span {
+  font-size: 16px;
+  font-weight: 400;
+  color: #666;
+}
+
+.features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 40px 0;
+  flex-grow: 1;
+}
+
+.features li {
+  font-size: 15px;
+  color: #444;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.features li .check {
+  margin-right: 12px;
+  color: #9b5978;
+  font-size: 18px;
+}
+
+.pricing-button {
+  width: 100%;
+  padding: 14px;
+  background: white;
+  color: #111;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pricing-button:hover {
+  background: #9b5978;
+  color: white;
+}
+
+/* Feature highlight for the middle plan */
+.pricing-grid .pricing-card:nth-child(2) {
+  border: 1px solid #111;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+  z-index: 1;
+}
+
+.pricing-grid .pricing-card:nth-child(2) .pricing-button {
+  background: #111;
+  color: white;
+  border-color: #111;
+}
+
+.pricing-grid .pricing-card:nth-child(2) .pricing-button:hover {
+  background: #333;
+}
+
+/* 🏁 반응형 */
+@media (max-width: 900px) {
+  .pricing-grid .pricing-card:nth-child(2) {
+    transform: scale(1);
   }
-  
+}
+
+@media (max-width: 768px) {
+  .pricing-section {
+    padding: 80px 20px;
+  }
+
   .pricing-header {
-    text-align: center;
-    font-size: 36px;
-    font-weight: 800;
-    margin-bottom: 60px;
+    font-size: 32px;
+    margin-bottom: 40px;
   }
-  
-  .pricing-grid {
-    display: flex;
-    gap: 30px;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-  
+
   .pricing-card {
-    margin-bottom: 100px;
-    background: #fff;
-    border-radius: 12px;
-    padding: 40px 30px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    flex: 1 1 280px;
-    max-width: 320px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; /* 좌측 정렬 */
-    text-align: left;        /* 좌측 정렬 */
+    padding: 30px;
+    max-width: 100%;
   }
-  
-  .plan-label {
-    font-size: 20px;      /* 라벨 크게 */
-    font-weight: 500;     /* 볼드 */
-    color: #333;
-    display: inline-block;
-  }
-  
-  .plan-name {
-    font-size: 16px;      /* 서브 텍스트 작게 */
-    color: #888;          /* 회색 */
-    font-weight: 500;
-    margin-bottom: 12px;
-  }
-  
-  .price {
-    font-size: 30px;      /* 가격 크게 */
-    font-weight: 800;     /* 볼드 */
-    margin-bottom: 20px;
-  }
-  
-  .features {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 20px 0;
-  }
-  
-  .features li {
-    font-size: 16px;
-    color: #555;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-  }
-  
-  .features li .check {
-    margin-right: 8px;
-    font-weight: bold;
-  }
-  
-  .pricing-button {
-    width: 100%;           /* 카드 폭만큼 버튼 */
-    padding: 12px 28px;
-    background: black;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-  }
-  
-  .pricing-button:hover {
-    opacity: 0.85;
-  }
-  
-  /* 반응형 */
-  @media (max-width: 768px) {
-    .pricing-grid {
-      flex-direction: column;
-      align-items: center;
-    }
-  
-    .pricing-card {
-      max-width: 100%;
-      margin-bottom: 30px;
-    }
-  }
-  
+}

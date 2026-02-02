@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import {
   collection,
   onSnapshot,
@@ -8,6 +8,8 @@ import {
   updateDoc,
   query,
   where,
+  writeBatch,
+  or,
 } from "firebase/firestore";
 import { db } from "../../firebase/firebase";
 import { useAuth } from "../../firebase/AuthContext";
@@ -18,10 +20,12 @@ const SYSTEM_COLUMNS = [
   { id: "pending", title: "To-Do" },
   { id: "progress", title: "In Progress" },
   { id: "completed", title: "Done" },
+  { id: "archived", title: "Archived" }
 ];
 
 export default function KanbanBoard({
   workspaceId,
+  categoryId,
   onSelectTask,
 }) {
   const { currentUser } = useAuth();
@@ -30,94 +34,180 @@ export default function KanbanBoard({
   const [customColumns, setCustomColumns] = useState([]);
 
   /* =========================
-     🔥 Tasks 구독 (Query 적용)
+     🔥 Tasks 구독
+  ========================= */
+  useEffect(() => {
+    if (!currentUser) return;
+
+    let unsubTasks = null;
+    let unsubWorkspaces = null;
+
+    // 1. 워크스페이스 실시간 감시
+    const wsQuery = query(
+      collection(db, "workspaces"),
+      or(
+        where("userId", "==", currentUser.uid),
+        where("members", "array-contains", currentUser.email)
+      )
+    );
+
+    unsubWorkspaces = onSnapshot(wsQuery, (wsSnap) => {
+      const collaborativeWsIds = wsSnap.docs
+        .filter(d => {
+          const data = d.data();
+          return (data.members && data.members.length > 0) || data.userId !== currentUser.uid;
+        })
+        .map(d => d.id);
+
+      const allWsIds = wsSnap.docs.map(d => d.id);
+
+      // 2. 태스크 쿼리 설정
+      let q;
+      if (workspaceId) {
+        q = query(collection(db, "tasks"), where("workspaceId", "==", workspaceId));
+      } else if (categoryId) {
+        if (categoryId === "uncategorized") {
+          q = query(collection(db, "tasks"), where("categoryId", "==", ""), where("userId", "==", currentUser.uid));
+        } else {
+          q = query(collection(db, "tasks"), where("categoryId", "==", categoryId));
+        }
+      } else {
+        if (allWsIds.length > 0) {
+          q = query(
+            collection(db, "tasks"),
+            or(
+              where("userId", "==", currentUser.uid),
+              where("workspaceId", "in", allWsIds.slice(0, 30))
+            )
+          );
+        } else {
+          q = query(collection(db, "tasks"), where("userId", "==", currentUser.uid));
+        }
+      }
+
+      // 3. 리스너 연결
+      if (unsubTasks) unsubTasks();
+      unsubTasks = onSnapshot(q, (snap) => {
+        const data = snap.docs.map(d => {
+          const taskData = d.data();
+          const isShared = taskData.workspaceId && collaborativeWsIds.includes(taskData.workspaceId);
+          return {
+            id: d.id,
+            ...taskData,
+            isSharedTask: isShared
+          };
+        });
+        setTasks(data);
+      });
+    }, (err) => console.error("Workspace listener error:", err));
+
+    return () => {
+      if (unsubTasks) unsubTasks();
+      if (unsubWorkspaces) unsubWorkspaces();
+    };
+  }, [currentUser, workspaceId, categoryId]);
+
+  /* =========================
+     🔥 Columns 구독
   ========================= */
   useEffect(() => {
     if (!currentUser) return;
 
     let q;
     if (workspaceId) {
-      // 워크스페이스 모드: 해당 워크스페이스의 태스크만
-      q = query(collection(db, "tasks"), where("workspaceId", "==", workspaceId));
+      q = query(collection(db, "columns"), where("workspaceId", "==", workspaceId));
+    } else if (categoryId) {
+      const targetCatId = categoryId === "uncategorized" ? "" : categoryId;
+      q = query(
+        collection(db, "columns"),
+        where("userId", "==", currentUser.uid),
+        where("categoryId", "==", targetCatId),
+        where("workspaceId", "==", null)
+      );
     } else {
-      // 개인 모드: 내 태스크 중 워크스페이스에 속하지 않은 것 (또는 내 전체)
-      // 여기서는 "개인 보드"의 정의에 따라 다를 수 있으나, 보통 내 ID로 생성된 것만 가져옴
-      q = query(collection(db, "tasks"), where("userId", "==", currentUser.uid));
+      q = query(
+        collection(db, "columns"),
+        where("userId", "==", currentUser.uid),
+        where("workspaceId", "==", null),
+        where("categoryId", "==", "")
+      );
     }
 
     const unsubscribe = onSnapshot(q, (snap) => {
-      // 개인 모드일 때 workspaceId가 있는(워크스페이스 태스크) 것은 제외하고 보여줄지 여부는 기획에 따라 다름.
-      // 일단 userId로 1차 필터링된 것을 가져오되, 개인 보드라면 workspaceId가 없는 것만 보여주는 것이 깔끔함.
-      let data = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
-
-      if (!workspaceId) {
-        data = data.filter(t => !t.workspaceId); // 워크스페이스 태스크 제외
-      }
-
-      setTasks(data);
-    });
+      setCustomColumns(snap.docs.map((d) => ({ id: d.id, ...d.data() })));
+    }, (err) => console.error(err));
 
     return () => unsubscribe();
-  }, [currentUser, workspaceId]);
+  }, [currentUser, workspaceId, categoryId]);
 
   /* =========================
-     🔥 Columns 구독 (Query 적용)
+     Handlers
   ========================= */
-  useEffect(() => {
-    if (!currentUser) return;
-
-    // 컬럼은 워크스페이스별로 따로 관리되지 않고 유저별로 관리되는 구조라면 userId로 쿼리
-    // 만약 워크스페이스별 컬럼을 지원한다면 workspaceId 조건 추가 필요
-    // 현재 구조상 columns엔 workspaceId 필드가 없어 보이나, userId는 있음.
-
-    // 단순화를 위해 내 컬럼만 가져옴
-    const q = query(
-      collection(db, "columns"),
-      where("userId", "==", currentUser.uid)
-    );
-
-    const unsubscribe = onSnapshot(q, (snap) => {
-      setCustomColumns(snap.docs.map((d) => ({ id: d.id, ...d.data() })));
-    });
-
-    return () => unsubscribe();
-  }, [currentUser]);
-
   const addColumn = async () => {
-    const title = prompt("컬럼 이름을 입력하세요");
-
+    const title = prompt("Enter the column name");
     if (!title || !title.trim()) return;
 
     await addDoc(collection(db, "columns"), {
       title: title.trim(),
       userId: currentUser.uid,
+      workspaceId: workspaceId || null,
+      categoryId: categoryId === "uncategorized" ? "" : (categoryId || ""),
     });
   };
 
-
   const deleteColumn = async (id) => {
-    await deleteDoc(doc(db, "columns", id));
+    if (!window.confirm("Do you want to delete this column? All tasks in this column will be moved to 'To-Do'.")) return;
+
+    try {
+      const batch = writeBatch(db);
+      const tasksToMove = tasks.filter(t => t.status === id);
+      tasksToMove.forEach(task => {
+        const taskRef = doc(db, "tasks", task.id);
+        batch.update(taskRef, { status: "pending" });
+      });
+
+      const colRef = doc(db, "columns", id);
+      batch.delete(colRef);
+      await batch.commit();
+    } catch (error) {
+      console.error("Error deleting column:", error);
+      alert("Failed to delete column properly.");
+    }
   };
 
-  /* ⭐ 핵심: status 기준 필터 */
-  const getTasks = (colId) =>
-    tasks.filter((t) => (t.status || "pending") === colId);
+  const updateColumn = async (id, newTitle) => {
+    if (!newTitle || !newTitle.trim()) return;
+    await updateDoc(doc(db, "columns", id), {
+      title: newTitle.trim(),
+    });
+  };
 
-  /* ⭐ 핵심: 드롭 시 status 업데이트 */
-  const handleDropTask = async (taskId, status) => {
+  const updateTaskStatus = async (taskId, status) => {
     await updateDoc(doc(db, "tasks", taskId), { status });
   };
 
+  const getTasksByColumn = (colId) =>
+    tasks.filter((t) => (t.status || "pending") === colId);
+
+  /* Progress Calculation */
+  const completedCount = tasks.filter(t => t.status === "completed").length;
+  const totalCount = tasks.length;
+  const progressPercent = totalCount === 0 ? 0 : Math.round((completedCount / totalCount) * 100);
+
+  const radius = 24;
+  const circumference = 2 * Math.PI * radius;
+  const offset = circumference - (progressPercent / 100) * circumference;
+
   return (
     <div className="kanban-board">
-      {SYSTEM_COLUMNS.map((col) => (
+      {SYSTEM_COLUMNS.slice(0, 3).map((col) => (
         <KanbanColumn
           key={col.id}
           title={col.title}
           status={col.id}
-          tasks={getTasks(col.id)}
+          tasks={getTasksByColumn(col.id)}
           onSelectTask={onSelectTask}
-          onDropTask={handleDropTask}
+          onDropTask={updateTaskStatus}
           isSystem
         />
       ))}
@@ -127,10 +217,11 @@ export default function KanbanBoard({
           key={col.id}
           title={col.title}
           status={col.id}
-          tasks={getTasks(col.id)}
+          tasks={getTasksByColumn(col.id)}
           onSelectTask={onSelectTask}
-          onDropTask={handleDropTask}
+          onDropTask={updateTaskStatus}
           onDeleteColumn={deleteColumn}
+          onUpdateColumn={updateColumn}
         />
       ))}
 
@@ -138,7 +229,25 @@ export default function KanbanBoard({
         <span className="plus">＋</span>
         Add Column
       </button>
+
+      {/* Fixed Progress Indicator */}
+      <div className="kanban-progress-indicator">
+        <svg width="60" height="60" viewBox="0 0 60 60">
+          <circle
+            className="bg"
+            cx="30" cy="30" r={radius}
+            fill="none" strokeWidth="5"
+          />
+          <circle
+            className="fg"
+            cx="30" cy="30" r={radius}
+            fill="none" strokeWidth="5"
+            strokeDasharray={circumference}
+            strokeDashoffset={offset}
+          />
+        </svg>
+        <span className="progress-text">{progressPercent}%</span>
+      </div>
     </div>
   );
 }
-

@@ -1,11 +1,17 @@
 /* =========================
-   Section
+   Section - 플래너 상세 페이지
 ========================= */
 
 .feature-rows {
   width: 100%;
-  background: #f6f7fb;
-  padding: 120px 0; /* 🔥 여백 확 늘림 */
+  /* 히어로와 동일한 배경 */
+  background: #fdfbf7;
+  background-image:
+    linear-gradient(#e5e7eb 1px, transparent 1px),
+    linear-gradient(90deg, #e5e7eb 1px, transparent 1px);
+  background-size: 50px 50px;
+  padding: 120px 0;
+  position: relative;
 }
 
 
@@ -19,7 +25,7 @@
   justify-content: center;
 
   max-width: 1200px;
-  margin: 0 auto 120px auto; /* 🔥 row 간격 */
+  margin: 0 auto 120px auto;
   padding: 0 40px;
 
   gap: 80px;
@@ -53,65 +59,55 @@
 }
 
 
-/* 🔥 타이틀 (SaaS 스타일) */
+/* 타이틀 - 각 Row마다 다른 핑크 톤 */
 .feature-text h2 {
-  font-size: 30px;        /* 🔥 36 → 30 */
+  font-size: 36px;
   font-weight: 800;
   letter-spacing: -0.5px;
   line-height: 1.25;
 
   margin-bottom: 18px;
-  color: #111;
+}
+
+/* Row별 타이틀 색상 */
+.feature-row:nth-child(1) .feature-text h2 {
+  color: #ff6b9d;
+  /* 핑크 */
+}
+
+.feature-row:nth-child(2) .feature-text h2 {
+  color: #f093fb;
+  /* 보라 */
+}
+
+.feature-row:nth-child(3) .feature-text h2 {
+  color: #ffa8d5;
+  /* 라이트 핑크 */
+}
+
+.feature-row:nth-child(4) .feature-text h2 {
+  color: #ee9ca7;
+  /* 피치 핑크 */
 }
 
 
-/* 🔥 설명 (가독성 업) */
+/* 설명 */
 .feature-text p {
-  font-size: 16px;        /* 🔥 18 → 16 */
+  font-size: 17px;
   line-height: 1.7;
   color: #666;
 
-  margin-bottom: 28px;
+  margin-bottom: 0;
 }
 
 
 /* =========================
-   🔥 Button (Hero/Callout 톤 통일)
-========================= */
-
-.feature-button {
-  padding: 11px 22px;
-
-  background: #111;
-  color: white;
-
-  border: none;
-  border-radius: 10px;
-
-  font-size: 14px;
-  font-weight: 600;
-
-  cursor: pointer;
-
-  transition: all 0.18s ease;
-}
-
-.feature-button:hover {
-  transform: translateY(-2px);
-  opacity: 0.92;
-}
-
-.feature-button:active {
-  transform: translateY(0);
-}
-
-
-/* =========================
-   Image
+   Image - 카드 스타일
 ========================= */
 
 .feature-image {
-  padding: 18px;
+  padding: 0;
+  position: relative;
 }
 
 .feature-image img {
@@ -119,27 +115,85 @@
   max-width: 520px;
 
   object-fit: contain;
-  border-radius: 18px;
+  border-radius: 20px;
 
-  box-shadow: 0 8px 30px rgba(0,0,0,0.06); /* 🔥 subtle shadow */
+  /* 흰색 카드 배경 */
+  background: white;
+  padding: 24px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+
+  transition: all 0.3s ease;
 }
 
-  
-  /* 반응형 */
-  @media (max-width: 1024px) {
-    .feature-row {
-      flex-direction: column;
-      min-height: auto;
-      text-align: center;
-    }
-  
-    .feature-block {
-      padding: 20px;
-    }
-  
-    .feature-image img {
-      max-height: 300px;
-    }
+/* Row별 왼쪽 액센트 테두리 */
+.feature-row:nth-child(1) .feature-image img {
+  border-left: 4px solid #ff6b9d;
+}
+
+.feature-row:nth-child(2) .feature-image img {
+  border-left: 4px solid #f093fb;
+}
+
+.feature-row:nth-child(3) .feature-image img {
+  border-left: 4px solid #ffa8d5;
+}
+
+.feature-row:nth-child(4) .feature-image img {
+  border-left: 4px solid #ee9ca7;
+}
+
+/* 호버 효과 */
+.feature-image img:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+}
+
+
+/* =========================
+   반응형
+========================= */
+
+@media (max-width: 1024px) {
+  .feature-rows {
+    padding: 80px 0;
   }
-   
-  
+
+  .feature-row {
+    flex-direction: column;
+    text-align: center;
+    gap: 40px;
+    margin-bottom: 80px;
+  }
+
+  .feature-text {
+    align-items: center;
+  }
+
+  .feature-text h2 {
+    font-size: 30px;
+  }
+
+  .feature-image img {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .feature-rows {
+    padding: 60px 0;
+  }
+
+  .feature-row {
+    padding: 0 20px;
+    margin-bottom: 60px;
+  }
+
+  .feature-text h2 {
+    font-size: 26px;
+  }
+
+  .feature-text p {
+    font-size: 16px;
+  }
+}

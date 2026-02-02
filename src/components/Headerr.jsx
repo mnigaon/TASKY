@@ -1,5 +1,6 @@
 //src/components/Headerr.jsx
 import { Link } from "react-router-dom";
+import logo from "../assets/logo.png";
 import "./Headerr.css";
 
 function Header() {
@@ -7,8 +8,16 @@ function Header() {
     <header className="header">
       <div className="header-inner">
         {/* Left: Logo */}
-        <Link to="/" className="logo">
-          TASKY
+        <Link
+          to="/"
+          className="logo"
+          onClick={() => {
+            if (window.location.pathname === "/") {
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+          }}
+        >
+          <img src={logo} alt="Dayzzy Logo" className="logo-img" />
         </Link>
 
         {/* Right: Nav */}

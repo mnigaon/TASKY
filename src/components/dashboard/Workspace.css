@@ -1,109 +1,174 @@
 .workspace-container {
-    padding: 16px;
+  padding: 16px;
+}
+
+.workspace-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.workspace-header button {
+  background: #648CFF;
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.workspace-sort {
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+
+.workspace-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.workspace-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+}
+
+.workspace-list li.pinned {
+  font-weight: 700;
+  background: #f1f4ff;
+}
+
+.workspace-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.workspace-icon {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  color: white;
+}
+
+.workspace-actions button {
+  margin-left: 4px;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+
+.workspace-actions button:first-child {
+  background: #f0f0f0;
+}
+
+.workspace-actions button:last-child {
+  background: #ff4d4f;
+  color: white;
+}
+
+.workspace-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.workspace-modal {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.workspace-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.workspace-modal-actions .cancel {
+  background: #ccc;
+  color: white;
+}
+
+/* =========================
+   📱 Mobile Responsive
+========================= */
+@media (max-width: 768px) {
+  .workspace-container {
+    padding: 12px;
   }
-  
-  .workspace-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 12px;
-  }
-  
+
   .workspace-header button {
-    background: #648CFF;
-    border: none;
-    color: white;
-    padding: 6px 12px;
-    border-radius: 6px;
-    cursor: pointer;
-  }
-  
-  .workspace-sort {
-    margin-bottom: 12px;
+    padding: 5px 10px;
     font-size: 14px;
   }
-  
-  .workspace-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .workspace-list li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px;
-    border-bottom: 1px solid #eee;
-    cursor: pointer;
-  }
-  
-  .workspace-list li.pinned {
-    font-weight: 700;
-    background: #f1f4ff;
-  }
-  
-  .workspace-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  
-  .workspace-icon {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    width: 28px;
-    height: 28px;
-    border-radius: 6px;
-    color: white;
-  }
-  
-  .workspace-actions button {
-    margin-left: 4px;
-    font-size: 12px;
-    padding: 4px 8px;
-    border-radius: 4px;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .workspace-actions button:first-child {
-    background: #f0f0f0;
-  }
-  
-  .workspace-actions button:last-child {
-    background: #ff4d4f;
-    color: white;
-  }
-  
-  .workspace-modal-backdrop {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.3);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
+
   .workspace-modal {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    width: 320px;
-    display: flex;
+    width: 90%;
+    max-width: 300px;
+    padding: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .workspace-container {
+    padding: 10px;
+  }
+
+  .workspace-header {
     flex-direction: column;
+    align-items: flex-start;
     gap: 10px;
   }
-  
-  .workspace-modal-actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 8px;
+
+  .workspace-header button {
+    width: 100%;
+    padding: 8px 12px;
   }
-  
-  .workspace-modal-actions .cancel {
-    background: #ccc;
-    color: white;
+
+  .workspace-sort {
+    font-size: 13px;
   }
-  
+
+  .workspace-list li {
+    padding: 10px 6px;
+    font-size: 14px;
+  }
+
+  .workspace-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .workspace-actions button {
+    font-size: 11px;
+    padding: 3px 6px;
+  }
+
+  .workspace-modal {
+    width: 95%;
+    padding: 16px;
+  }
+
+  .workspace-modal input,
+  .workspace-modal select {
+    font-size: 14px;
+  }
+}

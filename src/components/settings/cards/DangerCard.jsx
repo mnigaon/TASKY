@@ -90,8 +90,8 @@ export default function DangerCard() {
   };
 
   return (
-    <div className="settings-card" style={{ border: "1px solid #ae4343" }}>
-      <h3 style={{ color: "#ff0000" }}>⚠️ Danger Zone ⚠️</h3>
+    <div className="sticker-card danger-sticker">
+      <h3>⚠️ Danger Zone (Critical)</h3>
 
       <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
         <button
@@ -105,7 +105,7 @@ export default function DangerCard() {
           className="btn-danger"
           onClick={deleteAccount}
         >
-          Delete Account
+          Close Account
         </button>
       </div>
     </div>

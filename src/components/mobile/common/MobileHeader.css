@@ -1,0 +1,106 @@
+/* MobileHeader.css */
+.mobile-header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 56px;
+    background: #ffffff;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    z-index: 100;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.mobile-header-back {
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: transparent;
+    font-size: 24px;
+    color: #2d3748;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    transition: background 0.2s;
+}
+
+.mobile-header-back:hover {
+    background: #f7fafc;
+}
+
+.mobile-header-back:active {
+    background: #edf2f7;
+}
+
+.mobile-header-title {
+    flex: 1;
+    font-size: 18px;
+    font-weight: 700;
+    color: #1a202c;
+    text-align: center;
+    margin: 0;
+    padding: 0 8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.mobile-header-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.mobile-header-action-btn {
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: transparent;
+    font-size: 20px;
+    color: #2d3748;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    transition: background 0.2s;
+}
+
+.mobile-header-action-btn:hover {
+    background: #f7fafc;
+}
+
+.mobile-header-action-btn:active {
+    background: #edf2f7;
+}
+
+/* Dark Mode */
+.dark .mobile-header {
+    background: #1a202c;
+    border-bottom-color: #2d3748;
+}
+
+.dark .mobile-header-back,
+.dark .mobile-header-action-btn {
+    color: #e2e8f0;
+}
+
+.dark .mobile-header-back:hover,
+.dark .mobile-header-action-btn:hover {
+    background: #2d3748;
+}
+
+.dark .mobile-header-back:active,
+.dark .mobile-header-action-btn:active {
+    background: #4a5568;
+}
+
+.dark .mobile-header-title {
+    color: #f7fafc;
+}

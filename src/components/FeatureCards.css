@@ -1,8 +1,17 @@
+/* =========================
+   Section - 플래너 페이지 쇼케이스
+========================= */
+
 .callout {
   width: 100%;
-  padding: 100px 20px;
+  padding: 120px 20px;
   text-align: center;
-  background: #f6f7fb;
+  /* 히어로와 동일한 배경 */
+  background: #fdfbf7;
+  background-image:
+    linear-gradient(#e5e7eb 1px, transparent 1px),
+    linear-gradient(90deg, #e5e7eb 1px, transparent 1px);
+  background-size: 50px 50px;
 }
 
 
@@ -11,15 +20,16 @@
 ========================= */
 
 .callout-header {
-  font-size: 38px;
+  font-size: 42px;
   font-weight: 800;
   letter-spacing: -0.5px;
   margin-bottom: 16px;
-  color: #111;
+  color: #3d2b1f;
+  /* 다크 레더 */
 }
 
 
-/* 🔥 NEW - 서브 텍스트 */
+/* 서브 텍스트 */
 .callout-sub {
   font-size: 18px;
   color: #666;
@@ -35,21 +45,23 @@
 
 .callout-container {
   display: flex;
-  justify-content: center; /* ⭐ 중앙 정렬이 더 고급스러움 */
-  gap: 48px;
+  justify-content: center;
+  gap: 40px;
   width: 100%;
+  max-width: 1200px;
   margin: 0 auto;
   flex-wrap: wrap;
 }
 
 
 /* =========================
-   카드
+   카드 - 플래너 페이지 느낌
 ========================= */
 
 .callout-card {
   flex: 1 1 30%;
-  max-width: 340px;
+  max-width: 500px;
+  /* 가로 길이 증가 */
 
   display: flex;
   flex-direction: column;
@@ -57,15 +69,36 @@
   justify-content: flex-start;
   text-align: center;
 
-  padding: 18px;
-  border-radius: 16px;
+  padding: 32px;
+  background: white;
+  border-radius: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
 }
 
-/* 🔥 subtle hover (SaaS 느낌 핵심) */
+/* 왼쪽 액센트 테두리 - 각 카드마다 다른 색상 */
+.callout-card:nth-child(1) {
+  border-left: 4px solid #ff6b9d;
+  /* 핑크 */
+}
+
+.callout-card:nth-child(2) {
+  border-left: 4px solid #f093fb;
+  /* 보라 */
+}
+
+.callout-card:nth-child(3) {
+  border-left: 4px solid #ffa8d5;
+  /* 라이트 핑크 */
+}
+
+/* 호버 효과 */
 .callout-card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-8px);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.12);
 }
 
 
@@ -75,18 +108,13 @@
 .card-image {
   width: 100%;
   height: 240px;
-/*
-  background: white;
-
-  border-radius: 18px;
-  border: 1px solid #e5e7eb;
-
-  overflow: hidden;
-  padding: 16px;
-*/
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: 24px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #fafbff 0%, #f5f7fa 100%);
 }
 
 .card-image img {
@@ -94,25 +122,42 @@
   max-height: 100%;
   border-radius: 12px;
   object-fit: contain;
-
   display: block;
+  transition: transform 0.3s ease;
+}
+
+.callout-card:hover .card-image img {
+  transform: scale(1.05);
 }
 
 
-
-
-
 /* =========================
-   카드 타이틀
+   카드 타이틀 - 액센트 색상 매칭
 ========================= */
 
 .card-title {
-  margin-top: 20px;
-  font-size: 20px;
+  margin-top: 0;
+  font-size: 18px;
   font-weight: 700;
-  margin-bottom: 10px;
-  color: #222;
-  letter-spacing: 0.3px;
+  margin-bottom: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+/* 각 카드마다 다른 타이틀 색상 */
+.callout-card:nth-child(1) .card-title {
+  color: #ff6b9d;
+  /* 핑크 */
+}
+
+.callout-card:nth-child(2) .card-title {
+  color: #f093fb;
+  /* 보라 */
+}
+
+.callout-card:nth-child(3) .card-title {
+  color: #ffa8d5;
+  /* 라이트 핑크 */
 }
 
 
@@ -122,35 +167,47 @@
 
 .card-description {
   font-size: 15px;
-  line-height: 1.6;
+  line-height: 1.7;
   color: #666;
   font-weight: 400;
 }
-  
 
-  @media (max-width: 1024px) {
-    .callout-card {
-      flex: 1 1 45%;
-    }
-  
-    .card-image {
-      height: 220px;
-    }
+
+/* =========================
+   반응형
+========================= */
+
+@media (max-width: 1024px) {
+  .callout-card {
+    flex: 1 1 45%;
   }
-  
-  @media (max-width: 768px) {
-    .callout-container {
-      flex-direction: column;
-      align-items: center;
-      gap: 20px;
-    }
-  
-    .callout-card {
-      width: 90%;
-      max-width: none;
-    }
-  
-    .card-image {
-      height: 200px;
-    }
+
+  .card-image {
+    height: 220px;
   }
+}
+
+@media (max-width: 768px) {
+  .callout {
+    padding: 80px 20px;
+  }
+
+  .callout-header {
+    font-size: 32px;
+  }
+
+  .callout-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .callout-card {
+    width: 90%;
+    max-width: none;
+  }
+
+  .card-image {
+    height: 200px;
+  }
+}

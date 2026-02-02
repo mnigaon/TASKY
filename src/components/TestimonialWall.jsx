@@ -2,44 +2,24 @@ import "./TestimonialWall.css";
 
 const testimonials = [
   {
-    title: "Finally Organized",
-    content: "Tasky helps me keep all my daily tasks in one place without feeling overwhelmed.",
-    author: "Alice"
+    title: "Vibey & Productive",
+    content: "Dayzzy made my life so much more aesthetic. Managing tasks feels like a mood now!",
+    author: "Sophie"
   },
   {
-    title: "Focus Booster",
-    content: "The timer keeps me focused and stops me from procrastinating.",
-    author: "Bob"
+    title: "Sticker Obsessed",
+    content: "I love how I can deco my day. It's the only app that doesn't feel like a chore.",
+    author: "Mina"
   },
   {
-    title: "Super Simple",
-    content: "Clean design, no clutter. Exactly what a personal task app should be.",
-    author: "Charlie"
+    title: "Focus is Real",
+    content: "The focus garden is so cute. I've actually started finishing my assignments on time LOL.",
+    author: "Kevin"
   },
   {
-    title: "Great for Study",
-    content: "I use it every day to manage my assignments and study sessions.",
-    author: "Diana"
-  },
-  {
-    title: "My Daily Companion",
-    content: "I start every morning with Tasky. It keeps my day structured.",
-    author: "Ethan"
-  },
-  {
-    title: "Love the Kanban Board",
-    content: "Dragging tasks across columns feels satisfying and keeps me organized.",
-    author: "Fiona"
-  },
-  {
-    title: "Lightweight & Fast",
-    content: "No complicated setup. It just works instantly.",
-    author: "George"
-  },
-  {
-    title: "Perfect for Personal Use",
-    content: "Exactly what I needed to manage my life and personal goals.",
-    author: "Hannah"
+    title: "Actually Zazzy",
+    content: "Total game changer. No more boring lists, just pure zazzy vibes.",
+    author: "Zoe"
   }
 ];
 
@@ -47,7 +27,7 @@ const testimonials = [
 function TestimonialWall() {
   return (
     <section className="testimonial-wall">
-    <h2 className="testimonial-header">Certified User Testimonials</h2>
+      <h2 className="testimonial-header">Loved by the Dayzzy Community</h2>
       <div className="testimonial-grid">
         {testimonials.map((t, index) => (
           <div className="testimonial-card" key={index}>

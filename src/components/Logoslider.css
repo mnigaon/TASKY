@@ -1,26 +1,40 @@
 /* =========================
-   Section
+   Section - 스티커 컬렉션 쇼케이스
 ========================= */
 
 .testimonial {
   width: 100%;
   padding: 100px 20px;
-  background: #f6f7fb;   /* 🔥 더 부드러운 SaaS 톤 */
+  /* 히어로와 동일한 배경 */
+  background: #fdfbf7;
+  /* Warm creamy background */
+  background-image:
+    linear-gradient(#e5e7eb 1px, transparent 1px),
+    linear-gradient(90deg, #e5e7eb 1px, transparent 1px);
+  background-size: 50px 50px;
+  /* Soft grid */
   text-align: center;
+  overflow: visible;
+  /* 호버 애니메이션이 잘리지 않도록 */
 }
 
 
 /* =========================
-   헤드 텍스트
+   헤드 텍스트 - 키치한 핑크 그라데이션
 ========================= */
 
 .testimonial-text {
-  font-size: 14px;       /* 🔥 작게 */
-  font-weight: 600;
-  letter-spacing: 1.5px; /* 🔥 SaaS 감성 */
+  font-size: 16px;
+  /* 약간 크게 */
+  font-weight: 700;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
 
-  color: #8b97ad;        /* 🔥 Tasky 메인 컬러 계열 */
+  /* 키치한 핑크 그라데이션 */
+  background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 
   margin-bottom: 56px;
 }
@@ -31,9 +45,14 @@
 ========================= */
 
 .logo-slider {
-  overflow: hidden;
+  overflow-x: hidden;
+  /* 좌우만 숨김 */
+  overflow-y: visible;
+  /* 상하는 보이도록 */
   width: 100%;
   position: relative;
+  padding: 20px 0;
+  /* 상하 여유 공간 */
 }
 
 
@@ -46,16 +65,16 @@
   width: max-content;
   align-items: center;
 
-  animation: scroll 28s linear infinite; /* 🔥 살짝 느리게 */
+  animation: scroll 28s linear infinite;
 }
 
 
 /* =========================
-   로고 카드
+   스티커 카드 - 빈티지 플래너 느낌
 ========================= */
 
 .logo-item {
-  flex: 0 0 180px;  /* 🔥 조금 넓게 */
+  flex: 0 0 180px;
   height: 90px;
 
   display: flex;
@@ -64,15 +83,22 @@
 
   margin: 0 28px;
 
-  border-radius: 14px;
+  /* 흰색 카드 배경 */
+  background: white;
+  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 
-/* 🔥 subtle hover (있으면 고급짐) */
+/* 호버 효과 - 키치하고 재미있게 */
 .logo-item:hover {
-  transform: translateY(-4px);
+  transform: translateY(-8px) rotate(5deg) scale(1.05);
+  box-shadow: 0 12px 24px rgba(255, 107, 157, 0.2);
+  /* 핑크 그림자 */
+  border-color: rgba(255, 107, 157, 0.3);
 }
 
 
@@ -81,21 +107,20 @@
 ========================= */
 
 .logo-item img {
-  max-width: 110px;
-  max-height: 48px;
+  max-width: 130px;
+  max-height: 80px;
 
   object-fit: contain;
 
-  opacity: 0.55;        /* 🔥 기본 흐리게 */
-  filter: grayscale(100%);
+  opacity: 1;
+  filter: none;
 
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
 }
 
-/* hover 시 살아남 */
+/* hover 시 살짝 확대 */
 .logo-item:hover img {
-  opacity: 1;
-  filter: grayscale(0%);
+  transform: scale(1.1);
 }
 
 
@@ -107,16 +132,30 @@
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(-50%);
   }
 }
-  
-  /* 반응형 */
-  @media (max-width: 768px) {
-    .logo-item {
-      flex: 0 0 100px;
-      margin: 0 10px;
-    }
+
+/* 반응형 */
+@media (max-width: 768px) {
+  .testimonial {
+    padding: 80px 20px;
   }
-  
+
+  .testimonial-text {
+    font-size: 14px;
+  }
+
+  .logo-item {
+    flex: 0 0 120px;
+    height: 70px;
+    margin: 0 12px;
+  }
+
+  .logo-item img {
+    max-width: 100px;
+    max-height: 60px;
+  }
+}

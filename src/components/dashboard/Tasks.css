@@ -4,228 +4,762 @@
    Layout
 ========================= */
 
-.tasks {
-  padding: 28px;
-  max-width: 920px;
+/* =========================
+   Layout - Legal Pad Concept
+========================= */
+.tasks-page-layout {
+  display: flex;
+  align-items: stretch;
+  padding: 24px;
+  gap: 24px;
+  min-height: 100vh;
+  box-sizing: border-box;
+  max-width: 1400px;
   margin: 0 auto;
-  font-family: "Inter", sans-serif;
 }
 
-.tasks h2 {
-  font-size: 26px;
+.tasks {
+  flex: 7;
+  min-width: 0;
+  padding: 40px 40px 120px 60px;
+  margin: 0;
+  /* Override center margin for layout */
+  font-family: "Patrick Hand", "Inter", sans-serif;
+  background-color: #fcf6e3;
+  background-image:
+    linear-gradient(90deg, transparent 79px, #dcaebb 79px, #dcaebb 81px, transparent 81px),
+    linear-gradient(#bcd0e0 1px, transparent 1px);
+  background-size: 100% 44px, 100% 44px;
+  background-attachment: scroll;
+  background-repeat: repeat-y, repeat;
+  border-radius: 4px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), 0 4px 10px rgba(0, 0, 0, 0.05);
+  min-height: 85vh;
+  height: fit-content;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  animation: slideUp 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
+}
+
+/* 📓 Right Section (Sidebar - Ported from WorkspaceList) */
+.task-sidebar {
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background: #fff;
+  border-radius: 8px 18px 18px 8px;
+  border-left: 12px solid #5d4037;
+  padding: 30px 24px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+  min-width: 300px;
+  box-sizing: border-box;
+  position: relative;
+  min-height: 85vh;
+  /* Match the tasks section min-height */
+}
+
+.task-sidebar::before {
+  content: '● ● ● ●';
+  position: absolute;
+  left: 6px;
+  top: 40px;
+  width: 20px;
+  font-size: 12px;
+  line-height: 50px;
+  color: #bcaaa4;
+  word-break: break-word;
+  text-align: center;
+  font-family: sans-serif;
+  text-shadow: 1px 0px 0px rgba(0, 0, 0, 0.3);
+}
+
+/* Ported Stat Cards */
+.stats-card {
+  background: #fbfbfb;
+  border-radius: 4px;
+  padding: 16px;
+  border: 1px solid #eee;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.stats-card::after {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%) rotate(1deg);
+  width: 50px;
+  height: 16px;
+  background: rgba(230, 230, 230, 0.5);
+}
+
+.selected-project-info {
+  background: #333;
+  color: white;
+  transform: rotate(-1deg);
+  border: none;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  padding: 8px 14px;
+}
+
+.selected-project-info::after {
+  display: none;
+}
+
+.selected-project-info .label {
+  font-family: 'Patrick Hand', cursive;
+  font-size: 10px;
+  opacity: 0.8;
+  color: #ccc;
+}
+
+.selected-project-info .project-title {
+  font-family: 'Chewy', cursive;
+  font-size: 20px;
+  margin: 2px 0 4px 0;
+  color: #fff;
+}
+
+.project-badge {
+  display: inline-block;
+  padding: 1px 8px;
+  background: #aed581;
+  color: #1b5e20;
+  border-radius: 12px;
+  font-family: 'Patrick Hand', cursive;
+  font-size: 10px;
   font-weight: 700;
-  margin-bottom: 22px;
-  color: #111;
+}
+
+/* Circular Progress UI */
+.progress-circle-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background: #fff;
+  border: 4px double #eee;
+}
+
+.circular-progress-container {
+  width: 100px;
+  height: 100px;
+}
+
+.circular-chart {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+.circle-bg {
+  fill: none;
+  stroke: #f0f0f0;
+  stroke-width: 2.8;
+}
+
+.circle {
+  fill: none;
+  stroke-width: 2.8;
+  stroke-linecap: round;
+  stroke: #ff7043;
+}
+
+.percentage {
+  fill: #333;
+  font-family: 'Chewy', cursive;
+  font-size: 9px;
+  font-weight: 400;
+  text-anchor: middle;
+}
+
+/* Category Grid (Stats) */
+.category-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.section-title {
+  font-family: 'Chewy', cursive;
+  font-size: 18px !important;
+  color: #5d4037 !important;
+  margin: 0 0 4px 4px !important;
+  text-shadow: none !important;
+}
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2px;
+  row-gap: 2px;
+  width: 100%;
+}
+
+.cat-card {
+  padding: 10px;
+  background: #fff;
+  border-radius: 8px;
+  border: 2px dashed #ccc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.cat-card:hover {
+  transform: translateY(-2px) rotate(2deg);
+  border-color: #aaa;
+}
+
+.cat-card .count {
+  font-family: 'Chewy', cursive;
+  font-size: 26px;
+  color: #333;
+}
+
+.cat-card .label {
+  font-family: 'Patrick Hand', cursive;
+  font-size: 13px;
+  color: #777;
+}
+
+/* Stamp Colors */
+.cat-card.total {
+  border-color: #b0bec5;
+  background: #eceff1;
+}
+
+.cat-card.completed {
+  border-color: #a5d6a7;
+  background: #e8f5e9;
+}
+
+.cat-card.progress {
+  border-color: #90caf9;
+  background: #e3f2fd;
+}
+
+.cat-card.waiting {
+  border-color: #ffcc80;
+  background: #fff3e0;
+}
+
+.cat-card.total .count {
+  color: #546e7a;
+}
+
+.cat-card.completed .count {
+  color: #2e7d32;
+}
+
+.cat-card.progress .count {
+  color: #1565c0;
+}
+
+.cat-card.waiting .count {
+  color: #ef6c00;
+}
+
+/* Urgent Card in Sidebar */
+.urgent-task-info {
+  background: #fff1f0 !important;
+  border: 2px dashed #ff4d4f !important;
+  border-radius: 6px;
+  padding: 8px 12px;
+  position: relative;
+  transform: rotate(0.5deg);
+}
+
+.urgent-badge {
+  display: inline-block;
+  font-family: 'Special Elite', cursive;
+  font-size: 10px;
+  font-weight: 700;
+  color: #c0392b;
+  border: 1px solid #c0392b;
+  padding: 0px 4px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.urgent-task-info .task-title {
+  font-family: 'Patrick Hand', cursive !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  margin: 2px 0 4px 0 !important;
+  color: #3e2723 !important;
+  line-height: 1.2 !important;
+}
+
+.task-meta {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  color: #e57373 !important;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Dark mode Sidebar */
+.dark .task-sidebar {
+  background-color: #2b2b2b;
+  border-color: #4a5568;
+}
+
+.dark .stats-card {
+  background-color: #2d2f39;
+  border-color: #4a5568;
+}
+
+.dark .cat-card.total {
+  background: #37474f;
+  border-color: #546e7a;
+}
+
+.dark .cat-card.completed {
+  background: #1b5e20;
+  border-color: #2e7d32;
+}
+
+.dark .cat-card.progress {
+  background: #0d47a1;
+  border-color: #1565c0;
+}
+
+.dark .cat-card.waiting {
+  background: #e65100;
+  border-color: #ef6c00;
+}
+
+.dark .cat-card .count {
+  color: #fff !important;
+}
+
+/* 🌙 Dark Mode Support for Tasks Paper */
+.dark .tasks {
+  background-color: #2b2b2b;
+  background-image:
+    linear-gradient(90deg, transparent 79px, #5a5a5a 79px, #5a5a5a 81px, transparent 81px),
+    linear-gradient(#404040 1px, transparent 1px);
+  color: #e0e0e0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.dark .tasks-list li {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: #e0e0e0;
+}
+
+/* 🏁 Paper Bottom Edge Decoration */
+.tasks::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.02));
+  border-radius: 0 0 4px 4px;
+  pointer-events: none;
+}
+
+/* 🌀 Spring Binding Effect (Top) */
+.tasks::before {
+  content: "";
+  position: absolute;
+  top: -15px;
+  left: 20px;
+  right: 20px;
+  height: 20px;
+  background:
+    radial-gradient(circle, #333 30%, transparent 40%) 0 0;
+  background-size: 30px 30px;
+  opacity: 0.8;
+  z-index: 5;
+  /* Visual decorative holes */
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tasks h2,
+.tasks h3 {
+  font-family: 'Chewy', cursive;
+  font-size: 36px;
+  font-weight: 400;
+  margin-bottom: 30px;
+  color: #5d4037;
+  /* Brown Pen */
+  display: block;
+  letter-spacing: 0.5px;
+  text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.5);
+}
+
+/* 워크스페이스 타이틀 수정 인풋 */
+.workspace-title-edit-input {
+  font-family: 'Chewy', cursive;
+  font-size: 36px;
+  width: 100%;
+  border: none;
+  border-bottom: 2px dashed #5d4037;
+  background: transparent;
+  color: #5d4037;
+  padding: 4px;
+  margin-bottom: 24px;
+  outline: none;
+}
+
+.workspace-title-edit-input:focus {
+  border-bottom-style: solid;
+  border-bottom-color: #8d6e63;
+}
+
+/* 편집 힌트 아이콘 */
+.edit-hint-icon {
+  font-size: 0.6em;
+  margin-left: 10px;
+  opacity: 0.4;
+  color: #5d4037;
+  vertical-align: middle;
+}
+
+.workspace-editable-header:hover .edit-hint-icon {
+  opacity: 1;
+}
+
+/* 다크모드 대응 */
+.dark .workspace-title-edit-input {
+  color: #eee;
+  border-bottom-color: #888;
 }
 
 /* =========================
-   입력 카드
+   입력 카드 (Sticky Note Style)
 ========================= */
-
 .tasks-input {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
+  padding: 16px;
+  margin-bottom: 32px;
 
-  padding: 18px;
-  margin-bottom: 28px;
-
+  /* ✨ Sticky Note Look */
   background: #fff;
-  border-radius: 16px;
+  border: 1px solid #e0e0e0;
+  border-radius: 2px;
+  box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.06);
+  transform: rotate(-0.5deg);
+  position: relative;
+  z-index: 2;
+}
 
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+.tasks-input::after {
+  content: '';
+  /* Tape */
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(1px);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 /* inputs 공통 */
 .tasks-input input[type="text"],
 .tasks-input input[type="date"] {
   flex: 1 1 180px;
-
-  padding: 11px 14px;
-  border-radius: 10px;
-  border: 1px solid #e4e6eb;
-
-  font-size: 14px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 2px solid #ddd;
+  /* Thicker border */
+  font-family: 'Patrick Hand', cursive;
+  /* 손글씨 input */
+  font-size: 1.1rem;
+  background: #fafafa;
+  color: #444;
   transition: all 0.15s;
 }
 
 .tasks-input input:focus {
   outline: none;
-  border-color: #648cff;
-  box-shadow: 0 0 0 2px rgba(100, 140, 255, 0.15);
+  border-color: #ffa726;
+  /* Pencil Orange */
+  background: #fff;
+  transform: scale(1.01);
 }
 
 /* 파일 */
 .tasks-input input[type="file"] {
   font-size: 13px;
+  font-family: 'Patrick Hand', sans-serif;
 }
 
 /* Add 버튼 */
 .tasks-input button {
-  background: #E6EBF5;
-  color: black;
-
-  padding: 10px 18px;
-  border-radius: 10px;
-
-  font-weight: 600;
-  border: none;
-
+  background: #607d8b;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+  /* Hand-drawn shape */
+  font-weight: 700;
+  border: 2px solid transparent;
   cursor: pointer;
   transition: all 0.15s;
+  font-family: 'Patrick Hand', cursive;
+  font-size: 1.1rem;
 }
 
 .tasks-input button:hover {
-  background: #8B97AD;
-  color: white;
-  transform: translateY(-2px);
+  background: #455a64;
+  transform: scale(1.05) rotate(1deg);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 /* =========================
-   Task List
+   Task List (Handwritten Style)
 ========================= */
-
 .tasks-list {
   list-style: none;
   padding: 0;
   margin: 0;
-
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 0;
+  /* Remove gap to sit on lines */
 }
 
 /* =========================
    Task Card
 ========================= */
 
+/* =========================
+   Task Line Item
+========================= */
+
 .tasks-list li {
   position: relative;
-
-  background: #fff;
-  padding: 16px 20px;
-
-  border-radius: 14px;
+  background: transparent;
+  /* 투명 배경 */
+  padding: 8px 10px 8px 30px;
+  /* Indent for check */
+  margin-bottom: 2px;
+  /* Slight spacing */
+  border-radius: 0;
 
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
+  /* Align text to top */
   gap: 12px;
 
-  border: 1px solid #ececec;
+  /* Remove Card Style */
+  border: none;
+  box-shadow: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.02);
+  /* Slight guide */
 
   cursor: grab;
-  transition: all 0.15s;
+  transition: transform 0.2s ease, opacity 0.2s;
 }
 
-/* hover */
+/* hover - Pen Highlighter Effect */
 .tasks-list li:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  background: rgba(255, 235, 59, 0.2);
+  /* Highlighter Yellow */
+  transform: skewX(-1deg) translateX(2px);
+  border-color: transparent;
+  box-shadow: none;
 }
 
 /* drag 중 */
 .tasks-list li:active {
   cursor: grabbing;
+  opacity: 0.6;
 }
 
-/* 완료 상태 표시 (왼쪽 바) */
-.tasks-list li.completed::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
+/* Completed - Strikethrough & Gray */
+.tasks-list li.completed span {
+  text-decoration: line-through;
+  text-decoration-color: #888;
+  text-decoration-thickness: 2px;
+  opacity: 0.6;
+}
 
-  width: 6px;
-  background: #22c55e;
-  border-radius: 14px 0 0 14px;
-  opacity: 0.9;
+/* Custom Handwritten Checkbox */
+.tasks-list li::before {
+  content: "☐";
+  /* Unchecked box */
+  position: absolute;
+  left: 2px;
+  top: 8px;
+  /* Align with text */
+  font-size: 1.4rem;
+  color: #555;
+  font-family: 'Patrick Hand', cursive;
+  line-height: 1;
+}
+
+.tasks-list li.completed::before {
+  content: "☑";
+  /* Checked box with V */
+  color: #4caf50;
+  /* Green ink */
+  font-weight: bold;
+  background: transparent;
+  width: auto;
+  border-radius: 0;
+  opacity: 1;
+}
+
+/* ⭐ 공유 태스크 스타일 (라벤더 테마) */
+/* ⭐ 공유 태스크 스타일 (Important Note Text) */
+.tasks-list li.shared {
+  background: transparent;
+  border: none;
+  border-left: none;
+}
+
+.tasks-list li.shared span strong {
+  color: #7e57c2;
+  /* Purple Ink */
 }
 
 /* =========================
-   내용
+   내용 (Handwritten Font)
 ========================= */
 
 .tasks-list li span {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 2px;
 }
 
 /* 제목 */
 .tasks-list li strong {
-  font-size: 15px;
-  font-weight: 700;
-  color: #111;
+  font-family: 'Patrick Hand', cursive;
+  font-size: 1.3rem;
+  /* 커진 폰트 */
+  font-weight: 500;
+  color: #2c3e50;
+  /* Ink Blue/Black */
+  letter-spacing: 0.3px;
 }
 
 /* 설명 */
 .tasks-list li p {
-  font-size: 13px;
-  color: #555;
+  font-family: 'Patrick Hand', cursive;
+  font-size: 1.05rem;
+  color: #6d4c41;
+  /* Sepia/Brown Text */
   margin: 0;
+  opacity: 0.9;
 }
 
-/* due date 배지 */
+/* due date 배지 (Marker Highlight Style) */
 .tasks-list li small {
-  font-size: 12px;
+  font-family: 'Patrick Hand', cursive;
+  font-size: 0.9rem;
   width: fit-content;
-  border-radius: 8px;
-  color: #CD4275;
-  font-weight: bold;
+  border-radius: 4px;
+  color: #d81b60;
+  /* Pinkish Red */
+  font-weight: 700;
+  background: rgba(255, 64, 129, 0.1);
+  /* Light Highlight */
+  padding: 0 4px;
+  margin-top: 2px;
 }
 
 /* 첨부파일 pill */
 .tasks-list li a {
-  font-size: 12px;
+  font-family: 'Patrick Hand', sans-serif;
+  font-size: 0.9rem;
   width: fit-content;
 
-  background: #f6f7fb;
-  padding: 4px 8px;
+  background: transparent;
+  border: 1px dashed #648cff;
+  padding: 2px 6px;
 
-  border-radius: 8px;
+  border-radius: 4px;
   text-decoration: none;
-  color: #648cff;
+  color: #448aff;
+  margin-top: 4px;
 }
 
 .tasks-list li a:hover {
-  background: #e8edff;
+  background: #e3f2fd;
+}
+
+/* =========================
+   Task Buttons Container
+========================= */
+
+.task-buttons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
 }
 
 /* =========================
    Delete 버튼
 ========================= */
 
-.task-buttons {
-  display: flex;
-
-  justify-content: flex-end;  /* ⭐ 오른쪽 */
-  align-items: flex-end;      /* ⭐ 아래 */
-
-  height: 100%;               /* ⭐ li 높이 기준으로 하단 */
-}
-
-.task-buttons button {
+.task-buttons .delete-btn {
   background: white;
-  border: 1px solid black;
-
-  color: black;
-
-  padding: 6px 12px;
-  border-radius: 8px;
-
-  font-size: 12px;
-  font-weight: 600;
-
+  border: 1px solid #e2e8f0;
+  color: #ef4444;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
   cursor: pointer;
-  transition: all 0.15s;
+  transition: all 0.2s;
 }
 
-.task-buttons button:hover {
-  background: red;
+.task-buttons .delete-btn:hover {
+  background: #fee2e2;
+  border-color: #fecaca;
+  color: #b91c1c;
+}
+
+/* =========================
+   Shared Badge
+========================= */
+
+.task-buttons .status-badge-shared {
+  background: linear-gradient(135deg, #9c27b0 0%, #7b1fa2 100%);
   color: white;
-  border: none;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+  box-shadow: 0 2px 6px rgba(156, 39, 176, 0.3);
 }
 
 /* =========================
@@ -271,15 +805,18 @@
 ========================= */
 
 .dark .tasks-input button {
-  background: #2a2b31;          /* 카드 톤 */
-  color: #ffffff;               /* 부드러운 블루 */
+  background: #2a2b31;
+  /* 카드 톤 */
+  color: #ffffff;
+  /* 부드러운 블루 */
   border: 1px solid #3a3b42;
   box-shadow: none;
   transition: all 0.15s ease;
 }
 
 .dark .tasks-input button:hover {
-  background: #34353d;          /* 살짝 밝게 */
+  background: #34353d;
+  /* 살짝 밝게 */
   color: #ffffff;
   transform: translateY(-2px);
 }
@@ -328,8 +865,8 @@
 
 /* Due 날짜 */
 .dark .tasks-list li small {
-  background: #2a2b31;          
-  color: #ffffff; 
+  background: #2a2b31;
+  color: #ffffff;
 }
 
 /* workspace / individual 헤더 pill */
@@ -347,15 +884,21 @@
 }
 
 /* 버튼 */
-.dark .task-buttons button {
+.dark .task-buttons .delete-btn {
   background: #2a2b31;
   color: #ff8b8b;
   border: 1px solid #3a3b42;
 }
 
-.dark .task-buttons button:hover {
+.dark .task-buttons .delete-btn:hover {
   background: #ff5c5c;
   color: white;
+}
+
+/* Shared Badge */
+.dark .task-buttons .status-badge-shared {
+  background: linear-gradient(135deg, #ab47bc 0%, #8e24aa 100%);
+  box-shadow: 0 2px 6px rgba(171, 71, 188, 0.4);
 }
 
 
@@ -431,53 +974,211 @@
    🔎 Filter Bar
 ================================================= */
 
-.tasks-filter-bar {
-  display: inline-flex;   /* ⭐ 핵심: 내용만큼만 */
+/* =================================================
+   🔎 Filter Bar - Restored Simple UI
+================================================= */
+
+/* =================================================
+   🔖 Analog Filter Bar - Index Tabs & Search Sticker
+================================================= */
+.tasks-controls-wrapper {
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 15px;
+  position: relative;
+  z-index: 10;
   flex-wrap: wrap;
-  gap: 10px;
-  align-items: center;
-  margin-bottom: 20px;
-
-  background: #f6f7fb;
-  border-radius: 10px;
-
-  max-width: 100%;
 }
 
-/* 검색 input */
-.tasks-filter-bar input {
-  flex: 1;
-  min-width: 180px;
-
-  padding: 8px 12px;
-  border-radius: 8px;
-  border: 1px solid #d6d8e0;
-
-  font-size: 14px;
+/* 🏷️ Status Index Tabs (Pinned to the top-left area) */
+.tasks-filter-tabs {
+  display: flex;
+  gap: 8px;
+  padding-bottom: 15px;
+  /* Even more padding for safety */
+  align-items: flex-end;
+  overflow: visible;
+  /* Ensure no clipping */
 }
 
-/* select 공통 */
-.tasks-filter-bar select {
-  padding: 8px 10px;
-  border-radius: 8px;
-  border: 1px solid #d6d8e0;
-  background: white;
-
-  font-size: 14px;
+.filter-tab {
+  background: #eee;
+  border: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  border-radius: 8px 8px 0 0;
+  padding: 8px 20px;
+  font-family: 'Patrick Hand', cursive;
+  font-size: 1.1rem;
+  color: #666;
   cursor: pointer;
-  transition: 0.15s;
+  transition: all 0.2s;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  box-sizing: border-box;
 }
 
-.tasks-filter-bar select:hover {
-  border-color: #648cff;
+.filter-tab:hover {
+  background: #fff;
+  color: #333;
 }
 
-/* 포커스 */
-.tasks-filter-bar input:focus,
-.tasks-filter-bar select:focus {
+.filter-tab.active {
+  background: #fff;
+  color: #3e2723;
+  font-weight: 700;
+  box-shadow: 0 -3px 8px rgba(0, 0, 0, 0.05);
+  border-color: #dcaebb;
+  border-bottom: 1px solid #fff;
+  z-index: 5;
+  min-height: 44px;
+}
+
+/* Tab Colors */
+.filter-tab.pending.active {
+  border-top: 3px solid #ffcc80;
+}
+
+.filter-tab.progress.active {
+  border-top: 3px solid #90caf9;
+}
+
+.filter-tab.completed.active {
+  border-top: 3px solid #a5d6a7;
+}
+
+/* 🔍 Secondary Filters - Search & Selects */
+.tasks-secondary-filters {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: nowrap;
+}
+
+/* 🗒️ Search Sticker - Paper & Tape Look */
+.search-sticker {
+  background: #fff;
+  padding: 5px 15px;
+  border-radius: 2px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  transform: rotate(-1deg);
+  border: 1px solid #f0f0f0;
+}
+
+.search-sticker::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 20px;
+  width: 40px;
+  height: 15px;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(2px);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.search-sticker input {
+  border: none !important;
+  background: transparent !important;
+  font-family: 'Patrick Hand', cursive;
+  font-size: 1rem;
+  width: 100px;
+  padding: 5px 0;
   outline: none;
-  border-color: #648cff;
-  box-shadow: 0 0 0 2px rgba(100, 140, 255, 0.15);
+}
+
+.search-icon {
+  font-size: 14px;
+  opacity: 0.5;
+}
+
+/* 🔘 Select Wrappers */
+.select-wrapper select {
+  padding: 6px 12px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  background: #fff;
+  font-family: 'Patrick Hand', cursive;
+  font-size: 1rem;
+  color: #555;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.select-wrapper select:hover {
+  border-color: #8d6e63;
+  transform: translateY(-1px);
+}
+
+/* 🌙 Dark Mode Adjustments */
+.dark .filter-tab {
+  background: #2a2b31;
+  border-color: #3a3b42;
+  color: #888;
+}
+
+.dark .filter-tab.active {
+  background: #1e1f24;
+  color: #fff;
+  border-color: #4a5568;
+}
+
+.dark .search-sticker {
+  background: #2a2b31;
+  border-color: #3a3b42;
+  box-shadow: none;
+}
+
+.dark .search-sticker input {
+  color: #fff;
+}
+
+.dark .select-wrapper select {
+  background: #2a2b31;
+  border-color: #3a3b42;
+  color: #ccc;
+}
+
+/* =================================================
+   ➕ Add New Task Button - Muted Berry Theme
+================================================= */
+
+.tasks-input-area .btn.primary {
+  background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+  /* 🔹 다크 슬레이트 그라데이션 */
+  color: white;
+  padding: 10px 18px;
+  border-radius: 10px;
+  border: none;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 8px 20px rgba(51, 65, 85, 0.2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.tasks-input-area .btn.primary:hover {
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px rgba(51, 65, 85, 0.3);
+}
+
+.tasks-input-area .btn.primary:active {
+  transform: translateY(0) scale(0.98);
 }
 
 /* =================================================
@@ -489,27 +1190,16 @@
   border: 1px solid #2a2b31;
 }
 
-/* input */
-.dark .tasks-filter-bar input {
-  background: #2a2b31;
-  border: 1px solid #3a3b42;
-  color: #fff;
-}
-
-/* placeholder */
-.dark .tasks-filter-bar input::placeholder {
-  color: #9aa0a6;
-}
-
-/* select */
+.dark .tasks-filter-bar input,
 .dark .tasks-filter-bar select {
   background: #2a2b31;
   border: 1px solid #3a3b42;
   color: #fff;
 }
 
-.dark .tasks-filter-bar select:hover {
-  border-color: #648cff;
+.dark .tasks-filter-bar input:focus,
+.dark .tasks-filter-bar select:focus {
+  border-color: #9b5978;
 }
 
 /* =================================================
@@ -594,7 +1284,8 @@
 
 /* Add 버튼 (기존보다 살짝 업그레이드) */
 .tasks-input button {
-  margin-left: auto;   /* ⭐ 핵심 (오른쪽 끝 이동) */
+  margin-left: auto;
+  /* ⭐ 핵심 (오른쪽 끝 이동) */
 
   height: 35px;
   padding: 0 14px;
@@ -629,10 +1320,27 @@
   width: fit-content;
 }
 
+.task-card-header.clickable {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.task-card-header.clickable:hover {
+  background: #9b5978;
+  /* Dusty Berry 포인트 컬러 */
+  transform: scale(1.05);
+}
+
 .dark .task-card-header {
   color: white;
   background: transparent;
   border: 1px solid #e4e6eb;
+}
+
+.dark .task-card-header.clickable:hover {
+  border-color: #9b5978;
+  color: #9b5978;
+  background: rgba(155, 89, 120, 0.1);
 }
 
 

@@ -1,0 +1,433 @@
+/* TimerSettingsModal.css */
+
+.settings-panel {
+    width: 420px;
+    /* Widened from 320px */
+    background: rgba(255, 255, 255, 0.95);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 480px;
+    background: #fdfaf0;
+    /* Softer paper cream */
+    font-family: 'Patrick Hand', cursive;
+    /* Metal/Plastic Panel Removed */
+    border-radius: 20px;
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.3),
+        0 0 0 1px #bbb inset;
+    z-index: 1000;
+    overflow: hidden;
+    animation: popIn 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+    display: flex;
+    flex-direction: column;
+}
+
+@keyframes popIn {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -40%) scale(0.9);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+/* Header */
+.panel-header {
+    background: #e0e0e0;
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #ccc;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.panel-header h2 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #444;
+    font-family: 'Chewy', cursive;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.close-btn {
+    background: #ff6b6b;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 2px 0 #cc5555;
+    transition: transform 0.1s;
+}
+
+.close-btn:active {
+    transform: translateY(2px);
+    box-shadow: none;
+}
+
+/* Content Area */
+.panel-content {
+    padding: 24px;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.setting-section {
+    margin-bottom: 24px;
+    background: #fff;
+    padding: 16px;
+    border-radius: 4px;
+    border: 1px solid #e0e0e0;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.sticky-note-config {
+    background: #fcf6e3 !important;
+    /* Legal Pad / Yellow sticky note */
+    position: relative;
+    padding-top: 25px !important;
+    transform: rotate(-0.5deg);
+    border: none !important;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1) !important;
+}
+
+.sticky-tape {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 25px;
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(1px);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    z-index: 2;
+}
+
+.config-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.config-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+}
+
+.config-item label {
+    font-size: 0.85rem;
+    color: #8d6e63;
+    margin-bottom: 4px;
+}
+
+.config-item input {
+    width: 100%;
+    padding: 8px;
+    border: 2px solid #dcaebb;
+    border-radius: 8px;
+    background: #fff;
+    font-family: 'Patrick Hand', cursive;
+    font-size: 1.1rem;
+    color: #5d4037;
+    text-align: center;
+    outline: none;
+}
+
+.config-item input:focus {
+    border-color: #8d6e63;
+}
+
+.apply-config-btn {
+    width: 100%;
+    padding: 10px;
+    background: #5d4037;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Patrick Hand', cursive;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.apply-config-btn:hover {
+    background: #3e2723;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.setting-section h3 {
+    margin: 0 0 12px 0;
+    font-size: 0.95rem;
+    color: #666;
+    font-family: 'Patrick Hand', cursive;
+    text-transform: uppercase;
+    border-bottom: 1px dashed #ddd;
+    padding-bottom: 6px;
+}
+
+/* Color Grid */
+.color-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.color-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.color-btn:hover {
+    transform: scale(1.1);
+}
+
+.color-btn.active {
+    border-color: #333;
+    transform: scale(1.15);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Sound Options */
+.sound-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.sound-card {
+    flex: 1 1 30%;
+    /* 3 Columns */
+    background: #f9f9f9;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #eee;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #555;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    box-shadow: 0 2px 0 #ddd;
+}
+
+.sound-card input {
+    display: none;
+}
+
+.sound-card:hover {
+    background: #fff;
+    border-color: #ccc;
+    transform: translateY(-1px);
+}
+
+.sound-card.active {
+    background: #e3fafc;
+    border-color: #15aabf;
+    color: #0c8599;
+    box-shadow: 0 2px 0 #1098ad;
+    font-weight: 700;
+}
+
+/* Select */
+.sound-select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 2px solid #ddd;
+    background: #f9f9f9;
+    font-size: 1rem;
+    color: #444;
+    font-family: 'Patrick Hand', cursive;
+    cursor: pointer;
+}
+
+.sound-select:focus {
+    outline: none;
+    border-color: #648cff;
+}
+
+/* Dark Mode */
+.dark .settings-panel {
+    background: #2a2b31;
+    border-color: #444;
+}
+
+.dark .panel-header {
+    background: #1e1f24;
+    border-bottom-color: #333;
+}
+
+.dark .panel-header h2 {
+    color: #eee;
+}
+
+.dark .setting-section {
+    background: #333;
+    border-color: #444;
+    box-shadow: 0 2px 0 #222;
+}
+
+.dark .setting-section h3 {
+    color: #aaa;
+    border-bottom-color: #444;
+}
+
+.dark .sound-card {
+    background: #2a2b31;
+    border-color: #444;
+    color: #aaa;
+    box-shadow: 0 2px 0 #111;
+}
+
+.dark .sound-card:hover {
+    background: #383a42;
+}
+
+.dark .sound-card.active {
+    background: #1a2e35;
+    border-color: #0c8599;
+    color: #66d9e8;
+    box-shadow: 0 2px 0 #0b7285;
+}
+
+.dark .sound-select {
+    background: #2a2b31;
+    border-color: #444;
+    color: #eee;
+}
+
+/* =========================
+   📱 Mobile Responsive
+========================= */
+@media (max-width: 768px) {
+    .settings-panel {
+        max-width: 420px;
+    }
+
+    .panel-header {
+        padding: 14px 20px;
+    }
+
+    .panel-header h2 {
+        font-size: 1.1rem;
+    }
+
+    .panel-content {
+        padding: 20px;
+        max-height: 65vh;
+    }
+
+    .config-grid {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .sound-options {
+        gap: 6px;
+    }
+
+    .sound-card {
+        flex: 1 1 45%;
+        padding: 8px;
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .settings-panel {
+        width: 95%;
+        max-width: 100%;
+        border-radius: 15px;
+    }
+
+    .panel-header {
+        padding: 12px 18px;
+    }
+
+    .panel-header h2 {
+        font-size: 1rem;
+    }
+
+    .close-btn {
+        width: 28px;
+        height: 28px;
+        font-size: 1.1rem;
+    }
+
+    .panel-content {
+        padding: 18px;
+        max-height: 60vh;
+    }
+
+    .setting-section {
+        padding: 14px;
+        margin-bottom: 20px;
+    }
+
+    .setting-section h3 {
+        font-size: 0.9rem;
+    }
+
+    .sticky-note-config {
+        padding-top: 22px !important;
+    }
+
+    .sticky-tape {
+        width: 70px;
+        height: 22px;
+    }
+
+    .config-item label {
+        font-size: 0.8rem;
+    }
+
+    .config-item input {
+        padding: 7px;
+        font-size: 1rem;
+    }
+
+    .apply-config-btn {
+        padding: 9px;
+        font-size: 1rem;
+    }
+
+    .color-btn {
+        width: 32px;
+        height: 32px;
+    }
+
+    .sound-card {
+        flex: 1 1 100%;
+        padding: 10px;
+    }
+
+    .sound-select {
+        padding: 9px;
+        font-size: 0.95rem;
+    }
+}

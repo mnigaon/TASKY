@@ -10,6 +10,7 @@ import {
   doc,
   query,
   where,
+  or,
 } from "firebase/firestore";
 
 export default function WorkspaceCard() {
@@ -17,6 +18,7 @@ export default function WorkspaceCard() {
 
   const [workspaces, setWorkspaces] = useState([]);
   const [newName, setNewName] = useState("");
+  const [newIcon, setNewIcon] = useState("📁");
 
   /* =========================
      실시간 로드
@@ -24,7 +26,13 @@ export default function WorkspaceCard() {
   useEffect(() => {
     if (!currentUser) return;
 
-    const q = query(collection(db, "workspaces"), where("userId", "==", currentUser.uid));
+    const q = query(
+      collection(db, "workspaces"),
+      or(
+        where("userId", "==", currentUser.uid),
+        where("members", "array-contains", currentUser.email)
+      )
+    );
     const unsub = onSnapshot(q, (snap) => {
       const data = snap.docs
         .map((d) => ({ id: d.id, ...d.data() }));
@@ -78,80 +86,111 @@ export default function WorkspaceCard() {
 
     await addDoc(collection(db, "workspaces"), {
       name: newName,
-      icon: "📁",
+      icon: newIcon || "📁",
       pinned: false,
       userId: currentUser.uid,
       createdAt: new Date(),
     });
 
     setNewName("");
+    setNewIcon("📁");
   };
 
   if (!currentUser) return null;
 
   return (
-    <div className="settings-card">
+    <div className="sticker-card">
       <h3>🗂 Workspace</h3>
 
       {/* =========================
          목록
       ========================= */}
-      {workspaces.map((ws) => (
-        <div
-          key={ws.id}
-          style={{
-            display: "flex",
-            gap: 8,
-            alignItems: "center",
-            marginBottom: 10,
-          }}
-        >
-          {/* 아이콘 */}
-          <input
-            style={{ width: 50 }}
-            value={ws.icon || "📁"}
-            onChange={(e) => updateIcon(ws.id, e.target.value)}
-          />
+      <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+        {workspaces.map((ws) => {
+          const isOwner = ws.userId === currentUser.uid;
 
-          {/* 이름 */}
-          <input
-            value={ws.name}
-            onChange={(e) => updateName(ws.id, e.target.value)}
-          />
+          return (
+            <div
+              key={ws.id}
+              style={{
+                display: "flex",
+                gap: 12,
+                alignItems: "center",
+                padding: "10px",
+                background: "rgba(255,255,255,0.5)",
+                border: "1px dashed #cbd5e0",
+                borderRadius: "8px",
+                opacity: isOwner ? 1 : 0.8,
+              }}
+            >
+              {/* 아이콘 */}
+              <input
+                className="settings-emoji-input"
+                value={ws.icon || "📁"}
+                onChange={(e) => updateIcon(ws.id, e.target.value)}
+                disabled={!isOwner}
+                title={!isOwner ? "Only the leader can change the icon" : ""}
+              />
 
-          {/* 핀 */}
-          <button
-            className="btn-ghost"
-            onClick={() => togglePin(ws)}
-          >
-            {ws.pinned ? "📌" : "📍"}
-          </button>
+              {/* 이름 */}
+              <div style={{ flex: 1, position: 'relative' }}>
+                <input
+                  style={{ marginBottom: 0, border: "none", background: "transparent", fontWeight: "600" }}
+                  value={ws.name + (isOwner ? "" : " (Member)")}
+                  onChange={(e) => updateName(ws.id, e.target.value)}
+                  disabled={!isOwner}
+                  title={!isOwner ? "Only the leader can rename the workspace" : ""}
+                />
+              </div>
 
-          {/* 삭제 */}
-          <button
-            className="btn-danger"
-            onClick={() => removeWorkspace(ws.id)}
-          >
-            Delete
-          </button>
-        </div>
-      ))}
+              {/* 핀 */}
+              <button
+                className="btn-ghost"
+                onClick={() => togglePin(ws)}
+                style={{ padding: "4px 8px", fontSize: "1.2rem" }}
+              >
+                {ws.pinned ? "📌" : "📍"}
+              </button>
+
+              {/* 삭제 (Leader 전용) */}
+              {isOwner && (
+                <button
+                  className="btn-danger"
+                  onClick={() => removeWorkspace(ws.id)}
+                  style={{ padding: "6px 12px", fontSize: "0.9rem" }}
+                >
+                  Delete
+                </button>
+              )}
+            </div>
+          );
+        })}
+      </div>
 
       {/* =========================
          생성
       ========================= */}
-      <div style={{ display: "flex", gap: 8, marginTop: 12 }}>
+      <div style={{ display: "flex", gap: 12, marginTop: 24, padding: "20px 0 0", borderTop: "2px dashed #edf2f7" }}>
         <input
-          placeholder="New workspace name"
+          className="settings-emoji-input"
+          value={newIcon}
+          onChange={(e) => setNewIcon(e.target.value)}
+          placeholder="📁"
+        />
+
+        <input
+          placeholder="New workspace label..."
           value={newName}
           onChange={(e) => setNewName(e.target.value)}
+          style={{ marginBottom: 0 }}
         />
 
         <button
           className="btn-primary"
           onClick={createWorkspace}
+          style={{ whiteSpace: "nowrap" }}
         >
-          Add
+          Add Label
         </button>
       </div>
     </div>

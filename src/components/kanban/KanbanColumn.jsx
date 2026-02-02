@@ -10,8 +10,11 @@ export default function KanbanColumn({
   onDropTask,
   isSystem = false,
   onDeleteColumn,
+  onUpdateColumn,
 }) {
   const [isOver, setIsOver] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedTitle, setEditedTitle] = useState(title);
 
   const allowDrop = (e) => {
     e.preventDefault();
@@ -28,6 +31,21 @@ export default function KanbanColumn({
     onDropTask?.(taskId, status);
   };
 
+  const handleTitleSubmit = () => {
+    if (editedTitle.trim() && editedTitle !== title) {
+      onUpdateColumn?.(status, editedTitle);
+    }
+    setIsEditing(false);
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") handleTitleSubmit();
+    if (e.key === "Escape") {
+      setEditedTitle(title);
+      setIsEditing(false);
+    }
+  };
+
   return (
     <div
       className={`kanban-column ${isOver ? "drop-over" : ""}`}
@@ -36,23 +54,38 @@ export default function KanbanColumn({
       onDrop={handleDrop}
     >
       <div className="kanban-column-header">
-        <h3>{title}</h3>
+        <div className="kanban-title-area">
+          {isEditing && !isSystem ? (
+            <input
+              autoFocus
+              className="column-title-input"
+              value={editedTitle}
+              onChange={(e) => setEditedTitle(e.target.value)}
+              onBlur={handleTitleSubmit}
+              onKeyDown={handleKeyDown}
+            />
+          ) : (
+            <h3
+              onClick={() => !isSystem && setIsEditing(true)}
+              style={{ cursor: !isSystem ? "pointer" : "default" }}
+            >
+              {title}
+            </h3>
+          )}
+        </div>
 
-        {!isSystem && (
-          <button
-            onClick={() => onDeleteColumn?.(status)}
-            style={{
-              border: "none",
-              background: "transparent",
-              cursor: "pointer",
-              fontSize: 16,
-            }}
-          >
-            ✕
-          </button>
-        )}
-
-        <span className="count">{tasks.length}</span>
+        <div className="kanban-header-right">
+          <span className="count">{tasks.length}</span>
+          {!isSystem && (
+            <button
+              className="delete-column-btn"
+              onClick={() => onDeleteColumn?.(status)}
+              title="Delete Column"
+            >
+              ✕
+            </button>
+          )}
+        </div>
       </div>
 
       <div className="kanban-column-body">

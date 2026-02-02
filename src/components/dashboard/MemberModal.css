@@ -1,0 +1,294 @@
+/* src/components/dashboard/MemberModal.css */
+.member-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.member-modal-content {
+    background: rgba(255, 255, 255, 0.95);
+    width: 450px;
+    max-width: 90%;
+    border-radius: 24px;
+    padding: 32px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.member-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.member-modal-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #a0aec0;
+    transition: color 0.2s;
+}
+
+.close-btn:hover {
+    color: #4a5568;
+}
+
+.project-name {
+    margin-bottom: 20px;
+    color: #4a5568;
+}
+
+.invite-form {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.invite-form input {
+    flex: 1;
+    padding: 12px 16px;
+    border-radius: 12px;
+    border: 2px solid #edf2f7;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.invite-form input:focus {
+    border-color: #667eea;
+}
+
+.invite-form button {
+    padding: 0 20px;
+    border-radius: 12px;
+    border: none;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.invite-form button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.member-list-section h3 {
+    font-size: 1rem;
+    color: #718096;
+    margin-bottom: 12px;
+}
+
+.member-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.member-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: #f8fafc;
+    border-radius: 12px;
+    margin-bottom: 8px;
+    border: 1px solid #edf2f7;
+}
+
+.member-item.owner {
+    background: #f0f4ff;
+    border-color: #dbeafe;
+}
+
+.role-badge {
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 8px;
+    font-weight: 700;
+}
+
+.role-badge.leader {
+    background: #e0e7ff;
+    color: #4338ca;
+}
+
+.remove-btn {
+    background: #fff5f5;
+    color: #c53030;
+    border: 1px solid #fed7d7;
+    padding: 4px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+
+/* 🌙 Dark Mode */
+.dark .member-modal-content {
+    background: #2d3748;
+    border-color: #4a5568;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.dark .member-modal-header h2 {
+    /* Gradient text might still look okay, or we can brighten it */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.dark .project-name {
+    color: #cbd5e0;
+}
+
+.dark .invite-form input {
+    background: #1a202c;
+    border-color: #4a5568;
+    color: #e2e8f0;
+}
+
+.dark .invite-form input:focus {
+    border-color: #667eea;
+}
+
+.dark .member-list-section h3 {
+    color: #a0aec0;
+}
+
+.dark .member-item {
+    background: #1a202c;
+    border-color: #2d3748;
+    color: #e2e8f0;
+}
+
+.dark .member-item.owner {
+    background: #2a4365;
+    /* Dark blueish for owner */
+    border-color: #2c5282;
+}
+
+.dark .role-badge.leader {
+    background: #4c51bf;
+    color: #e2e8f0;
+}
+
+.dark .close-btn {
+    color: #a0aec0;
+}
+
+.dark .close-btn:hover {
+    color: #cbd5e0;
+}
+
+/* =========================
+   📱 Mobile Responsive
+========================= */
+@media (max-width: 768px) {
+    .member-modal-content {
+        width: 90%;
+        max-width: 400px;
+        padding: 28px;
+    }
+
+    .member-modal-header h2 {
+        font-size: 1.3rem;
+    }
+
+    .invite-form {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .invite-form button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .member-modal-content {
+        width: 95%;
+        max-width: 100%;
+        padding: 24px;
+    }
+
+    .member-modal-header h2 {
+        font-size: 1.2rem;
+    }
+
+    .close-btn {
+        font-size: 20px;
+    }
+
+    .project-name {
+        font-size: 14px;
+        margin-bottom: 16px;
+    }
+
+    .invite-form input {
+        padding: 10px 14px;
+        font-size: 14px;
+    }
+
+    .invite-form button {
+        padding: 10px 16px;
+        font-size: 14px;
+    }
+
+    .member-list-section h3 {
+        font-size: 0.9rem;
+    }
+
+    .member-list {
+        max-height: 200px;
+    }
+
+    .member-item {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+
+    .role-badge {
+        font-size: 11px;
+        padding: 3px 6px;
+    }
+
+    .remove-btn {
+        font-size: 11px;
+        padding: 3px 10px;
+    }
+}

@@ -1,27 +1,37 @@
 /* =========================
-   Section
+   Section - 후기 갤러리
 ========================= */
 
 .testimonial-wall {
   width: 100%;
   padding: 120px 5%;
-  background: #f6f7fb;
+  /* 히어로와 동일한 배경 */
+  background: #fdfbf7;
+  background-image:
+    linear-gradient(#e5e7eb 1px, transparent 1px),
+    linear-gradient(90deg, #e5e7eb 1px, transparent 1px);
+  background-size: 50px 50px;
   box-sizing: border-box;
   text-align: center;
 }
 
 
 /* =========================
-   Header
+   Header - 핑크 그라데이션
 ========================= */
 
 .testimonial-header {
-  font-size: 34px;        /* 🔥 살짝 축소 */
+  font-size: 38px;
   font-weight: 800;
   letter-spacing: -0.5px;
 
   margin: 0 0 70px 0;
-  color: #111;
+
+  /* 키치한 핑크 그라데이션 */
+  background: linear-gradient(135deg, #000000 0%, #000000 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 
@@ -32,50 +42,88 @@
 .testimonial-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 28px;
+  gap: 32px;
 
   max-width: 1200px;
-  margin: 0 auto 90px auto;
+  margin: 0 auto;
 }
 
 
 /* =========================
-   Card
+   Card - 각 카드마다 다른 액센트
 ========================= */
 
 .testimonial-card {
   background: white;
 
-  border-radius: 16px;
-  padding: 28px;
+  border-radius: 20px;
+  padding: 32px;
 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   text-align: left;
 
-  /* 🔥 softer shadow */
-  box-shadow: 0 6px 24px rgba(0,0,0,0.05);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.08);
 
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-/* 🔥 SaaS hover */
+/* 각 카드마다 다른 왼쪽 액센트 테두리 */
+.testimonial-card:nth-child(1) {
+  border-left: 4px solid #ff6b9d;
+  /* 핑크 */
+}
+
+.testimonial-card:nth-child(2) {
+  border-left: 4px solid #f093fb;
+  /* 보라 */
+}
+
+.testimonial-card:nth-child(3) {
+  border-left: 4px solid #ffa8d5;
+  /* 라이트 핑크 */
+}
+
+.testimonial-card:nth-child(4) {
+  border-left: 4px solid #ee9ca7;
+  /* 피치 핑크 */
+}
+
+/* 호버 효과 */
 .testimonial-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+  transform: translateY(-8px);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.12);
 }
 
 
 /* =========================
-   Title
+   Title - 액센트 색상 매칭
 ========================= */
 
 .testimonial-card h3 {
-  font-size: 17px;       /* 🔥 작게 */
+  font-size: 18px;
   font-weight: 700;
   margin-bottom: 12px;
-  color: #222;
+  letter-spacing: 0.5px;
+}
+
+/* 각 카드마다 다른 타이틀 색상 */
+.testimonial-card:nth-child(1) h3 {
+  color: #ff6b9d;
+}
+
+.testimonial-card:nth-child(2) h3 {
+  color: #f093fb;
+}
+
+.testimonial-card:nth-child(3) h3 {
+  color: #ffa8d5;
+}
+
+.testimonial-card:nth-child(4) h3 {
+  color: #ee9ca7;
 }
 
 
@@ -84,7 +132,7 @@
 ========================= */
 
 .testimonial-card p {
-  font-size: 15px;       /* 🔥 16 → 15 */
+  font-size: 15px;
   line-height: 1.7;
   color: #666;
   margin-bottom: 20px;
@@ -97,47 +145,27 @@
 
 .testimonial-card .author {
   font-size: 13px;
-  color: #9aa0a6;
+  color: #999;
   text-align: right;
+  font-style: italic;
 }
 
 
 /* =========================
-   Button Area
+   반응형
 ========================= */
 
-.see-more {
-  text-align: center; /* 🔥 가운데가 더 자연스러움 */
-}
-
-
-/* 🔥 CTA 버튼 통일 (Hero/Feature 스타일 동일) */
-.see-more button {
-  padding: 11px 22px;
-
-  background: #111;
-  color: white;
-
-  border: none;
-  border-radius: 10px;
-
-  font-size: 14px;
-  font-weight: 600;
-
-  cursor: pointer;
-
-  transition: all 0.18s ease;
-}
-
-  
-  /* 반응형 */
-  @media (max-width: 768px) {
-    .testimonial-wall {
-      padding: 60px 20px;
-    }
-  
-    .see-more {
-      text-align: center;
-    }
+@media (max-width: 768px) {
+  .testimonial-wall {
+    padding: 80px 20px;
   }
-  
+
+  .testimonial-header {
+    font-size: 30px;
+  }
+
+  .testimonial-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}

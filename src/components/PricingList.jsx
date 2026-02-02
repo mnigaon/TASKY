@@ -2,22 +2,22 @@ import "./PricingList.css";
 
 const plans = [
   {
-    label: "Plan 1",
-    name: "For Individual",
-    price: "$2/month",
-    features: ["Task Management", "Basic Analytics", "Email Support"]
+    label: "Petal",
+    name: "For the casual deco",
+    price: "Free",
+    features: ["Task Management", "Basic Deco", "Community Access"]
   },
   {
-    label: "Plan 2",
-    name: "For Medium Teams",
-    price: "$5/month",
-    features: ["Task Management", "Team Collaboration", "Priority Support"]
+    label: "Bloom",
+    name: "For the aesthetic pro",
+    price: "$5/mo",
+    features: ["Sticker Tasks", "Focus Garden Pro", "Custom Themes"]
   },
   {
-    label: "Plan 3",
-    name: "For Large Teams",
-    price: "$10/month",
-    features: ["All Features", "Advanced Analytics", "Dedicated Support"]
+    label: "Bouquet",
+    name: "The full experience",
+    price: "$12/mo",
+    features: ["All Zazzy Tools", "Priority Support", "Exclusive Stickers"]
   }
 ];
 

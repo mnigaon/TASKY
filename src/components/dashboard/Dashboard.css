@@ -2,106 +2,607 @@
 .dashboard {
   display: flex;
   height: 100vh;
-  font-family: 'Inter', Arial, sans-serif;
-  color: #111;
+  /* Fixed height to ensure sidebar stays fixed while content scrolls */
+  width: 100%;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: #1a1a1a;
+  background-color: #fcfcfc;
+  /* Cleaner white/gray */
+  overflow: hidden;
 }
 
-/* Sidebar */
+/* Sidebar - Leather Binder Organizer Extension */
 .sidebar {
-  width: 220px;
+  width: 260px;
+  min-width: 260px;
   display: flex;
   flex-direction: column;
-  padding: 24px;
+  padding: 20px 0 20px 25px;
+  /* Leave space for rings on the left */
   box-sizing: border-box;
-  background-color: #f9f9f9; /* 기본 배경 유지 */
-  border-right: 1px solid #e0e0e0;
+  background-color: #3d2b1f;
+  /* Dark Leather Base */
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px),
+    url("https://www.transparenttextures.com/patterns/leather.png");
+  border-right: 4px solid #2d1b0f;
+  position: relative;
+  z-index: 10;
+  box-shadow: 10px 0 20px rgba(0, 0, 0, 0.3);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  /* Hide content when closed */
+  white-space: nowrap;
+  /* Prevent text wrapping */
 }
 
-.sidebar .logo {
-  font-size: 28px;
-  font-weight: 800;
-  margin-bottom: 40px;
+/* Closed State */
+.sidebar.closed {
+  width: 0 !important;
+  min-width: 0 !important;
+  padding: 0 !important;
+  border-right: none;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Close Button (X) */
+.close-sidebar-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  color: #a1887f;
+  font-size: 1.2rem;
+  font-weight: bold;
   cursor: pointer;
+  z-index: 20;
   transition: color 0.2s;
 }
 
-.sidebar .logo:hover {
-  color: #8B97AD;
+.close-sidebar-btn:hover {
+  color: #fff;
 }
 
-/* Sidebar menu */
+/* 📔 Silver Binder Rings Effect */
+.sidebar::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 40px;
+  bottom: 40px;
+  width: 14px;
+  background: repeating-linear-gradient(to bottom,
+      #999 0, #999 4px,
+      #ddd 4px, #eee 8px,
+      #999 8px, #999 12px,
+      transparent 12px, transparent 36px);
+  border-radius: 4px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+  z-index: 11;
+}
+
+/* Logo - Fixed Position */
+.logo.fixed-logo {
+  position: fixed;
+  top: 20px;
+  left: 25px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  filter: contrast(0.8) sepia(0.5);
+  transition: 0.3s;
+  z-index: 50;
+  /* Above everything */
+}
+
+.logo-img {
+  width: 160px;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(1px 1px 1px rgba(255, 255, 255, 0.1));
+}
+
+.logo.fixed-logo:hover {
+  filter: contrast(1);
+  transform: scale(1.05);
+}
+
+/* Sidebar Menu - Index Tabs */
 .sidebar ul {
   list-style: none;
   padding: 0;
   margin: 0;
   flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  overflow-y: auto;
+  /* Ensure scrollability if items are many */
+  overflow-x: hidden;
+}
+
+/* Hide scrollbar for cleaner look */
+.sidebar ul::-webkit-scrollbar {
+  width: 0;
 }
 
 .sidebar ul li {
-  padding: 12px 14px;
-  margin-bottom: 12px;
-  border-radius: 8px;
+  padding: 12px 20px;
+  margin-right: -4px;
+  /* Slight overlap for tab look */
+  border-radius: 8px 0 0 8px;
   cursor: pointer;
-  transition: background-color 0.2s, color 0.2s;
+  font-family: 'Patrick Hand', cursive;
+  font-weight: 400;
+  font-size: 1.3rem;
+  letter-spacing: 2px;
+  /* Wider tracking */
+  color: #d7ccc8;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  position: relative;
+  border: 1px solid transparent;
 }
 
 .sidebar ul li:hover {
-  background-color: #E6EBF5;
-  color: #5B6B8C;
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  transform: translateX(4px);
 }
 
+/* Active Tab: Bright Paper or Stitched Leather */
 .sidebar ul li.active {
-  background-color: #8B97AD;
-  color: white;
+  background: #fdfbf7;
+  /* Paper Tab */
+  color: #3e2723;
+  font-weight: 700;
+  box-shadow: -5px 5px 15px rgba(0, 0, 0, 0.2);
+  border-left: 5px solid #8d6e63;
+  z-index: 5;
+}
+
+.sidebar ul li.active::after {
+  content: '';
+  position: absolute;
+  right: -5px;
+  top: 0;
+  height: 100%;
+  width: 10px;
+  background: #fdfbf7;
+  z-index: 6;
+}
+
+/* Bottom Buttons (Stamped Tape) */
+.sidebar ul li.settings-btn {
+  margin-top: auto;
+  margin-bottom: 4px;
+  background: rgba(141, 110, 99, 0.4);
+  color: #efebe9;
+  border-radius: 4px;
+  justify-content: center;
+  font-size: 1.1rem;
+  padding: 8px;
+}
+
+.sidebar ul li.settings-btn.active {
+  background: #fdfbf7;
+  color: #3e2723;
 }
 
 .sidebar ul li.logout-btn {
-  margin-top: auto;
-  background-color: #000000;
-  text-align: center;
-  color: white;
+  background: rgba(211, 47, 47, 0.2);
+  color: #ffcdd2;
+  border-radius: 4px;
+  justify-content: center;
+  font-size: 1.1rem;
+  margin-top: 10px;
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+  padding: 8px;
 }
 
 .sidebar ul li.logout-btn:hover {
-  background-color: #373333;
+  background: rgba(211, 47, 47, 0.4);
+  color: #fff;
 }
 
 /* Main content */
 .main-content {
   flex: 1;
-  padding: 32px;
+  padding: 0 0 10px 0;
+  /* Increased bottom padding significantly */
   overflow-y: auto;
+  overflow-x: hidden;
+  /* Force hide horz scroll */
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  /* Important for flex child to shrink */
 
+  /* 🔥 히어로 섹션과 동일한 배경 적용 */
+  background: #fdfbf7;
+  /* Warm creamy background */
+  background-image:
+    linear-gradient(#e5e7eb 1px, transparent 1px),
+    linear-gradient(90deg, #e5e7eb 1px, transparent 1px);
+  background-size: 50px 50px;
+  /* Soft grid */
+}
+
+.main-content>h1 {
+  /* Deprecated: using .dashboard-welcome-header instead */
+  display: none;
+}
+
+/* 웰컴 헤더 영역 */
+.dashboard-welcome-header {
+  margin: 80px 60px 40px 60px;
+  animation: fadeIn 1s ease;
+  position: relative;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 날짜 뱃지 */
+.dashboard-date-pill {
+  display: inline-block;
+  padding: 6px 16px;
+  background: rgba(0, 0, 0, 0.04);
+  color: #718096;
+  font-size: 0.85rem;
+  font-weight: 700;
+  border-radius: 100px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 20px;
+  /* Added top margin to move it down */
+  margin-bottom: 16px;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(0, 0, 0, 0.02);
+}
+
+/* 웰컴 타이틀 */
+.dashboard-welcome-title {
+  font-family: 'Chewy', cursive;
+  /* 로고 스타일 폰트 */
+  font-size: 3.2rem;
+  /* Bubbly하고 크게 */
+  font-weight: 400;
+  margin-bottom: 8px;
+  color: #111;
+  letter-spacing: 1px;
+  line-height: 1.1;
+}
+
+/* 손 흔드는 이모지 애니메이션 */
+.wave-emoji {
+  display: inline-block;
+  margin-left: 8px;
+}
+
+@keyframes wave {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  10% {
+    transform: rotate(14deg);
+  }
+
+  20% {
+    transform: rotate(-8deg);
+  }
+
+  30% {
+    transform: rotate(14deg);
+  }
+
+  40% {
+    transform: rotate(-4deg);
+  }
+
+  50% {
+    transform: rotate(10deg);
+  }
+
+  60% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+/* 웰컴 서브타이틀 */
+.dashboard-welcome-subtitle {
+  font-family: 'Chewy', cursive;
+  /* 로고 스타일 폰트 */
+  font-size: 1.6rem;
+  /* 가독성 좋게 */
+  color: #718096;
+  font-weight: 400;
+  margin: 0;
+  max-width: 600px;
+  line-height: 1.4;
+}
+
+/* 다크모드 대응 */
+.dark .dashboard-welcome-title {
+  background: linear-gradient(135deg, #ffffff 0%, #cbd5e0 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.dark .dashboard-date-pill {
+  background: rgba(255, 255, 255, 0.08);
+  color: #a0aec0;
+  border-color: rgba(255, 255, 255, 0.05);
+}
+
+.dark .dashboard-welcome-subtitle {
+  color: #a0aec0;
+}
+
+/* Make sure child components handle their own padding/centering if needed */
+.dashboard>.main-content>div {
+  /* Most components like tasks, kanban likely need padding */
+  width: 100%;
 }
 
 /* Cards (Today's Tasks, Ongoing Projects, Recent Activity) */
 .cards {
   display: flex;
   gap: 20px;
-  margin-top: 100px;
+  margin-top: 40px;
 }
 
 .card {
   flex: 1;
-  padding: 28px;
-
+  padding: 32px;
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  /* Thin border instead of color */
   border-radius: 12px;
-
-  text-align: center;
-  font-weight: 600;
-  font-size: 18px;
-  transition: transform 0.2s, box-shadow 0.2s;
+  text-align: left;
+  /* Notion-style left align */
+  transition: all 0.2s ease;
 }
 
 .card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.1);
 }
 
 /* =========================
-   🌙 Dark mode – Sidebar Logo
+   🌙 Dark mode – Sidebar
 ========================= */
+.dark .dashboard {
+  background-color: #1a1a1a;
+  color: #eee;
+}
 
-.dark .logo {
-  color: #ffffff;
+.dark .sidebar {
+  background: #252526;
+  border-right: 1px solid #333;
+  box-shadow: none;
+}
+
+.dark .sidebar .logo {
+  background: linear-gradient(135deg, #a0aec0 0%, #e2e8f0 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.dark .sidebar ul li {
+  color: #a0aec0;
+}
+
+.dark .sidebar ul li:hover {
+  background: #333;
+  color: #eee;
+}
+
+.dark .sidebar ul li.active {
+  background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+  color: white;
+  box-shadow: none;
+}
+
+.dark .sidebar ul li.settings-btn {
+  border-color: #333;
+  color: #888;
+}
+
+.dark .sidebar ul li.settings-btn:hover {
+  background: #333;
+  color: #eee;
+}
+
+.dark .sidebar ul li.logout-btn {
+  background: rgba(229, 62, 62, 0.1);
+  color: #fc8181;
+  border-color: rgba(229, 62, 62, 0.2);
+}
+
+.dark .sidebar ul li.logout-btn:hover {
+  background: rgba(229, 62, 62, 0.2);
+}
+
+
+
+/* =========================
+   📱 Mobile Responsive
+========================= */
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 220px;
+    min-width: 220px;
+    padding: 20px 0 20px 20px;
+  }
+
+  .logo-img {
+    width: 140px;
+  }
+
+  .sidebar ul li {
+    font-size: 1.2rem;
+    padding: 10px 16px;
+  }
+}
+
+@media (max-width: 768px) {
+
+  /* 모바일 사이드바 오버레이 */
+  .sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .sidebar-overlay.active {
+    display: block;
+    opacity: 1;
+  }
+
+  /* 사이드바 기본적으로 숨김 */
+  .sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 260px !important;
+    min-width: 260px !important;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 1000;
+  }
+
+  /* 사이드바 열렸을 때 */
+  .sidebar:not(.closed) {
+    transform: translateX(0);
+  }
+
+  /* 메인 컨텐츠가 전체 너비 차지 */
+  .main-content {
+    width: 100% !important;
+    margin-left: 0 !important;
+    padding: 0 0 10px 0;
+  }
+
+  /* 대시보드 컨테이너 */
+  .dashboard {
+    flex-direction: column;
+  }
+
+  .dashboard-welcome-header {
+    margin: 60px 40px 30px 40px;
+  }
+
+  .dashboard-welcome-title {
+    font-size: 2.5rem;
+  }
+
+  .dashboard-welcome-subtitle {
+    font-size: 1.3rem;
+  }
+
+  /* 로고를 햄버거 메뉴처럼 작동 */
+  .logo.fixed-logo {
+    z-index: 1001;
+    background: rgba(61, 43, 31, 0.95);
+    padding: 10px 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+}
+
+@media (max-width: 480px) {
+
+  /* 사이드바 너비 축소 */
+  .sidebar {
+    width: 240px !important;
+    min-width: 240px !important;
+  }
+
+  /* 메인 컨텐츠 */
+  .main-content {
+    width: 100% !important;
+    margin-left: 0 !important;
+  }
+
+  .dashboard-welcome-header {
+    margin: 40px 20px 20px 20px;
+  }
+
+  .dashboard-date-pill {
+    font-size: 0.75rem;
+    padding: 5px 12px;
+    margin-top: 15px;
+    margin-bottom: 12px;
+  }
+
+  .dashboard-welcome-title {
+    font-size: 2rem;
+  }
+
+  .dashboard-welcome-subtitle {
+    font-size: 1.1rem;
+  }
+
+  .logo.fixed-logo {
+    top: 15px;
+    left: 15px;
+    padding: 8px 12px;
+  }
+
+  .logo-img {
+    width: 120px;
+  }
+
+  .cards {
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 30px;
+  }
+
+  .card {
+    padding: 24px;
+  }
+
+  /* 사이드바 내부 요소 크기 조정 */
+  .sidebar ul li {
+    font-size: 1.1rem;
+    padding: 9px 14px;
+  }
+
+  .sidebar-footer button {
+    font-size: 1rem;
+    padding: 9px 14px;
+  }
 }

@@ -1,94 +1,70 @@
 /* =========================
-   Section
+   Section - CTA 히어로
 ========================= */
 
 .hero-gradient {
   position: relative;
   width: 100%;
-  min-height: 100vh;
-
+  min-height: 90vh;
   display: flex;
   align-items: center;
   justify-content: center;
-
-  background-color: #f6f7fb; /* 🔥 전체 톤 통일 */
-
-  padding: 120px 20px;
+  /* 히어로와 동일한 배경 */
+  background: #fdfbf7;
+  background-image:
+    linear-gradient(#e5e7eb 1px, transparent 1px),
+    linear-gradient(90deg, #e5e7eb 1px, transparent 1px);
+  background-size: 50px 50px;
+  padding: 100px 20px;
   text-align: center;
-  flex-direction: column;
-
   overflow: hidden;
 }
 
 
 /* =========================
-   Background (기존 유지)
+   CTA 카드
 ========================= */
 
-.hero-gradient::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-
-  background:
-    radial-gradient(circle at 20% 20%, #a8ff65 0%, transparent 55%),
-    radial-gradient(circle at 80% 25%, #ffc07f 0%, transparent 55%),
-    radial-gradient(circle at 75% 75%, #ffb3c6 0%, transparent 50%),
-    linear-gradient(
-      to bottom,
-      rgba(246, 247, 251, 1) 0%,
-      rgba(246, 247, 251, 0) 25%,
-      rgba(246, 247, 251, 0) 75%,
-      rgba(246, 247, 251, 1) 100%
-    );
-
-  background-blend-mode: screen;
-  z-index: 0;
-}
-
-
-/* =========================
-   Content
-========================= */
-
-.hero-gradient-content {
+.hero-gradient-card {
   position: relative;
-  z-index: 1;
-  max-width: 720px;
-  margin: 0 auto;
+  z-index: 2;
+  width: 100%;
+  max-width: 1100px;
+  padding: 100px 40px;
+
+  /* 흰색 카드 배경 */
+  background: white;
+  border-radius: 24px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.1);
+
+  /* 핑크 액센트 테두리 */
+  border-top: 5px solid #ff6b9d;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 
 /* =========================
-   🔥 Eyebrow
-========================= */
-
-.eyebrow-text {
-  font-size: 13px;
-  font-weight: 700;
-
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-
-  color: #8b97ad;
-
-  margin-bottom: 18px;
-}
-
-
-/* =========================
-   🔥 Title (Tasky 톤)
+   Title
 ========================= */
 
 .hero-gradient-title {
-  font-size: 42px;          /* 🔥 55 → 42 */
+  font-size: 56px;
   font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -2px;
+  margin-bottom: 48px;
 
-  line-height: 1.25;
-  letter-spacing: -0.6px;
+  /* 키치한 핑크 그라데이션 */
+  background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 
-  margin-bottom: 26px;
-  color: #111;
+  max-width: 850px;
 }
 
 
@@ -98,52 +74,30 @@
 
 .hero-gradient-buttons {
   display: flex;
-  gap: 14px;
   justify-content: center;
-  flex-wrap: wrap;
-  margin-top: 50px;
+  width: 100%;
 }
 
-
-/* 🔥 공통 버튼 */
-.hero-gradient-buttons button {
-  padding: 12px 22px;
-
-  font-size: 14px;
+.hero-button.primary {
+  padding: 18px 48px;
+  font-size: 16px;
   font-weight: 600;
-
-  border-radius: 10px;
+  border-radius: 12px;
   border: none;
 
-  cursor: pointer;
-
-  transition: all 0.18s ease;
-}
-
-
-/* 🔥 Primary */
-.btn-black {
-  background: #111;
+  /* 핑크 그라데이션 버튼 */
+  background: linear-gradient(135deg, #000000 0%, #000000 100%);
   color: white;
+
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 24px rgba(255, 107, 157, 0.3);
 }
 
-.btn-black:hover {
-  transform: translateY(-2px);
-  opacity: 0.92;
-}
-
-
-/* 🔥 Ghost */
-.btn-white {
-  background: white;
-  color: #111;
-
-  border: 1px solid #d6d8e0;
-}
-
-.btn-white:hover {
-  background: #f0f1f6;
-  transform: translateY(-2px);
+.hero-button.primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(255, 107, 157, 0.4);
+  filter: brightness(1.1);
 }
 
 
@@ -152,12 +106,23 @@
 ========================= */
 
 @media (max-width: 768px) {
-  .hero-gradient-title {
-    font-size: 30px;
+  .hero-gradient {
+    padding: 80px 20px;
+    min-height: 70vh;
   }
 
-  .hero-gradient-buttons {
-    flex-direction: column;
-    gap: 10px;
+  .hero-gradient-card {
+    padding: 60px 30px;
+    border-radius: 20px;
+  }
+
+  .hero-gradient-title {
+    font-size: 36px;
+    letter-spacing: -1px;
+  }
+
+  .hero-button.primary {
+    padding: 16px 36px;
+    font-size: 15px;
   }
 }

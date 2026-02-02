@@ -81,76 +81,76 @@ export default function CommentEditModal({
   };
 
   return ReactDOM.createPortal(
-    <div className="modal-overlay" onClick={onClose}>
-      <div
-        className="modal-content"
-        style={{ maxWidth: 420 }}
-        onClick={(e) => e.stopPropagation()}
-      >
-        <h3>Edit Comment</h3>
+    <div className="modal-overlay" onClick={onClose} style={{ zIndex: 10001 }}>
+      <div className="modal-content" style={{ maxWidth: 560 }} onClick={(e) => e.stopPropagation()}>
+        <div className="modal-paper">
+          <header className="modal-workspace-header">
+            💬 <span>Edit Comment</span>
+          </header>
 
-        {/* 텍스트 */}
-        <textarea
-          value={text}
-          rows={4}
-          onChange={(e) => setText(e.target.value)}
-          onKeyDown={handleKey}
-        />
+          <div className="task-modal-scroll-area" style={{ padding: '30px', overflow: 'hidden' }}>
+            {/* Textarea */}
+            <div className="input-group">
+              <label style={{ fontSize: '11px', fontWeight: 'bold', color: '#94a3b8', marginBottom: '8px', display: 'block' }}>YOUR THOUGHTS</label>
+              <textarea
+                className="task-desc-textarea"
+                value={text}
+                rows={4}
+                onChange={(e) => setText(e.target.value)}
+                onKeyDown={handleKey}
+                placeholder="Edit your comment..."
+              />
+            </div>
 
-        {/* =========================
-           기존 파일 표시
-        ========================= */}
-        {comment.attachmentUrl && !removeOldFile && (
-          <div style={{ marginBottom: 8 }}>
-            <a
-              href={comment.attachmentUrl}
-              target="_blank"
-              rel="noreferrer"
-            >
-              📎 {comment.attachmentName}
-            </a>
+            {/* Attachment Management */}
+            <div className="file-section">
+              {comment.attachmentUrl && !removeOldFile && (
+                <div className="file-list">
+                  <div className="file-item">
+                    <a
+                      href={comment.attachmentUrl}
+                      className="file-name"
+                      target="_blank"
+                      rel="noreferrer"
+                      title={comment.attachmentName}
+                    >
+                      📎 {comment.attachmentName}
+                    </a>
+                    <button
+                      className="remove-file-btn"
+                      onClick={() => setRemoveOldFile(true)}
+                    >
+                      ✕
+                    </button>
+                  </div>
+                </div>
+              )}
 
-            {/* ⭐ 파일 제거 버튼 */}
-            <button
-              className="btn ghost"
-              style={{ marginLeft: 8 }}
-              onClick={() => setRemoveOldFile(true)}
-            >
-              Remove
-            </button>
+              <div className="upload-button-wrapper" style={{ marginTop: '8px' }}>
+                <label className="custom-file-upload">
+                  <span>{file ? "📄 " + file.name : "➕ Change File"}</span>
+                  <input
+                    type="file"
+                    className="hidden-file-input"
+                    onChange={(e) => setFile(e.target.files[0])}
+                  />
+                </label>
+              </div>
+            </div>
+
+            {/* Actions */}
+            <div className="task-actions" style={{ marginTop: '16px' }}>
+              <button className="btn ghost" onClick={onClose}>
+                Cancel
+              </button>
+              <button className="btn danger" onClick={handleDelete}>
+                Delete
+              </button>
+              <button className="btn primary" onClick={handleSave}>
+                Save Changes
+              </button>
+            </div>
           </div>
-        )}
-
-        {/* =========================
-           새 파일 선택
-        ========================= */}
-        <input
-          type="file"
-          onChange={(e) => setFile(e.target.files[0])}
-        />
-
-        {/* ⭐ 선택 파일 이름 표시 */}
-        {file && (
-          <div style={{ fontSize: 12, marginTop: 6 }}>
-            Selected: {file.name}
-          </div>
-        )}
-
-        {/* =========================
-           버튼
-        ========================= */}
-        <div className="modal-actions">
-          <button className="btn primary" onClick={handleSave}>
-            Save
-          </button>
-
-          <button className="btn danger" onClick={handleDelete}>
-            Delete
-          </button>
-
-          <button className="btn ghost" onClick={onClose}>
-            Cancel
-          </button>
         </div>
       </div>
     </div>,

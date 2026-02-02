@@ -1,0 +1,99 @@
+/* MobileCard.css */
+.mobile-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+}
+
+.mobile-card:active {
+    transform: scale(0.98);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.mobile-card-icon {
+    font-size: 32px;
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f7fafc;
+    border-radius: 10px;
+}
+
+.mobile-card-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.mobile-card-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.mobile-card-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1a202c;
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.mobile-card-subtitle {
+    font-size: 14px;
+    color: #718096;
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.mobile-card-badge {
+    font-size: 12px;
+    font-weight: 600;
+    color: #ffffff;
+    background: #648cff;
+    padding: 2px 8px;
+    border-radius: 12px;
+    white-space: nowrap;
+}
+
+.mobile-card-arrow {
+    font-size: 20px;
+    color: #cbd5e0;
+    flex-shrink: 0;
+}
+
+/* Dark Mode */
+.dark .mobile-card {
+    background: #2d3748;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.dark .mobile-card-icon {
+    background: #1a202c;
+}
+
+.dark .mobile-card-title {
+    color: #f7fafc;
+}
+
+.dark .mobile-card-subtitle {
+    color: #a0aec0;
+}
+
+.dark .mobile-card-arrow {
+    color: #4a5568;
+}

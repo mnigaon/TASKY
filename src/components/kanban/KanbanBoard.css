@@ -1,56 +1,152 @@
 .kanban-board {
-    flex: 1;
-    display: flex;
-    gap: 20px;
-    overflow-x: auto;
-    padding-bottom: 10px;
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  /* Allow wrapping */
+  gap: 40px;
+  padding: 0 20px 40px 20px;
+  align-items: start;
+  justify-content: center;
+  /* Center align columns */
+  overflow-x: hidden;
+  /* Ensure no horz scroll */
+}
+
+/* No Horizontal Scrollbar needed anymore */
+.kanban-board::-webkit-scrollbar {
+  display: none;
+}
+
+.kanban-board::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 6px;
+}
+
+/* 🌙 Dark */
+.dark .kanban-board::-webkit-scrollbar-thumb {
+  background: #444;
+}
+
+.add-column-btn {
+  min-width: 200px;
+  /* 🔹 가로 길이 축소 (280px -> 200px) */
+  background: linear-gradient(135deg, #334155 0%, #1e293b 100%);
+  color: white;
+  border: none;
+  border-radius: 16px;
+  padding: 16px 24px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgba(51, 65, 85, 0.2);
+}
+
+.add-column-btn:hover {
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px rgba(51, 65, 85, 0.3);
+}
+
+.add-column-btn:active {
+  transform: scale(0.97);
+}
+
+/* Kanban Progress Indicator */
+.kanban-progress-indicator {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.kanban-progress-indicator svg {
+  transform: rotate(-90deg);
+}
+
+.kanban-progress-indicator circle.bg {
+  stroke: #eee;
+}
+
+.kanban-progress-indicator circle.fg {
+  stroke: #111;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.5s ease-out;
+}
+
+.kanban-progress-indicator .progress-text {
+  position: absolute;
+  font-size: 14px;
+  font-weight: 800;
+  color: #111;
+  font-family: 'Outfit', sans-serif;
+}
+
+/* =========================
+   📱 Mobile Responsive
+========================= */
+@media (max-width: 1024px) {
+  .kanban-board {
+    gap: 30px;
+    padding: 0 15px 30px 15px;
   }
-  
-  /* 스크롤바 깔끔하게 */
-  .kanban-board::-webkit-scrollbar {
-    height: 8px;
+}
+
+@media (max-width: 768px) {
+  .kanban-board {
+    flex-direction: column;
+    gap: 25px;
+    padding: 0 10px 25px 10px;
   }
-  
-  .kanban-board::-webkit-scrollbar-thumb {
-    background: #ccc;
-    border-radius: 6px;
-  }
-  
-  /* 🌙 Dark */
-  .dark .kanban-board::-webkit-scrollbar-thumb {
-    background: #444;
-  }
-  
+
   .add-column-btn {
-    min-width: 140px;
-    height: 44px;
-  
-    padding: 0 14px;
-  
-    border-radius: 10px;
-    border: 1.5px dashed #d0d7de;
-  
-    background: #fafbfc;
-    color: #555;
-  
+    min-width: 100%;
+    max-width: 100%;
+  }
+
+  .kanban-progress-indicator {
+    width: 50px;
+    height: 50px;
+    bottom: 20px;
+    right: 20px;
+  }
+
+  .kanban-progress-indicator .progress-text {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .kanban-board {
+    gap: 20px;
+    padding: 0 5px 20px 5px;
+  }
+
+  .add-column-btn {
+    padding: 14px 20px;
     font-size: 14px;
-    font-weight: 600;
-  
-    cursor: pointer;
-  
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  
-    transition: all 0.12s ease;
   }
-  
-  .add-column-btn:hover {
-    background: #f1f3f5;
-    border-color: #9ca3af;
+
+  .kanban-progress-indicator {
+    width: 45px;
+    height: 45px;
+    bottom: 15px;
+    right: 15px;
   }
-  
-  .add-column-btn:active {
-    transform: scale(0.97);
+
+  .kanban-progress-indicator .progress-text {
+    font-size: 11px;
   }
-  
+}

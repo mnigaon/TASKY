@@ -20,6 +20,7 @@ import PrivateRoute from "./components/dashboard/PrivateRoute";
 // TimerProvider 제거됨 (index.js로 이동)
 import TimerPage from "./components/timer/TimerPage";
 import "./styles/theme.css";
+import "@fontsource/jua"; // Jua 폰트 import
 
 
 function Home() {

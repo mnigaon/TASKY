@@ -1,0 +1,208 @@
+/* DiaryReaderModal.css */
+.diary-reader-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.diary-reader-modal {
+    width: 600px;
+    min-height: 500px;
+    max-height: 80vh;
+    background: #fff;
+    background-image:
+        linear-gradient(90deg, transparent 39px, #abced4 39px, #abced4 41px, transparent 41px),
+        linear-gradient(#eee .1em, transparent .1em);
+    background-size: 100% 100%, 100% 1.5em;
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.3),
+        0 0 0 10px rgba(255, 255, 255, 0.4);
+    border-radius: 4px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 60px 50px 40px 60px;
+    /* Left padding for red line margin */
+    font-family: 'Patrick Hand', cursive;
+    transform-origin: center;
+    animation: popBook 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}
+
+.diary-reader-modal::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 40px;
+    bottom: 0;
+    width: 2px;
+    background: #ffaa9f;
+    /* Red margin line */
+}
+
+@keyframes popBook {
+    0% {
+        transform: scale(0.8) translateY(20px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Tape at top */
+.diary-reader-tape {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-2deg);
+    width: 120px;
+    height: 35px;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(2px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+
+.diary-reader-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #888;
+    cursor: pointer;
+    z-index: 10;
+    transition: color 0.2s;
+}
+
+.diary-reader-close:hover {
+    color: #ff6b6b;
+}
+
+.diary-reader-date {
+    font-family: 'Amatic SC', cursive;
+    font-size: 2.5rem;
+    color: #5d4037;
+    border-bottom: 2px dashed #d7ccc8;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 700;
+}
+
+.diary-reader-content {
+    flex: 1;
+    font-size: 1.3rem;
+    line-height: 1.5em;
+    /* Match background-size height */
+    color: #4a4a4a;
+    width: 100%;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    padding-right: 10px;
+}
+
+.diary-reader-footer {
+    margin-top: 20px;
+    text-align: right;
+    font-size: 0.9rem;
+    color: #a0aec0;
+    font-style: italic;
+}
+
+/* Scrollbar */
+.diary-reader-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.diary-reader-content::-webkit-scrollbar-thumb {
+    background: #d7ccc8;
+    border-radius: 3px;
+}
+
+/* =========================
+   📱 Mobile Responsive
+========================= */
+@media (max-width: 768px) {
+    .diary-reader-modal {
+        width: 90%;
+        max-width: 500px;
+        padding: 50px 40px 35px 50px;
+    }
+
+    .diary-reader-date {
+        font-size: 2.2rem;
+    }
+
+    .diary-reader-content {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .diary-reader-overlay {
+        padding: 0;
+    }
+
+    .diary-reader-modal {
+        width: 100%;
+        max-width: 100%;
+        max-height: 100vh;
+        min-height: 100vh;
+        padding: 50px 30px 30px 40px;
+        border-radius: 0;
+    }
+
+    .diary-reader-modal::before {
+        left: 30px;
+    }
+
+    .diary-reader-tape {
+        width: 100px;
+        height: 30px;
+    }
+
+    .diary-reader-close {
+        top: 12px;
+        right: 12px;
+        font-size: 1.3rem;
+    }
+
+    .diary-reader-date {
+        font-size: 2rem;
+        padding-bottom: 8px;
+        margin-bottom: 15px;
+    }
+
+    .diary-reader-content {
+        font-size: 1.1rem;
+        line-height: 1.4em;
+    }
+
+    .diary-reader-footer {
+        font-size: 0.85rem;
+        margin-top: 15px;
+    }
+}

@@ -4,11 +4,15 @@
 
 .footer {
   width: 100%;
-
-  padding: 100px 5%;   /* 🔥 margin 대신 padding */
-  background: #f6f7fb;
-
-  color: #111;
+  padding: 100px 5%;
+  background-color: #3d2b1f;
+  /* Dark Leather Base - 헤더/사이드바와 동일 */
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px),
+    url("https://www.transparenttextures.com/patterns/leather.png");
+  /* 가죽 텍스처 */
+  color: #d7ccc8;
+  /* 밝은 텍스트 */
 
   display: flex;
   justify-content: space-between;
@@ -16,6 +20,10 @@
   gap: 60px;
 
   box-sizing: border-box;
+  border-top: 4px solid #2d1b0f;
+  /* 헤더와 동일한 테두리 */
+  box-shadow: 0 -10px 20px rgba(0, 0, 0, 0.3);
+  /* 위쪽 그림자 */
 }
 
 
@@ -32,9 +40,42 @@
 
 /* 🔥 로고 (Header와 통일) */
 .footer-logo {
-  font-size: 20px;   /* 🔥 35 → 20 */
-  font-weight: 800;
-  letter-spacing: 1.5px;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  cursor: pointer;
+  opacity: 0.85;
+  /* 기본 상태를 약간 연하게 */
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.footer-logo:hover {
+  opacity: 1;
+  /* 호버 시 원본처럼 진해지도록 */
+  transform: scale(1.02);
+  filter: brightness(1.2);
+  /* 호버 시 더 밝게 */
+}
+
+.footer-logo-img {
+  width: 200px;
+  /* 푸터는 약간 더 크게 */
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(1px 1px 1px rgba(255, 255, 255, 0.1));
+  /* 헤더 로고와 동일한 필터 */
+  margin-left: -20px;
+  /* 시각적 왼쪽 정렬 보정 */
+}
+
+/* 🔥 태그라인 스타일 추가 */
+.footer-tagline {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 500;
+  color: #a1887f;
+  /* 사이드바와 비슷한 밝은 색상 */
+  letter-spacing: -0.2px;
 }
 
 
@@ -58,10 +99,12 @@
 
   border-radius: 10px;
 
-  background: white;
-  border: 1px solid #e6e8ee;
+  background: rgba(255, 255, 255, 0.1);
+  /* 반투명 배경 */
+  border: 1px solid rgba(255, 255, 255, 0.2);
 
-  color: #666;
+  color: #d7ccc8;
+  /* 밝은 색상 */
   font-size: 15px;
 
   transition: all 0.15s ease;
@@ -69,9 +112,11 @@
 
 /* hover */
 .social-links a:hover {
-  background: #111;
-  color: white;
+  background: #fdfbf7;
+  /* 헤더 버튼과 동일 */
+  color: #3e2723;
   transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.4);
 }
 
 
@@ -109,7 +154,8 @@
   text-transform: uppercase;
 
   margin-bottom: 14px;
-  color: #888;
+  color: #a1887f;
+  /* 밝은 색상 */
 }
 
 
@@ -130,13 +176,15 @@
   text-decoration: none;
 
   font-size: 14px;
-  color: #666;
+  color: #d7ccc8;
+  /* 밝은 색상 */
 
   transition: color 0.15s ease;
 }
 
 .footer-links .link-group ul li a:hover {
-  color: #111;
+  color: #fff;
+  /* 호버 시 하얀게 */
 }
 
 
@@ -165,4 +213,3 @@
     justify-content: center;
   }
 }
-   

@@ -1,69 +1,237 @@
 .kanban-column {
-    width: 300px;
-    min-width: 300px;
-  
-    display: flex;
-    flex-direction: column;
-  
-    background: #f7f8fa;
-    border-radius: 14px;
-    padding: 14px;
-  }
-  
-  /* header */
-  .kanban-column-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  
-    font-weight: 700;
-    margin-bottom: 12px;
-  }
-  
-  .count {
-    font-size: 12px;
-    background: #e3e6ef;
-    padding: 4px 8px;
-    border-radius: 20px;
-  }
-  
-  /* body */
-  .kanban-column-body {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    min-height: 100px;
-  }
-  
-  /* =========================
-     🌙 Dark mode
+  /* Approx 1/3 width minus gap */
+  width: calc(33.333% - 27px);
+  min-width: 280px;
+  max-width: 350px;
+
+  display: flex;
+  flex-direction: column;
+
+  /* ✨ 투명 배경 (보드 위에 올려진 느낌) */
+  background: transparent;
+  padding: 10px;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* header - ✨ Masking Tape Effect */
+.kanban-column-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 30px;
+  padding: 8px 16px;
+
+  /* 테이프 효과 */
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transform: rotate(-1deg);
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  min-width: 140px;
+
+  /* 찢어진 테이프 끝 느낌 (clip-path or border-image로 고도화 가능하지만 우선 간단히 처리) */
+  /* 간단한 테이프 느낌 */
+  position: relative;
+}
+
+/* 테이프 양쪽 끝 투명 효과 */
+.kanban-column-header::before,
+.kanban-column-header::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 10px;
+  background: rgba(255, 255, 255, 0.4);
+  /* 반투명 끝자락 */
+}
+
+.kanban-column-header::before {
+  left: -5px;
+}
+
+.kanban-column-header::after {
+  right: -5px;
+}
+
+
+.kanban-title-area {
+  flex: initial;
+  /* 중앙 정렬을 위해 */
+  min-width: 0;
+}
+
+.kanban-column-header h3 {
+  font-family: 'Patrick Hand', cursive;
+  /* 손글씨 폰트 */
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #444;
+  margin: 0;
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+
+.kanban-column-header h3:hover {
+  background: transparent;
+  /* 테이프 위라 배경 제거 */
+  color: #000;
+  transform: scale(1.05);
+}
+
+.kanban-header-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.column-title-input {
+  font-family: 'Patrick Hand', cursive;
+  font-size: 1.2rem;
+  text-align: center;
+  background: transparent;
+  border: none;
+  border-bottom: 2px dashed #ccc;
+}
+
+.delete-column-btn {
+  border: none;
+  background: transparent;
+  color: #bbb;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.delete-column-btn:hover {
+  color: #e53e3e;
+  background: transparent;
+  transform: scale(1.2);
+}
+
+.count {
+  font-size: 0.9rem;
+  font-family: 'Patrick Hand', cursive;
+  background: #eee;
+  color: #555;
+  padding: 2px 8px;
+  border-radius: 50%;
+  font-weight: 700;
+}
+
+/* body */
+.kanban-column-body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  /* 카드간 간격 넓힘 */
+  min-height: 200px;
+  padding: 10px;
+  /* 카드 회전 시 잘림 방지 */
+}
+
+/* =========================
+     🌙 Dark mode - Blackboard Concept?
   ========================= */
-  
-  .dark .kanban-column {
-    background: #1e1f24;
-    border: 1px solid #2a2b31;
-  }
-  
-  .dark .kanban-column-header h3 {
-    color: #fff;
-  }
-  
-  .dark .count {
-    background: #2a2b31;
-    color: #bbb;
-  }
-  
-  /* 드롭 가능 상태 */
+.dark .kanban-column {
+  background: transparent;
+  border: none;
+}
+
+.dark .kanban-column-header {
+  background: rgba(45, 55, 72, 0.9);
+  /* 다크 테이프 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.dark .kanban-column-header h3 {
+  color: #e2e8f0;
+}
+
+.dark .column-title-input {
+  color: #e2e8f0;
+  border-bottom-color: #555;
+}
+
+.dark .count {
+  background: #4a5568;
+  color: #a0aec0;
+}
+
+/* 드롭 가능 상태 */
 .kanban-column.drop-over {
-  background: #e8f0ff;
-  transform: scale(1.02);
-  transition: 0.12s ease;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  transition: 0.2s;
 }
 
 .kanban-column-body:empty::after {
-  content: "Drop here ✨";
-  opacity: 0.4;
-  font-size: 13px;
+  content: "Empty Space 🍃";
+  font-family: 'Patrick Hand', cursive;
+  opacity: 0.5;
+  font-size: 1.2rem;
   text-align: center;
-  padding: 20px 0;
+  padding: 40px 0;
+  color: #888;
+}
+
+/* =========================
+   📱 Mobile Responsive
+========================= */
+@media (max-width: 768px) {
+  .kanban-column {
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
+  }
+
+  .kanban-column-header h3 {
+    font-size: 1.2rem;
+  }
+
+  .column-title-input {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .kanban-column {
+    padding: 8px;
+  }
+
+  .kanban-column-header {
+    padding: 6px 12px;
+    margin-bottom: 20px;
+    min-width: 120px;
+  }
+
+  .kanban-column-header h3 {
+    font-size: 1.1rem;
+  }
+
+  .column-title-input {
+    font-size: 1rem;
+  }
+
+  .count {
+    font-size: 0.85rem;
+    padding: 2px 6px;
+  }
+
+  .delete-column-btn {
+    font-size: 12px;
+  }
+
+  .kanban-column-body {
+    gap: 15px;
+    padding: 8px;
+  }
+
+  .kanban-column-body:empty::after {
+    font-size: 1.1rem;
+    padding: 30px 0;
+  }
 }

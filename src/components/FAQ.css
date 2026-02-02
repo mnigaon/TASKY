@@ -1,18 +1,19 @@
 /* =========================
-   Section
+   Section - FAQ
 ========================= */
 
 .faq-section {
   width: 100%;
-
-  /* 🔥 margin 제거 (흰색 버그 원인) */
   margin: 0;
-
-  /* 🔥 padding으로 간격 처리 */
   padding: 120px 5%;
-
-  background: #f6f7fb;
+  /* 히어로와 동일한 배경 */
+  background: #fdfbf7;
+  background-image:
+    linear-gradient(#e5e7eb 1px, transparent 1px),
+    linear-gradient(90deg, #e5e7eb 1px, transparent 1px);
+  background-size: 50px 50px;
   box-sizing: border-box;
+  position: relative;
 }
 
 
@@ -21,37 +22,49 @@
 ========================= */
 
 .faq-title {
-  font-size: 34px;
+  font-size: 38px;
   font-weight: 800;
   letter-spacing: -0.5px;
 
   margin-bottom: 70px;
   text-align: center;
 
-  color: #111;
+  color: #3d2b1f;
+  /* 다크 레더 */
 }
 
 
 /* =========================
-   FAQ Item
+   FAQ Item - 카드 스타일
 ========================= */
 
 .faq-item {
   max-width: 900px;
-  margin: 0 auto;
+  margin: 0 auto 20px auto;
 
-  border-bottom: 1px solid #e6e8ee;
-  padding: 22px 6px;
+  /* 흰색 카드 배경 */
+  background: white;
+  border-radius: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+
+  padding: 24px 28px;
 
   cursor: pointer;
 
-  transition: background 0.15s ease;
+  transition: all 0.3s ease;
 }
 
-/* 🔥 subtle hover */
+/* 호버 효과 */
 .faq-item:hover {
-  background: rgba(0, 0, 0, 0.03);
-  border-radius: 8px;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+/* 열린 상태 */
+.faq-item.open {
+  border-left: 4px solid #ff6b9d;
+  /* 핑크 액센트 */
 }
 
 
@@ -67,9 +80,9 @@
 }
 
 
-/* 🔥 Question text (Tasky 톤) */
+/* Question text */
 .faq-question {
-  font-size: 16px;   /* 🔥 18 → 16 */
+  font-size: 17px;
   font-weight: 600;
   color: #222;
 
@@ -86,14 +99,20 @@
 ========================= */
 
 .faq-icon {
-  font-size: 18px;
-  color: #888;
+  font-size: 20px;
+  color: #ff6b9d;
+  /* 핑크 */
 
-  transition: transform 0.2s ease, color 0.2s ease;
+  transition: transform 0.3s ease, color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.faq-item.open .faq-icon {
+  transform: rotate(180deg);
 }
 
 .faq-item:hover .faq-icon {
-  color: #111;
+  color: #c44569;
 }
 
 
@@ -107,9 +126,34 @@
 }
 
 .faq-answer {
-  margin: 14px 0 18px 0;
+  margin: 18px 0 0 0;
+  padding-top: 18px;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
 
-  font-size: 15px;   /* 🔥 작게 */
+  font-size: 15px;
   line-height: 1.7;
   color: #666;
+}
+
+
+/* =========================
+   반응형
+========================= */
+
+@media (max-width: 768px) {
+  .faq-section {
+    padding: 80px 20px;
+  }
+
+  .faq-title {
+    font-size: 30px;
+  }
+
+  .faq-item {
+    padding: 20px 24px;
+  }
+
+  .faq-question {
+    font-size: 16px;
+  }
 }

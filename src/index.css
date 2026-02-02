@@ -1,8 +1,16 @@
 /* 전역 스타일 최소화 */
-html, body {
-    margin: 0;
-    padding: 0;
-    background-color: #f9f9f9;
-    overflow-x: hidden;
-  }
-  
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #f9f9f9;
+  overflow-x: hidden;
+  /* Force hide global scroll */
+  font-family: 'Jua', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}

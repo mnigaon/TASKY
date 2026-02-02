@@ -1,35 +1,58 @@
-/* =========================
-   Section
-========================= */
+@keyframes contactFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
 
-.contact-sales {
-  max-width: 640px;
-  margin: 160px auto 120px auto;
-
-  padding: 0 24px;
-  text-align: left;
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
+.contact-sales {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 160px 20px 120px 20px;
+  /* 대시보드와 동일한 배경 */
+  background: #fdfbf7;
+  /* Warm creamy background */
+  background-image:
+    linear-gradient(#e5e7eb 1px, transparent 1px),
+    linear-gradient(90deg, #e5e7eb 1px, transparent 1px);
+  background-size: 50px 50px;
+  /* Soft grid */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  animation: contactFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.contact-header {
+  text-align: center;
+  margin-bottom: 50px;
+  max-width: 600px;
+}
 
 /* =========================
    Header
 ========================= */
 
-.contact-sales h1 {
-  font-size: 34px;           /* 🔥 40 → 34 */
+.contact-header h1 {
+  font-size: 42px;
   font-weight: 800;
-  letter-spacing: -0.5px;
-
-  margin-bottom: 12px;
-  color: #111;
+  letter-spacing: -1px;
+  margin-bottom: 16px;
+  color: #3d2b1f;
+  /* 헤더/푸터와 동일한 다크 레더 색상 */
 }
 
-.contact-sales p {
-  font-size: 15px;
+.contact-header p {
+  font-size: 18px;
   line-height: 1.6;
   color: #666;
-
-  margin-bottom: 40px;
 }
 
 
@@ -40,14 +63,22 @@
 .contact-form {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 18px;
 
-  padding: 26px;
+  width: 100%;
+  max-width: 540px;
+  padding: 40px;
 
   background: white;
   border-radius: 16px;
+  /* 대시보드 카드와 동일 */
 
-  box-shadow: 0 10px 32px rgba(0,0,0,0.06); /* 🔥 subtle */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  /* 부드러운 그림자 */
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  /* 얇은 테두리 */
+  border-left: 5px solid #8d6e63;
+  /* 사이드바 active tab과 유사한 액센트 */
 }
 
 
@@ -57,59 +88,107 @@
 
 .contact-form input,
 .contact-form textarea {
-  padding: 12px 14px;
+  padding: 16px 20px;
+  font-size: 15px;
 
-  font-size: 14px;
+  border-radius: 12px;
+  /* 대시보드 카드와 동일 */
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: #fafbff !important;
+  /* 강제로 라이트 배경 */
+  transition: all 0.2s ease;
+  color: #333 !important;
+  /* 강제로 다크 텍스트 */
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  -webkit-text-fill-color: #333 !important;
+  /* 브라우저 자동완성 텍스트 색상 강제 */
+}
 
-  border-radius: 10px;
-  border: 1px solid #e4e6eb;
-
-  transition: all 0.15s ease;
-  background: #fff;
+/* 브라우저 자동완성 스타일 오버라이드 */
+.contact-form input:-webkit-autofill,
+.contact-form input:-webkit-autofill:hover,
+.contact-form input:-webkit-autofill:focus,
+.contact-form textarea:-webkit-autofill,
+.contact-form textarea:-webkit-autofill:hover,
+.contact-form textarea:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px #fafbff inset !important;
+  -webkit-text-fill-color: #333 !important;
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  transition: background-color 5000s ease-in-out 0s;
 }
 
 /* focus */
 .contact-form input:focus,
 .contact-form textarea:focus {
   outline: none;
-  border-color: #8b97ad;
-  box-shadow: 0 0 0 2px rgba(139, 151, 173, 0.15);
+  border-color: #8d6e63 !important;
+  /* 사이드바 액센트 색상 */
+  background: white !important;
+  box-shadow: 0 0 0 4px rgba(141, 110, 99, 0.1);
+  transform: translateY(-1px);
+  color: #333 !important;
+  -webkit-text-fill-color: #333 !important;
 }
 
 .contact-form textarea {
-  min-height: 120px;
+  min-height: 150px;
   resize: vertical;
 }
 
+::placeholder {
+  color: #adb5bd !important;
+  opacity: 1;
+}
+
+
 
 /* =========================
-   🔥 Button (Hero/CTA와 통일)
+   🔥 Button
 ========================= */
 
-.contact-form button {
-  margin-top: 6px;
+.contact-button {
+  margin-top: 10px;
+  padding: 18px;
 
-  padding: 12px;
-
-  background: #111;
+  background: #3d2b1f;
+  /* 헤더/푸터와 동일한 다크 레더 */
   color: white;
 
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 700;
 
   border: none;
-  border-radius: 10px;
+  border-radius: 12px;
+  /* 대시보드 버튼과 동일 */
 
   cursor: pointer;
-
-  transition: all 0.18s ease;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(61, 43, 31, 0.2);
 }
 
-.contact-form button:hover {
+.contact-button:hover {
   transform: translateY(-2px);
-  opacity: 0.92;
+  box-shadow: 0 8px 20px rgba(61, 43, 31, 0.3);
+  background: #2d1b0f;
+  /* 더 어두운 색상 */
 }
 
-.contact-form button:active {
+.contact-button:active {
   transform: translateY(0);
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+  .contact-sales {
+    padding-top: 120px;
+  }
+
+  .contact-header h1 {
+    font-size: 32px;
+  }
+
+  .contact-form {
+    padding: 25px;
+    border-radius: 16px;
+  }
 }

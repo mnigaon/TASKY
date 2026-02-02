@@ -7,21 +7,21 @@ function FeatureCard() {
   const cards = [
     {
       img: Img1,
-      title: "SIMPLE",
+      title: "AESTHETIC DECO",
       description:
-        "Clean and distraction-free design so you can focus on what matters.",
+        "Beautiful and kitsch design that makes organization feel like decorating your favorite journal.",
     },
     {
       img: Img2,
-      title: "PERSONAL",
+      title: "ZAZZY TOOLS",
       description:
-        "Built for individuals who want a lightweight daily task manager.",
+        "From sticker tasks to focus gardens, everything you need to build your dream routine.",
     },
     {
       img: Img3,
-      title: "DISTRACTION-FREE",
+      title: "CREATIVE FOCUS",
       description:
-        "Stay focused with a clutter-free workspace that helps you get things done faster.",
+        "Stay productive while staying inspired. The only workspace that understands your style.",
     },
   ];
 
@@ -29,12 +29,12 @@ function FeatureCard() {
     <section className="callout">
 
       <h1 className="callout-header">
-        Designed for focus. Built for everyday life.
+        Designed for creators. Built for your best self.
       </h1>
 
       <p className="callout-sub">
-        Tasky keeps things simple so you can plan your day, stay organized,
-        and get more done without distractions.
+        Dayzzy keeps things fun so you can plan your day, stay inspired,
+        and get more done in style.
       </p>
 
       <div className="callout-container">

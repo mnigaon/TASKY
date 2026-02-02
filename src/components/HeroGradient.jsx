@@ -10,23 +10,16 @@ function HeroGradient() {
 
   return (
     <section className="hero-gradient">
-      <div className="hero-gradient-content">
-
-        {/* 🔥 개인용 톤으로 변경 */}
-        <span className="eyebrow-text">
-          Simple. Personal. Focused.
-        </span>
-
+      <div className="hero-gradient-card">
         <h2 className="hero-gradient-title">
-          Organize your day and get things done with Tasky
+          Join the Dayzzy universe and start your journey
         </h2>
 
         <div className="hero-gradient-buttons">
-          <button className="hero-button" onClick={handleGetStarted}>
-            Start Free
+          <button className="hero-button primary" onClick={handleGetStarted}>
+            Get Started for Free
           </button>
         </div>
-
       </div>
     </section>
   );

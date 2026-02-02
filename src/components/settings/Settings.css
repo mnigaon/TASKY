@@ -1,89 +1,483 @@
-.settings {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 28px;
-    display: grid;
-    gap: 24px;
-    font-family: 'Inter', sans-serif;
-  }
-  
-  /* 페이지 제목 */
-  .settings-title {
-    font-size: 28px;
-    font-weight: 800;
-    margin-bottom: 8px;
-  }
-  
-  /* 공통 카드 */
-  .settings-card {
-    background: #fff;
-    padding: 22px;
-    border-radius: 14px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  }
-  
-  /* 카드 타이틀 */
-  .settings-card h3 {
-    margin-bottom: 16px;
-    font-weight: 700;
-  }
-  
-  /* input 공통 */
-  .settings-card input {
-    width: 100%;
-    padding: 10px 12px;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-    margin-bottom: 12px;
-    font-size: 14px;
-  }
-  
-  .settings-card input:focus {
-    outline: none;
-    border-color: #b4c24e;
-  }
-  
-  /* 버튼 */
-  .settings-card button {
-    padding: 8px 14px;
-    border-radius: 8px;
-    border: none;
-    font-weight: 600;
-    cursor: pointer;
-  }
-  
-  .btn-primary {
-    background: #000000;
-    color: white;
-  }
-  
-  .btn-danger {
-    background: #ae4343;
-    color: white;
-  }
-  
-  .btn-ghost {
-    background: #eee;
-  }
+/* src/components/settings/Settings.css - ID Card & Sticker Theme */
 
-  /* =========================
-   🌙 Dark mode
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Chewy&family=Indie+Flower&display=swap');
+
+.settings {
+  width: 100%;
+  padding: 60px 0;
+  min-height: 100vh;
+  position: relative;
+  z-index: 1;
+  background-color: #f9f9f9;
+}
+
+.settings-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* 페이지 제목 */
+.settings-title {
+  font-family: 'Chewy', cursive;
+  font-size: 3.5rem;
+  font-weight: 400;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #4e342e;
+  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+/* =========================
+   🪪 ID Card Style (Profile)
+========================= */
+.id-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 0;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  flex-shrink: 0;
+  min-height: 200px;
+}
+
+.id-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, transparent 50%, rgba(255, 255, 255, 0.1) 100%);
+  pointer-events: none;
+}
+
+.id-card-header {
+  background: #2d3748;
+  color: #fff;
+  padding: 10px 20px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 4px solid #1a202c;
+}
+
+.id-card-body {
+  padding: 30px;
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+  background: linear-gradient(to bottom, #fff, #f7fafc);
+}
+
+.id-photo-area {
+  width: 120px;
+  height: 140px;
+  background: #e2e8f0;
+  border: 4px solid #fff;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 60px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.id-info-area {
+  flex: 1;
+}
+
+/* =========================
+   🏷️ Sticker Style (General Cards)
+========================= */
+.sticker-card {
+  background: #fff;
+  padding: 30px;
+  border-radius: 4px;
+  box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.1);
+  border: 1px solid #efefef;
+  position: relative;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  flex-shrink: 0;
+  min-height: 100px;
+}
+
+.sticker-card:nth-child(even) {
+  transform: rotate(0.5deg);
+}
+
+.sticker-card:nth-child(odd) {
+  transform: rotate(-0.5deg);
+}
+
+.sticker-card:hover {
+  transform: scale(1.02) rotate(0deg);
+  z-index: 10;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+/* Sticker Tab / Corner */
+.sticker-card::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 20px;
+  width: 60px;
+  height: 25px;
+  background: rgba(100, 140, 255, 0.2);
+  /* Masking Tape */
+  backdrop-filter: blur(2px);
+  transform: rotate(-10deg);
+  pointer-events: none;
+}
+
+.sticker-card h3,
+.id-card h3 {
+  font-family: 'Patrick Hand', cursive;
+  font-size: 1.8rem;
+  margin-bottom: 24px;
+  color: #2d3748;
+  border-bottom: 2px dashed #e2e8f0;
+  padding-bottom: 10px;
+}
+
+/* =========================
+   🎈 Common Elements
 ========================= */
 
-body.dark {
-    background: #121212;
-    color: #eee;
+.settings label {
+  font-family: 'Patrick Hand', cursive;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #4a5568;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.settings input,
+.settings select {
+  font-family: 'Inter', sans-serif;
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 2px solid #e2e8f0;
+  background: #fdfdfd;
+  margin-bottom: 20px;
+  font-size: 1rem;
+  transition: 0.2s;
+}
+
+.settings input:focus,
+.settings select:focus {
+  border-color: #648cff;
+  outline: none;
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(100, 140, 255, 0.1);
+}
+
+/* =========================
+   🖱️ Custom Toggle Sticker
+========================= */
+.sticker-toggle {
+  width: 50px;
+  height: 26px;
+  background: #edf2f7;
+  border: 2px solid #cbd5e0;
+  border-radius: 13px;
+  position: relative;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.sticker-toggle.active {
+  background: #c6f6d5;
+  border-color: #48bb78;
+}
+
+.sticker-toggle-thumb {
+  width: 18px;
+  height: 18px;
+  background: #fff;
+  border: 1px solid #cbd5e0;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.sticker-toggle.active .sticker-toggle-thumb {
+  left: 26px;
+  border-color: #48bb78;
+  background: #fff;
+}
+
+/* =========================
+   💥 Danger Sticker
+========================= */
+.danger-sticker {
+  border: 2px solid #feb2b2;
+  background: #fff;
+}
+
+.danger-sticker::before {
+  background: rgba(254, 178, 178, 0.4);
+}
+
+.danger-sticker h3 {
+  color: #e53e3e;
+  border-color: #fed7d7;
+}
+
+/* =========================
+   🔘 Buttons (Tape Buttons)
+========================= */
+.settings button {
+  font-family: 'Patrick Hand', cursive;
+  font-size: 1.1rem;
+  padding: 8px 18px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.settings button:active {
+  transform: translateY(2px);
+  box-shadow: none;
+}
+
+.btn-primary {
+  background: #648cff;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #4a74f4;
+}
+
+.btn-danger {
+  background: #e53e3e;
+  color: #fff;
+}
+
+.btn-ghost {
+  background: #edf2f7;
+  color: #4a5568;
+}
+
+/* =========================
+   🌙 Dark Mode
+========================= */
+.dark .settings {
+  background-color: #1a202c !important;
+  background-image: radial-gradient(#2d3748 1.5px, transparent 1.5px);
+  background-size: 20px 20px;
+}
+
+.dark .settings-title {
+  color: #fff;
+}
+
+.dark .sticker-card,
+.dark .id-card {
+  background: #2d3748;
+  border-color: #4a5568;
+  color: #e2e8f0;
+}
+
+.dark .id-card::after {
+  opacity: 0.1;
+}
+
+.dark .id-card-header {
+  background: #1a202c;
+}
+
+.dark .id-photo-area {
+  background: #1a202c;
+  border-color: #4a5568;
+}
+
+.dark .id-card-body {
+  background: #2d3748;
+}
+
+.dark .sticker-card h3 {
+  color: #fff;
+  border-color: #4a5568;
+}
+
+.dark .settings label {
+  color: #cbd5e0;
+}
+
+.dark .settings input,
+.dark .settings select {
+  background: #1a202c;
+  border-color: #4a5568;
+  color: #fff;
+}
+
+.dark .btn-ghost {
+  background: #4a5568;
+  color: #fff;
+}
+
+/* Emoji Input Specific */
+.settings-emoji-input {
+  width: 50px !important;
+  text-align: center;
+  font-size: 1.5rem !important;
+  padding: 4px !important;
+}
+
+/* =========================
+   📱 Mobile Responsive
+========================= */
+@media (max-width: 768px) {
+  .settings {
+    padding: 50px 0;
   }
-  
-  body.dark .settings-card {
-    background: #1e1e1e;
-    box-shadow: none;
+
+  .settings-inner {
+    max-width: 700px;
+    padding: 0 18px;
+    gap: 25px;
   }
-  
-  body.dark input,
-  body.dark select {
-    background: #2a2a2a;
-    color: #fff;
-    border: 1px solid #444;
+
+  .settings-title {
+    font-size: 3rem;
+    margin-bottom: 18px;
   }
-  
+
+  .id-card-body {
+    flex-direction: column;
+    gap: 20px;
+    padding: 25px;
+  }
+
+  .id-photo-area {
+    width: 100px;
+    height: 120px;
+    font-size: 50px;
+  }
+
+  .sticker-card {
+    padding: 25px;
+  }
+
+  .sticker-card h3,
+  .id-card h3 {
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+  }
+
+  .settings label {
+    font-size: 1.1rem;
+  }
+
+  .settings input,
+  .settings select {
+    padding: 11px 14px;
+    font-size: 0.95rem;
+  }
+
+  .settings button {
+    font-size: 1rem;
+    padding: 7px 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .settings {
+    padding: 40px 0;
+  }
+
+  .settings-inner {
+    padding: 0 15px;
+    gap: 20px;
+  }
+
+  .settings-title {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+  }
+
+  .id-card-header {
+    padding: 8px 16px;
+    font-size: 12px;
+  }
+
+  .id-card-body {
+    padding: 20px;
+    gap: 15px;
+  }
+
+  .id-photo-area {
+    width: 90px;
+    height: 110px;
+    font-size: 45px;
+  }
+
+  .sticker-card {
+    padding: 20px;
+  }
+
+  .sticker-card::before {
+    width: 50px;
+    height: 20px;
+    left: 15px;
+  }
+
+  .sticker-card h3,
+  .id-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 18px;
+  }
+
+  .settings label {
+    font-size: 1rem;
+  }
+
+  .settings input,
+  .settings select {
+    padding: 10px 12px;
+    font-size: 0.9rem;
+    margin-bottom: 16px;
+  }
+
+  .settings button {
+    font-size: 0.95rem;
+    padding: 6px 14px;
+  }
+
+  .sticker-toggle {
+    width: 45px;
+    height: 24px;
+  }
+
+  .sticker-toggle-thumb {
+    width: 16px;
+    height: 16px;
+  }
+
+  .sticker-toggle.active .sticker-toggle-thumb {
+    left: 23px;
+  }
+}

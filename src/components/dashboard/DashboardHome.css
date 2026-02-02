@@ -1,136 +1,470 @@
 /* DashboardHome.css */
 .dashboard-home {
-  padding: 1rem;
+  padding: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .cards {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
 }
 
-/* 카드 공통 스타일 */
+/* =========================
+   Standard Card Styles
+========================= */
 .card {
-  padding: 1rem;
+  /* Sticky Note Base */
+  background: #fdfdfd;
+  padding: 32px;
+  border-radius: 2px;
+  border: none;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  transition: all 0.3s ease;
-  cursor: pointer; /* 호버 시 포인터 */
-  min-height: 180px; /* 세로 길이 늘림 */
-  max-width: 300px;  /* 가로 길이 조금 줄임 */
-  position: relative; /* hover 텍스트 위치용 */
-}
-
-/* 카드 헤드라인 */
-.card h3 {
-  margin-bottom: 0.5rem;
-  font-size: 1.1rem;
-  color: #333;
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
-  transition: all 0.3s ease;
-}
-
-/* 워크스페이스 리스트 */
-.workspace-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-/* 워크스페이스 카드 */
-.workspace-card {
-  background-color: transparent;
-  border: 1px solid #8B97AD;
-  color: black; 
-  display: flex;
-  align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
+  align-items: center;
+  min-height: 240px;
   cursor: pointer;
-  min-height: 180px;
-  max-width: 300px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  flex-direction: column;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: visible;
 }
 
-/* 워크스페이스 카드 헤드라인 */
-.workspace-card .workspace-title {
-  color: white; /* 호버 전 흰색 */
-  font-size: 1.1rem;
-  font-weight: 600;
+/* Tape Effect */
+.card::after {
+  content: '';
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-1deg);
+  width: 110px;
+  height: 32px;
+  background-color: rgba(255, 255, 255, 0.4);
+  background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent);
+  background-size: 10px 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(2px);
+  z-index: 10;
+  opacity: 0.9;
 }
 
-/* 호버 시 중앙 텍스트 */
-.workspace-card .hover-text {
-  color: black;
-  font-size: 1.3rem;
-  font-weight: 600;
-  text-align: center;
+/* Hover Effect */
+.card:hover {
+  transform: translateY(-5px) scale(1.02) rotate(0deg) !important;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  z-index: 20;
 }
 
-/* 호버 배경색 변경 */
-.workspace-card:hover {
-  background-color: #f0f4ff;
+/* =========================
+   Existing Cards
+========================= */
+/* 🟡 Workspace Card */
+.home-ws-card {
+  background: linear-gradient(135deg, #fffde7 0%, #fff9c4 100%) !important;
+  transform: rotate(-1.5deg);
 }
 
-/* 집중 시간 카드 */
+.home-ws-card h3 {
+  background: rgba(255, 215, 0, 0.15);
+  color: #795548;
+}
+
+.home-ws-card .workspace-name-display {
+  color: #5d4037;
+  font-family: 'Inter', sans-serif;
+}
+
+.workspace-meta {
+  color: #8d6e63;
+}
+
+/* 🌸 Focus Timer Card */
 .focus-card {
-  background-color: transparent;
-  border: 1px solid #8B97AD;
-  color: black; 
+  background: linear-gradient(135deg, #ffebee 0%, #ffcdd2 100%) !important;
+  transform: rotate(1.5deg);
+}
+
+.focus-card h3 {
+  background: rgba(255, 82, 82, 0.1);
+  color: #c62828;
+}
+
+.focus-card .focus-time {
+  color: #b71c1c !important;
+}
+
+.focus-card .mode {
+  color: #e57373;
+}
+
+/* =========================
+   🆕 Add Shortcut Button
+========================= */
+.add-shortcut-card {
+  background: rgba(255, 255, 255, 0.5);
+  border: 3px dashed #e2e8f0;
+  box-shadow: none;
+  color: #a0aec0;
+  transition: all 0.2s ease;
+  transform: none !important;
+  /* No rotation for add button initially */
+}
+
+/* No tape for add button */
+.add-shortcut-card::after {
+  display: none;
+}
+
+.add-shortcut-card:hover {
+  border-color: #cbd5e0;
+  background: #f7fafc;
+  color: #718096;
+  transform: translateY(-5px) !important;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+.add-plus-icon {
+  font-size: 48px;
+  margin-bottom: 10px;
+  line-height: 1;
+}
+
+.add-text {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+/* =========================
+   🆕 Custom User Shortcuts
+========================= */
+.shortcut-card .shortcut-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+}
+
+.shortcut-card h3 {
+  margin-bottom: 8px;
+  text-transform: none;
+  font-size: 1.2rem;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(4px);
+  padding: 8px 16px;
+  border-radius: 12px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  color: inherit;
+  /* Use parent color */
+}
+
+.shortcut-delete-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.1);
+  border: none;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  text-align: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transition: all 0.2s;
+  font-size: 14px;
+  color: #fff;
 }
 
-.focus-card:hover {
-  background-color: transparent;
-  border: 1px solid #8B97AD;
-  color: black; 
+.shortcut-card:hover .shortcut-delete-btn {
+  opacity: 1;
 }
 
-/* 호버 텍스트 중앙 표시 */
-.hover-text {
+.shortcut-delete-btn:hover {
+  background: #ef4444;
+  transform: scale(1.1);
+}
+
+/* Shortcut Colors */
+.shortcut-tasks {
+  background: linear-gradient(135deg, #ffe0b2 0%, #ffcc80 100%);
+  color: #e65100;
+  transform: rotate(-1deg);
+}
+
+.shortcut-kanban {
+  background: linear-gradient(135deg, #b3e5fc 0%, #81d4fa 100%);
+  color: #01579b;
+  transform: rotate(1deg);
+}
+
+.shortcut-calendar {
+  background: linear-gradient(135deg, #f8bbd0 0%, #f48fb1 100%);
+  color: #880e4f;
+  transform: rotate(-2deg);
+}
+
+.shortcut-docs {
+  background: linear-gradient(135deg, #c8e6c9 0%, #a5d6a7 100%);
+  color: #1b5e20;
+  transform: rotate(2deg);
+}
+
+.shortcut-whiteboard {
+  background: linear-gradient(135deg, #e1bee7 0%, #ce93d8 100%);
+  color: #4a148c;
+  transform: rotate(-0.5deg);
+}
+
+.shortcut-diary {
+  background: linear-gradient(135deg, #cfd8dc 0%, #b0bec5 100%);
+  color: #37474f;
+  transform: rotate(1.5deg);
+}
+
+/* =========================
+   Add Shortcut Button (Kanban-style Minimalist)
+========================= */
+.add-shortcut-card {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  transition: all 0.3s ease;
+  position: relative;
+
+  /* Strict Sizing Override */
+  width: 60px !important;
+  height: 60px !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  margin: 20px auto;
+}
+
+.add-shortcut-card::after {
+  display: none !important;
+  /* Remove tape effect */
+}
+
+.add-shortcut-card:hover {
+  border: none !important;
+  background: transparent !important;
+  color: #111;
+  transform: scale(1.1) !important;
+  box-shadow: none !important;
+  z-index: 20;
+}
+
+/* Tooltip on Hover (Top) */
+.add-shortcut-card:hover::before {
+  content: "Add Shortcut";
+  position: absolute;
+  top: -40px;
+  bottom: auto;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #333;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 13px;
+  white-space: nowrap;
+  opacity: 0;
+  animation: fadeInTooltip 0.2s 0.1s forwards;
+  z-index: 100;
+}
+
+@keyframes fadeInTooltip {
+  to {
+    opacity: 1;
+  }
+}
+
+.add-plus-icon {
+  font-size: 48px;
+  color: inherit;
+  font-weight: 400;
+  /* Increased from 200 for thicker appearance */
+  line-height: 1;
+  transition: transform 0.3s ease;
+}
+
+.add-shortcut-card:hover .add-plus-icon {
+  transform: rotate(90deg);
+}
+
+/* =========================
+   Selection Menu (Popup)
+========================= */
+.shortcut-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.1);
+  z-index: 99;
+}
+
+.shortcut-menu {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-weight: 600;
-  color: black;
-  font-size: 1.3rem;
+  background: white;
+  padding: 16px;
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  z-index: 100;
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  animation: popMenu 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-/* 진행 원형 */
+@keyframes popMenu {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -40%) scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.menu-header {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #4a5568;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: none;
+  background: #f7fafc;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #2d3748;
+  text-align: left;
+}
+
+.menu-item:hover {
+  background: #edf2f7;
+  transform: translateX(4px);
+}
+
+/* =========================
+   Common Header Styling in Cards (Legacy support)
+========================= */
+.card h3 {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  z-index: 5;
+  border: 1px solid transparent;
+}
+
+/* Content Transition */
+.card-normal-content {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+}
+
+.card:hover .card-normal-content {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Hover Overlay Text */
+.card-hover-overlay {
+  display: none;
+}
+
+/* Large BG Icon adjustment */
+.bg-icon-large {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  font-size: 100px;
+  opacity: 0.08;
+  filter: grayscale(1);
+  transition: all 0.5s ease;
+  pointer-events: none;
+  z-index: 1;
+  color: #000;
+}
+
+/* Progress Ring */
 .progress-ring {
   position: relative;
-  width: 80px;
-  height: 80px;
-  margin: 0.5rem auto;
+  width: 60px;
+  height: 60px;
+  margin: 12px auto;
 }
 
 .progress-ring svg {
   transform: rotate(-90deg);
   width: 100%;
   height: 100%;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.focus-card:hover .progress-ring svg {
+  transform: rotate(-90deg) scale(1.1);
 }
 
 .circle-bg {
   fill: none;
-  stroke: #eee;
-  stroke-width: 3.8;
+  stroke: #edf2f7;
+  stroke-width: 5;
 }
 
 .circle {
   fill: none;
-  stroke:  #8B97AD;
-  stroke-width: 3.8;
+  stroke: #111;
+  stroke-width: 5;
   stroke-linecap: round;
-  transition: stroke-dasharray 0.3s ease;
+  transition: stroke-dasharray 0.5s ease;
 }
 
 .focus-time {
@@ -138,79 +472,132 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 1rem;
-  font-weight: bold;
-  color: #333;
-  transition: all 0.3s ease;
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #111;
+  text-align: center;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
 }
-
-.mode {
-  font-size: 0.8rem;
-  color: #666;
-  margin-top: 0.3rem;
-}
-
 
 /* =========================
-   🌙 Dark mode – Dashboard Home Cards
+   🌙 Dark mode
 ========================= */
-
-/* 카드 공통 */
-.dark .dashboard-home .card {
-  background: #1e1f24;
-  border: 1px solid #2a2b31;
-  color: #ffffff;
-  box-shadow: none;
+.dark .card {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
 }
 
-/* hover */
-.dark .dashboard-home .card:hover {
-  background: #25262c;
-  transform: translateY(-4px);
+.dark .home-ws-card {
+  background: linear-gradient(135deg, #424242 0%, #303030 100%) !important;
+  color: #efebe9;
 }
 
-/* 제목 */
-.dark .dashboard-home h3 {
-  color: #ffffff;
+.dark .focus-card {
+  background: linear-gradient(135deg, #3e2723 0%, #291a16 100%) !important;
+  color: #ffebee;
 }
 
-/* hover 텍스트 */
-.dark .hover-text {
-  color: #9ecbff;
+.dark .shortcut-tasks {
+  background: linear-gradient(135deg, #e65100 0%, #bf360c 100%);
+  color: #ffe0b2;
 }
 
-/* focus 시간 숫자 */
-.dark .focus-time {
-  color: #ffffff;
+.dark .shortcut-kanban {
+  background: linear-gradient(135deg, #0277bd 0%, #01579b 100%);
+  color: #b3e5fc;
 }
 
-/* mode 텍스트 */
-.dark .mode {
+.dark .shortcut-calendar {
+  background: linear-gradient(135deg, #ad1457 0%, #880e4f 100%);
+  color: #f8bbd0;
+}
+
+.dark .shortcut-docs {
+  background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+  color: #c8e6c9;
+}
+
+.dark .shortcut-whiteboard {
+  background: linear-gradient(135deg, #6a1b9a 0%, #4a148c 100%);
+  color: #e1bee7;
+}
+
+.dark .shortcut-diary {
+  background: linear-gradient(135deg, #37474f 0%, #263238 100%);
+  color: #cfd8dc;
+}
+
+.dark .add-shortcut-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: #4a5568;
+  color: #718096;
+}
+
+.dark .add-shortcut-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #cbd5e0;
+  border-color: #718096;
+}
+
+.dark .shortcut-menu {
+  background: #2d3748;
+  color: #e2e8f0;
+}
+
+.dark .menu-header {
+  color: #cbd5e0;
+}
+
+.dark .menu-item {
+  background: #1a202c;
+  color: #e2e8f0;
+}
+
+.dark .menu-item:hover {
+  background: #2d3748;
+  filter: brightness(1.2);
+}
+
+.dark .card h3 {
+  background: rgba(0, 0, 0, 0.2) !important;
+  color: inherit !important;
+}
+
+.dark .home-ws-card .workspace-name-display {
+  color: #fdd835;
+}
+
+.dark .workspace-meta {
   color: #bdbdbd;
 }
 
-/* =========================
-   🌙 Progress Ring
-========================= */
+.dark .focus-card .focus-time {
+  color: #ff8a80 !important;
+}
 
-/* 배경 원 */
 .dark .circle-bg {
-  stroke: #2f3138;
+  stroke: rgba(255, 255, 255, 0.1);
 }
 
-/* 진행 원 */
 .dark .circle {
-  stroke: #648cff;
+  stroke: #ff5252;
 }
 
-
+.dark .bg-icon-large {
+  color: white;
+  opacity: 0.05;
+}
 
 /* 모바일 대응 */
 @media (max-width: 768px) {
+  .dashboard-home {
+    padding: 20px;
+  }
+
   .cards {
     grid-template-columns: 1fr;
   }
 }
-
-  
-  

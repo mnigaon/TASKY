@@ -55,7 +55,7 @@ export default function PreferencesCard() {
   }, [dateFormat]);
 
   return (
-    <div className="settings-card">
+    <div className="sticker-card">
       <h3>⚙️ Preferences</h3>
 
       {/* Dark mode */}
@@ -125,7 +125,7 @@ function SettingRow({ label, control }) {
         marginBottom: 14,
       }}
     >
-      <span>{label}</span>
+      <span style={{ fontFamily: "'Patrick Hand', cursive", fontSize: "1.2rem" }}>{label}</span>
       {control}
     </div>
   );
@@ -135,29 +135,10 @@ function SettingRow({ label, control }) {
 function Toggle({ checked, onChange }) {
   return (
     <div
+      className={`sticker-toggle ${checked ? "active" : ""}`}
       onClick={onChange}
-      style={{
-        width: 42,
-        height: 22,
-        borderRadius: 20,
-        background: checked ? "#648CFF" : "#ccc",
-        position: "relative",
-        cursor: "pointer",
-        transition: "0.2s",
-      }}
     >
-      <div
-        style={{
-          width: 18,
-          height: 18,
-          borderRadius: "50%",
-          background: "white",
-          position: "absolute",
-          top: 2,
-          left: checked ? 22 : 2,
-          transition: "0.2s",
-        }}
-      />
+      <div className="sticker-toggle-thumb" />
     </div>
   );
 }

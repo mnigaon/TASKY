@@ -1,235 +1,406 @@
-/* src/components/timer/ReportModal.css */
+/* src/components/timer/ReportModal.css - Clipboard Report Edition */
 
+/* Overlay */
 .report-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.55);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 2000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+/* Modal as 'Paper on Clipboard' */
+.report-modal {
+  background: #fffdf5;
+  /* Paper Color */
+  width: 90%;
+  max-width: 600px;
+  min-height: 600px;
+  max-height: 85vh;
+  /* 🔹 Fix scrolling issue */
+  border-radius: 4px;
+  box-shadow:
+    0 2px 5px rgba(0, 0, 0, 0.1),
+    0 15px 40px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: slideUpReport 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+  position: relative;
+  border-top: 8px solid #333;
+  /* Clipboard Clip hint */
+}
+
+/* Add Paper Lines Effect */
+.report-modal::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 40px;
+  width: 2px;
+  background: rgba(255, 0, 0, 0.1);
+  /* Margin Line */
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes slideUpReport {
+  from {
+    opacity: 0;
+    transform: translateY(50px) rotate(-2deg);
   }
-  
-  .report-modal {
-    width: 90%;
-    max-width: 720px;
-    background: white;
-    border-radius: 16px;
-    padding: 1.5rem 1.8rem;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-    animation: fadeUp 0.25s ease;
-  }
-  
-  @keyframes fadeUp {
-    from {
-      transform: translateY(20px);
-      opacity: 0;
-    }
-    to {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
-  
-  /* Header */
-  .report-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 1rem;
-  }
-  
-  .report-header h3 {
-    font-size: 1.3rem;
-    font-weight: 800;
-  }
-  
-  .close-btn {
-    border: none;
-    background: none;
-    font-size: 1.2rem;
-    cursor: pointer;
-    opacity: 0.6;
-  }
-  
-  .close-btn:hover {
+
+  to {
     opacity: 1;
+    transform: translateY(0) rotate(0);
   }
-  
-  /* Tabs */
-  .report-tabs {
-    display: flex;
-    gap: 0.5rem;
-    margin-bottom: 1.2rem;
-  }
-  
-  .report-tabs button {
-    padding: 0.45rem 1rem;
-    border-radius: 20px;
-    border: 1px solid #ddd;
-    background: white;
-    font-size: 0.85rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-  
-  .report-tabs button:hover {
-    background: #f3f6ff;
-  }
-  
-  .report-tabs button.active {
-    background: #800000;
-    color: white;
-    border-color: #800000;
-    font-weight: 600;
-  }
+}
 
+/* Header */
+.report-header {
+  padding: 24px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px dashed #ddd;
+  z-index: 1;
+}
 
-  /* 필터 버튼 기본 */
-.report-filter button {
-  padding: 6px 12px;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  background: white;
+.report-header h3 {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 400;
+  font-family: 'Chewy', cursive;
+  color: #2d3436;
+}
+
+.close-btn {
+  background: transparent;
+  border: 2px solid #ccc;
+  font-size: 1.2rem;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
   cursor: pointer;
-  transition: all 0.15s;
+  color: #888;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* hover */
-.report-filter button:hover {
-  background: #f3f3f3;
+.close-btn:hover {
+  border-color: #ff6b6b;
+  color: #ff6b6b;
+  transform: rotate(90deg);
 }
 
-/* 🔥 활성 버튼 (요청 색상) */
-.report-filter button.active {
-  background: #800000;
-  color: white;
-  border-color: #800000;
+/* Tabs as 'Sticky Notes' or Underlines */
+.report-tabs {
+  display: flex;
+  padding: 0 30px;
+  margin-top: 10px;
+  border-bottom: 1px solid #eee;
+  z-index: 1;
 }
 
-
-
-
-  
-  /* Content */
-  .report-content h4 {
-    font-size: 1rem;
-    font-weight: 700;
-    margin-bottom: 0.6rem;
-  }
-  
-  /* Summary Cards */
-  .summary-cards {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.8rem;
-  }
-  
-  .summary-card {
-    background: #f7f9ff;
-    border-radius: 12px;
-    padding: 0.8rem;
-    text-align: center;
-    font-weight: 600;
-    font-size: 0.85rem;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-  }
-  
-  /* Chart Placeholder */
-  .chart-placeholder {
-    height: 180px;
-    background: #f0f3ff;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.8rem;
-    color: #555;
-  }
-  
-  /* Ranking */
-  .ranking-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .ranking-list li {
-    padding: 0.5rem 0;
-    font-size: 0.9rem;
-    border-bottom: 1px solid #eee;
-  }
-
-  
-  /* =========================
-   🌙 Dark mode – Report Modal
-========================= */
-
-/* 오버레이 */
-.dark .report-overlay {
-  background: rgba(0, 0, 0, 0.65);
-}
-
-/* 모달 카드 */
-.dark .report-modal {
-  background: #1e1f24;
-  color: #ffffff;
-  border: 1px solid #2a2b31;
-  box-shadow: none;
-}
-
-/* 헤더 */
-.dark .report-header h3 {
-  color: #ffffff;
-}
-
-/* 닫기 버튼 */
-.dark .close-btn {
+.report-tabs button {
+  background: transparent;
+  border: none;
+  padding: 12px 20px;
+  font-family: 'Patrick Hand', cursive;
+  font-size: 1.1rem;
   color: #aaa;
+  cursor: pointer;
+  position: relative;
+  top: 1px;
 }
 
-.dark .close-btn:hover {
-  color: #fff;
+.report-tabs button.active {
+  color: #2d3436;
+  font-weight: bold;
+  border-bottom: 3px solid #ff6b6b;
+  /* Highlight marker */
 }
 
-/* 탭 */
-.dark .report-tabs button {
-  background: #2a2b31;
-  color: #ccc;
-  border: 1px solid #3a3b42;
+/* Content */
+.report-content {
+  flex: 1;
+  padding: 30px;
+  overflow-y: auto;
+  z-index: 1;
 }
 
-.dark .report-tabs button.active {
-  background: #800000;
+.report-content h4 {
+  margin: 0 0 16px 0;
+  font-family: 'Chewy', cursive;
+  font-size: 1.3rem;
+  color: #555;
+}
+
+/* Summary Cards - Stamps */
+.summary-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.summary-card {
+  background: rgba(0, 0, 0, 0.03);
+  border: 2px solid #e0e0e0;
+  padding: 15px 10px;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #2d3436;
+  font-family: 'Patrick Hand', cursive;
+  transform: rotate(-1deg);
+  transition: transform 0.2s;
+}
+
+.summary-card:hover {
+  transform: rotate(1deg) scale(1.05);
+  border-color: #bbb;
+  background: #fff;
+}
+
+/* Filter Buttons */
+.report-filter button {
+  background: transparent;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  padding: 4px 12px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-family: 'Patrick Hand', cursive;
+  color: #888;
+}
+
+.report-filter button.active {
+  background: #2d3436;
   color: white;
+  border-color: #2d3436;
 }
 
-/* summary 카드 */
-.dark .summary-card {
-  background: #2a2b31;
-  color: #fff;
-  border: 1px solid #3a3b42;
+/* History List - Typed List */
+.history-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-/* ranking */
-.dark .ranking-list li {
-  border-bottom: 1px solid #2f3036;
-  color: #e5e7eb;
+.history-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px dashed #ddd;
+  font-family: 'Patrick Hand', cursive;
 }
 
-/* 필터 버튼 (Week / Month / Year) */
-.dark .report-content button {
-  background: #2a2b31;
-  color: #ccc;
-  border: 1px solid #3a3b42;
+.history-task {
+  font-size: 1.1rem;
+  color: #2d3436;
 }
 
-.dark .report-content button.active {
-  background: #800000;
+.tag {
+  font-size: 0.75rem;
+  padding: 2px 8px;
+  border-radius: 4px;
   color: white;
+  font-weight: bold;
+  text-transform: uppercase;
 }
 
-/* 섹션 제목 */
-.dark .report-content h4 {
-  color: #ffffff;
+.tag.pomodoro {
+  background: #ff6b6b;
+}
+
+.tag.short {
+  background: #4dabf7;
+}
+
+.tag.long {
+  background: #51cf66;
+}
+
+.history-meta {
+  text-transform: capitalize;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.history-meta .tag.pomodoro {
+  background: #fee2e2;
+  color: #c53030;
+}
+
+.history-meta .tag.short {
+  background: #e6fffa;
+  color: #2c7a7b;
+}
+
+.history-meta .tag.long {
+  background: #ebf8ff;
+  color: #2b6cb0;
+}
+
+.dark .history-meta .tag.pomodoro {
+  background: rgba(197, 48, 48, 0.2);
+  color: #fc8181;
+}
+
+.dark .history-meta .tag.short {
+  background: rgba(49, 151, 149, 0.2);
+  color: #81e6d9;
+}
+
+.dark .history-meta .tag.long {
+  background: rgba(49, 130, 206, 0.2);
+  color: #90cdf4;
+}
+
+.no-data {
+  text-align: center;
+  color: #a0aec0;
+  margin-top: 20px;
+}
+
+.delete-history-btn {
+  background: none;
+  border: none;
+  font-size: 16px;
+  color: #a0aec0;
+  cursor: pointer;
+  padding: 0 4px;
+  margin-left: 8px;
+  transition: color 0.2s;
+}
+
+.delete-history-btn:hover {
+  color: #e53e3e;
+}
+
+.dark .delete-history-btn:hover {
+  color: #fc8181;
+}
+
+/* =========================
+   📱 Mobile Responsive
+========================= */
+@media (max-width: 768px) {
+  .report-modal {
+    width: 95%;
+    max-width: 550px;
+    min-height: 500px;
+  }
+
+  .report-header {
+    padding: 20px 25px;
+  }
+
+  .report-header h3 {
+    font-size: 1.7rem;
+  }
+
+  .report-tabs {
+    padding: 0 25px;
+  }
+
+  .report-tabs button {
+    padding: 10px 16px;
+    font-size: 1rem;
+  }
+
+  .report-content {
+    padding: 25px;
+  }
+
+  .summary-cards {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .report-modal {
+    width: 100%;
+    max-width: 100%;
+    min-height: 100vh;
+    max-height: 100vh;
+    border-radius: 0;
+  }
+
+  .report-header {
+    padding: 18px 20px;
+  }
+
+  .report-header h3 {
+    font-size: 1.5rem;
+  }
+
+  .close-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 1.1rem;
+  }
+
+  .report-tabs {
+    padding: 0 20px;
+  }
+
+  .report-tabs button {
+    padding: 8px 12px;
+    font-size: 0.95rem;
+  }
+
+  .report-content {
+    padding: 20px;
+  }
+
+  .report-content h4 {
+    font-size: 1.2rem;
+    margin-bottom: 14px;
+  }
+
+  .summary-cards {
+    gap: 10px;
+  }
+
+  .summary-card {
+    padding: 12px 8px;
+    font-size: 0.85rem;
+  }
+
+  .history-item {
+    padding: 10px 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .history-task {
+    font-size: 1rem;
+  }
+
+  .tag {
+    font-size: 0.7rem;
+    padding: 2px 6px;
+  }
+
+  .report-filter button {
+    font-size: 0.8rem;
+    padding: 3px 10px;
+  }
 }

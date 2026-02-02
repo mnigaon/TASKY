@@ -18,7 +18,7 @@ export default function KanbanCard({ task, onClick }) {
 
   return (
     <div
-      className="kanban-card"
+      className={`kanban-card ${task.isSharedTask ? 'shared' : ''}`}
       draggable
       onDragStart={onDragStart}
       onClick={() => !editing && onClick?.()}

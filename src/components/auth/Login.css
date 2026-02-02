@@ -4,69 +4,214 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: #f9f9f9;
+  /* 감각적인 파스텔톤 그라데이션 배경 */
+  background: linear-gradient(135deg, #fce4ec 0%, #f3e5f5 50%, #e8eaf6 100%);
   padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 배경 장식 요소들 */
+.auth-page::before,
+.auth-page::after {
+  content: '';
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: rgba(155, 89, 120, 0.1);
+  z-index: 0;
+}
+
+.auth-page::before {
+  top: -50px;
+  right: -50px;
+}
+
+.auth-page::after {
+  bottom: -50px;
+  left: -50px;
 }
 
 .auth-card {
-  background: white;
-  padding: 50px 40px;
-  border-radius: 12px;
-  box-shadow: 0 6px 25px rgba(0,0,0,0.1);
-  max-width: 400px;
+  position: relative;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(15px);
+  padding: 60px 45px;
+  border-radius: 32px;
+  /* 부드러운 라운딩 */
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  max-width: 420px;
   width: 100%;
   text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.auth-logo {
+  width: 150px;
+  height: 150px;
+  margin-bottom: 24px;
+  object-fit: contain;
+  /* 필터로 살짝 강조 */
+  filter: drop-shadow(0 5px 15px rgba(155, 89, 120, 0.2));
 }
 
 .auth-card h1 {
-  font-size: 28px;
-  font-weight: 700;
-  margin-bottom: 30px;
-  color: #111;
+  font-size: 32px;
+  font-weight: 800;
+  margin-bottom: 12px;
+  color: #333;
+  letter-spacing: -1px;
 }
 
-.auth-card input {
-  width: 100%;
-  padding: 12px 15px;
-  margin-bottom: 20px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  font-size: 16px;
-  box-sizing: border-box;
+.auth-subtitle {
+  color: #718096;
+  margin-bottom: 35px;
+  font-size: 15px;
 }
 
 .auth-button {
   width: 100%;
-  padding: 14px 0;
-  background: black;
+  padding: 16px 0;
+  background: #111;
   color: white;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 700;
   border: none;
-  border-radius: 6px;
+  border-radius: 16px;
   cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
 
 .auth-button.google {
-  background: #4285F4;
-  margin-bottom: 15px;
+  background: white;
+  color: #333;
+  border: 1px solid #e2e8f0;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
-.auth-button:hover {
-  opacity: 0.85;
+.auth-button.google:hover {
+  background: #f7fafc;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+}
+
+.auth-button.primary {
+  background: #9b5978;
+  /* Dusty Berry */
+  box-shadow: 0 10px 20px -5px rgba(155, 89, 120, 0.4);
+}
+
+.auth-button.primary:hover {
+  background: #864a66;
+  transform: translateY(-2px);
+  box-shadow: 0 15px 25px -5px rgba(155, 89, 120, 0.5);
 }
 
 .auth-card p {
-  margin-top: 15px;
+  margin-top: 25px;
   font-size: 14px;
-  color: #555;
+  color: #718096;
 }
 
 .auth-link {
-  color: #111;
-  font-weight: 600;
+  color: #9b5978;
+  font-weight: 700;
   cursor: pointer;
+  margin-left: 5px;
+  transition: color 0.2s;
+}
+
+.auth-link:hover {
+  color: #864a66;
   text-decoration: underline;
 }
 
-  
+/* 입력 필드 스타일 (회원가입에서 사용) */
+.auth-input-group {
+  margin-bottom: 18px;
+  text-align: left;
+}
+
+.auth-card input {
+  width: 100%;
+  padding: 16px 20px;
+  border-radius: 16px;
+  border: 2px solid #f0f1f5;
+  background: #fafbff;
+  font-size: 15px;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.auth-card input:focus {
+  outline: none;
+  border-color: #9b5978;
+  background: white;
+  box-shadow: 0 0 0 4px rgba(155, 89, 120, 0.1);
+}
+
+/* =========================
+   📱 Mobile Responsive
+========================= */
+@media (max-width: 768px) {
+  .auth-card {
+    padding: 50px 35px;
+    max-width: 380px;
+  }
+
+  .auth-logo {
+    width: 120px;
+    height: 120px;
+  }
+
+  .auth-card h1 {
+    font-size: 28px;
+  }
+
+  .auth-subtitle {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-page {
+    padding: 15px;
+  }
+
+  .auth-card {
+    padding: 40px 25px;
+    max-width: 100%;
+  }
+
+  .auth-logo {
+    width: 100px;
+    height: 100px;
+  }
+
+  .auth-card h1 {
+    font-size: 24px;
+  }
+
+  .auth-subtitle {
+    font-size: 13px;
+    margin-bottom: 25px;
+  }
+
+  .auth-button {
+    padding: 14px 0;
+    font-size: 15px;
+  }
+
+  .auth-card input {
+    padding: 14px 18px;
+    font-size: 14px;
+  }
+}

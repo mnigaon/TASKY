@@ -4,28 +4,28 @@ import "./FAQ.css";
 
 const faqData = [
   {
-    q: "What is Tasky?",
-    a: "Tasky is a simple personal task manager that helps you organize your day, stay focused, and get things done without distractions."
+    q: "What is Dayzzy?",
+    a: "Dayzzy is your aesthetic productivity companion. It's a kitsch workspace designed for creators, students, and anyone who wants to organize their day with style."
   },
   {
-    q: "Is Tasky free to use?",
-    a: "Yes. Tasky is completely free to use with all core features included. No subscriptions or hidden fees."
+    q: "Is it really free?",
+    a: "Yas! All our core zazzy features are completely free. We want everyone to enjoy a more beautiful and organized life."
   },
   {
-    q: "Can I use Tasky with a team?",
-    a: "Tasky is designed for personal productivity. It focuses on helping individuals manage their own tasks efficiently."
+    q: "Can I deco my workspace?",
+    a: "Absolutely! From custom workspaces to sticker-style tasks, Dayzzy is built for you to express your unique vibe while staying on top of your goals."
   },
   {
-    q: "What features does Tasky provide?",
-    a: "You can create tasks, organize them into workspaces, use a Kanban board, track time with a Pomodoro timer, attach files, and view simple productivity reports."
+    q: "Will it help me focus?",
+    a: "Definitely. Our aesthetic Focus Garden timer and clean Kanban boards are designed to keep you in the zone without the boring clutter."
   },
   {
-    q: "Is my data secure?",
-    a: "Yes. Your data is securely stored and protected using modern authentication and best security practices."
+    q: "Is my data safe?",
+    a: "100%. We take security seriously, so your personal journey is always protected."
   },
   {
-    q: "Does Tasky work on mobile?",
-    a: "Yes. Tasky works smoothly on desktop, tablet, and mobile browsers with a fully responsive design."
+    q: "Can I collaborate with my team?",
+    a: "Yes! In co-op projects, you can chat with your teammates in real-time. Share ideas, discuss tasks, and stay connected while working together on your goals."
   }
 ];
 
@@ -35,7 +35,7 @@ export default function FAQ() {
 
   return (
     <section className="faq-section">
-      <h2 className="faq-title">TASKY FAQ</h2>
+      <h2 className="faq-title">Any Questions?</h2>
 
       {faqData.map((item, index) => {
         const isOpen = openIndex === index;
