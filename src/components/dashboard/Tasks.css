@@ -24,7 +24,7 @@
   padding: 40px 40px 120px 60px;
   margin: 0;
   /* Override center margin for layout */
-  font-family: "Patrick Hand", "Inter", sans-serif;
+  font-family: 'Gaegu', cursive;
   background-color: #fcf6e3;
   background-image:
     linear-gradient(90deg, transparent 79px, #dcaebb 79px, #dcaebb 81px, transparent 81px),
@@ -72,7 +72,7 @@
   color: #bcaaa4;
   word-break: break-word;
   text-align: center;
-  font-family: sans-serif;
+  font-family: 'Gaegu', sans-serif;
   text-shadow: 1px 0px 0px rgba(0, 0, 0, 0.3);
 }
 
@@ -113,14 +113,14 @@
 }
 
 .selected-project-info .label {
-  font-family: 'Patrick Hand', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 10px;
   opacity: 0.8;
   color: #ccc;
 }
 
 .selected-project-info .project-title {
-  font-family: 'Chewy', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 20px;
   margin: 2px 0 4px 0;
   color: #fff;
@@ -132,7 +132,7 @@
   background: #aed581;
   color: #1b5e20;
   border-radius: 12px;
-  font-family: 'Patrick Hand', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 10px;
   font-weight: 700;
 }
@@ -173,7 +173,7 @@
 
 .percentage {
   fill: #333;
-  font-family: 'Chewy', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 9px;
   font-weight: 400;
   text-anchor: middle;
@@ -187,7 +187,7 @@
 }
 
 .section-title {
-  font-family: 'Chewy', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 18px !important;
   color: #5d4037 !important;
   margin: 0 0 4px 4px !important;
@@ -220,13 +220,13 @@
 }
 
 .cat-card .count {
-  font-family: 'Chewy', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 26px;
   color: #333;
 }
 
 .cat-card .label {
-  font-family: 'Patrick Hand', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 13px;
   color: #777;
 }
@@ -280,7 +280,7 @@
 
 .urgent-badge {
   display: inline-block;
-  font-family: 'Special Elite', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 10px;
   font-weight: 700;
   color: #c0392b;
@@ -293,7 +293,7 @@
 }
 
 .urgent-task-info .task-title {
-  font-family: 'Patrick Hand', cursive !important;
+  font-family: 'Gaegu', cursive !important;
   font-size: 15px !important;
   font-weight: 600 !important;
   margin: 2px 0 4px 0 !important;
@@ -302,7 +302,7 @@
 }
 
 .task-meta {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Gaegu', sans-serif;
   font-size: 12px;
   color: #e57373 !important;
   font-weight: 600;
@@ -404,7 +404,7 @@
 
 .tasks h2,
 .tasks h3 {
-  font-family: 'Chewy', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 36px;
   font-weight: 400;
   margin-bottom: 30px;
@@ -417,7 +417,7 @@
 
 /* 워크스페이스 타이틀 수정 인풋 */
 .workspace-title-edit-input {
-  font-family: 'Chewy', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 36px;
   width: 100%;
   border: none;
@@ -495,7 +495,7 @@
   border-radius: 8px;
   border: 2px solid #ddd;
   /* Thicker border */
-  font-family: 'Patrick Hand', cursive;
+  font-family: 'Gaegu', cursive;
   /* 손글씨 input */
   font-size: 1.1rem;
   background: #fafafa;
@@ -514,7 +514,7 @@
 /* 파일 */
 .tasks-input input[type="file"] {
   font-size: 13px;
-  font-family: 'Patrick Hand', sans-serif;
+  font-family: 'Gaegu', sans-serif;
 }
 
 /* Add 버튼 */
@@ -528,7 +528,7 @@
   border: 2px solid transparent;
   cursor: pointer;
   transition: all 0.15s;
-  font-family: 'Patrick Hand', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 1.1rem;
 }
 
@@ -618,7 +618,7 @@
   /* Align with text */
   font-size: 1.4rem;
   color: #555;
-  font-family: 'Patrick Hand', cursive;
+  font-family: 'Gaegu', cursive;
   line-height: 1;
 }
 
@@ -660,7 +660,7 @@
 
 /* 제목 */
 .tasks-list li strong {
-  font-family: 'Patrick Hand', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 1.3rem;
   /* 커진 폰트 */
   font-weight: 500;
@@ -671,7 +671,7 @@
 
 /* 설명 */
 .tasks-list li p {
-  font-family: 'Patrick Hand', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 1.05rem;
   color: #6d4c41;
   /* Sepia/Brown Text */
@@ -681,7 +681,7 @@
 
 /* due date 배지 (Marker Highlight Style) */
 .tasks-list li small {
-  font-family: 'Patrick Hand', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 0.9rem;
   width: fit-content;
   border-radius: 4px;
@@ -696,7 +696,7 @@
 
 /* 첨부파일 pill */
 .tasks-list li a {
-  font-family: 'Patrick Hand', sans-serif;
+  font-family: 'Gaegu', sans-serif;
   font-size: 0.9rem;
   width: fit-content;
 
@@ -1010,7 +1010,7 @@
   border-bottom: 1px solid #ccc;
   border-radius: 8px 8px 0 0;
   padding: 8px 20px;
-  font-family: 'Patrick Hand', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 1.1rem;
   color: #666;
   cursor: pointer;
@@ -1089,7 +1089,7 @@
 .search-sticker input {
   border: none !important;
   background: transparent !important;
-  font-family: 'Patrick Hand', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 1rem;
   width: 100px;
   padding: 5px 0;
@@ -1107,7 +1107,7 @@
   border-radius: 4px;
   border: 1px solid #ddd;
   background: #fff;
-  font-family: 'Patrick Hand', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 1rem;
   color: #555;
   cursor: pointer;

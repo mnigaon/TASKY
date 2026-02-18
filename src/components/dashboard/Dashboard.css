@@ -137,7 +137,7 @@
   /* Slight overlap for tab look */
   border-radius: 8px 0 0 8px;
   cursor: pointer;
-  font-family: 'Patrick Hand', cursive;
+  font-family: 'Gaegu', cursive;
   font-weight: 400;
   font-size: 1.3rem;
   letter-spacing: 2px;
@@ -278,7 +278,7 @@
 
 /* 웰컴 타이틀 */
 .dashboard-welcome-title {
-  font-family: 'Chewy', cursive;
+  font-family: 'Gaegu', cursive;
   /* 로고 스타일 폰트 */
   font-size: 3.2rem;
   /* Bubbly하고 크게 */
@@ -331,7 +331,7 @@
 
 /* 웰컴 서브타이틀 */
 .dashboard-welcome-subtitle {
-  font-family: 'Chewy', cursive;
+  font-family: 'Gaegu', cursive;
   /* 로고 스타일 폰트 */
   font-size: 1.6rem;
   /* 가독성 좋게 */

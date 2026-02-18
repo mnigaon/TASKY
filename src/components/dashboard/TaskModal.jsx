@@ -20,7 +20,7 @@ import {
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import "./TaskModal.css";
 import CommentEditModal from "./CommentEditModal";
-import { formatDate } from "../../utils/dateFormat";
+
 
 /* 🔥 GOOGLE MAPS */
 import { GoogleMap, Marker, Autocomplete, useJsApiLoader } from "@react-google-maps/api";
@@ -113,7 +113,7 @@ export default function TaskModal({
     else setEndDueDate("");
     setExistingFiles(task.attachments || (task.attachmentUrl ? [{ url: task.attachmentUrl, name: task.attachmentName }] : []));
     setNewFiles([]);
-  }, [task]);
+  }, [task, categoryId]);
 
   // 🔹 댓글 실시간 구독 및 유저 정보 매핑
   useEffect(() => {
@@ -148,7 +148,7 @@ export default function TaskModal({
       }
     });
     return () => unsubscribe();
-  }, [task?.id]);
+  }, [task?.id, commentUserMap]);
 
 
   // Load Categories
@@ -230,6 +230,21 @@ export default function TaskModal({
   };
 
   const formatTime = (d) => (d ? d.toLocaleString() : "");
+
+  // 🔹 Safe Close Handler
+  const handleSafeClose = () => {
+    const isModified =
+      title !== (task.title || "") ||
+      desc !== (task.description || "");
+
+    if (isModified) {
+      if (window.confirm("Your unsaved changes have not been saved. Are you sure you want to close?")) {
+        onClose();
+      }
+    } else {
+      onClose();
+    }
+  };
 
   return ReactDOM.createPortal(
     <div className="modal-overlay" onClick={onClose}>

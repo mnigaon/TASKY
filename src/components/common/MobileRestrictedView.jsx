@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './MobileRestrictedView.css';
 import { FaDesktop } from 'react-icons/fa';
 import logo from '../../assets/logo.png'; // Assuming logo path

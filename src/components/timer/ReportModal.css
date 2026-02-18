@@ -77,7 +77,7 @@
   margin: 0;
   font-size: 2rem;
   font-weight: 400;
-  font-family: 'Chewy', cursive;
+  font-family: 'Gaegu', cursive;
   color: #2d3436;
 }
 
@@ -115,7 +115,7 @@
   background: transparent;
   border: none;
   padding: 12px 20px;
-  font-family: 'Patrick Hand', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 1.1rem;
   color: #aaa;
   cursor: pointer;
@@ -140,7 +140,7 @@
 
 .report-content h4 {
   margin: 0 0 16px 0;
-  font-family: 'Chewy', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 1.3rem;
   color: #555;
 }
@@ -162,7 +162,7 @@
   font-weight: 700;
   font-size: 0.9rem;
   color: #2d3436;
-  font-family: 'Patrick Hand', cursive;
+  font-family: 'Gaegu', cursive;
   transform: rotate(-1deg);
   transition: transform 0.2s;
 }
@@ -181,7 +181,7 @@
   padding: 4px 12px;
   cursor: pointer;
   font-size: 0.85rem;
-  font-family: 'Patrick Hand', cursive;
+  font-family: 'Gaegu', cursive;
   color: #888;
 }
 
@@ -204,7 +204,7 @@
   align-items: center;
   padding: 12px 0;
   border-bottom: 1px dashed #ddd;
-  font-family: 'Patrick Hand', cursive;
+  font-family: 'Gaegu', cursive;
 }
 
 .history-task {

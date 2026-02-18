@@ -21,7 +21,7 @@
 
 /* 페이지 제목 */
 .settings-title {
-  font-family: 'Chewy', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 3.5rem;
   font-weight: 400;
   margin-bottom: 20px;
@@ -152,7 +152,7 @@
 
 .sticker-card h3,
 .id-card h3 {
-  font-family: 'Patrick Hand', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 1.8rem;
   margin-bottom: 24px;
   color: #2d3748;
@@ -165,7 +165,7 @@
 ========================= */
 
 .settings label {
-  font-family: 'Patrick Hand', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 1.2rem;
   font-weight: 700;
   color: #4a5568;
@@ -253,7 +253,7 @@
    🔘 Buttons (Tape Buttons)
 ========================= */
 .settings button {
-  font-family: 'Patrick Hand', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 1.1rem;
   padding: 8px 18px;
   border-radius: 4px;

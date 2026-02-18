@@ -1,5 +1,5 @@
 // src/components/dashboard/Chat.jsx
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { db } from "../../firebase/firebase";
 import { collection, addDoc, query, where, onSnapshot, serverTimestamp, getDocs, doc, getDoc, setDoc } from "firebase/firestore";
 import "./Chat.css";
@@ -18,23 +18,30 @@ export default function Chat({ workspace, currentUser, onClose }) {
     const [hasLoadedStatus, setHasLoadedStatus] = useState(false); // ⭐ 상태 로드 여부
 
     const scrollRef = useRef();
-    const myEmail = currentUser.email?.toLowerCase();
 
-    const getChatId = (targetEmail) => {
-        if (!targetEmail) return workspace.id;
+    // ⭐ Safe values for hooks dependencies
+    const myEmail = currentUser?.email?.toLowerCase();
+    const workspaceId = workspace?.id;
+
+    const getChatId = useCallback((targetEmail) => {
+        if (!targetEmail || !workspaceId) return workspaceId;
         return [myEmail, targetEmail.toLowerCase()].sort().join("_");
-    };
+    }, [myEmail, workspaceId]);
 
-    const currentChatId = chatType === "group" ? workspace.id : getChatId(selectedTarget);
+    const currentChatId = chatType === "group" ? workspaceId : getChatId(selectedTarget);
 
     // 1. 멤버 정보 및 이름 로드
     useEffect(() => {
         const fetchMemberDetails = async () => {
-            if (!workspace.id) return;
+            if (!workspaceId) return;
             const emails = new Set();
-            if (workspace.members) workspace.members.forEach(m => emails.add(m.trim().toLowerCase()));
-            let leaderEmail = (workspace.ownerEmail || "").toLowerCase();
-            if (!leaderEmail && workspace.userId) {
+            // ⭐ Safe access to members array
+            if (workspace?.members && Array.isArray(workspace.members)) {
+                workspace.members.forEach(m => emails.add(m.trim().toLowerCase()));
+            }
+
+            let leaderEmail = (workspace?.ownerEmail || "").toLowerCase();
+            if (!leaderEmail && workspace?.userId) {
                 try {
                     const uDoc = await getDoc(doc(db, "users", workspace.userId));
                     if (uDoc.exists()) leaderEmail = uDoc.data().email?.toLowerCase();
@@ -51,14 +58,14 @@ export default function Chat({ workspace, currentUser, onClose }) {
             }
         };
         fetchMemberDetails();
-    }, [workspace.id, workspace.members, workspace.ownerEmail, workspace.userId]);
+    }, [workspaceId, workspace?.members, workspace?.ownerEmail, workspace?.userId]);
 
     // 2. 워크스페이스 내 모든 메시지 실시간 감시 (알림용 & 소리)
     const isInitialLoad = useRef(true);
 
     useEffect(() => {
-        if (!workspace.id) return;
-        const q = query(collection(db, "messages"), where("workspaceId", "==", workspace.id));
+        if (!workspaceId) return;
+        const q = query(collection(db, "messages"), where("workspaceId", "==", workspaceId));
 
         const unsubscribe = onSnapshot(q, (snapshot) => {
             const msgs = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
@@ -80,12 +87,12 @@ export default function Chat({ workspace, currentUser, onClose }) {
             });
         });
         return () => unsubscribe();
-    }, [workspace.id]);
+    }, [workspaceId, myEmail]);
 
     // 3. 내 읽음 상태 실시간 감시 (알림용)
     useEffect(() => {
-        if (!workspace.id || !currentUser.uid) return;
-        const q = query(collection(db, "chat_status"), where("workspaceId", "==", workspace.id));
+        if (!workspaceId || !currentUser?.uid) return;
+        const q = query(collection(db, "chat_status"), where("workspaceId", "==", workspaceId));
         const unsubscribe = onSnapshot(q, (snapshot) => {
             const newStatusMap = {};
             snapshot.forEach(d => {
@@ -98,18 +105,18 @@ export default function Chat({ workspace, currentUser, onClose }) {
             setHasLoadedStatus(true); // ⭐ 상태 로드 완료
         });
         return () => unsubscribe();
-    }, [workspace.id, currentUser.uid]);
+    }, [workspaceId, currentUser?.uid]);
 
     // 4. 미확인 개수 통합 계산
     useEffect(() => {
-        if (!hasLoadedStatus) return; // ⭐ 상태가 로드되기 전에는 계산하지 않음
+        if (!hasLoadedStatus || !workspaceId) return; // ⭐ 상태가 로드되기 전에는 계산하지 않음
 
         const newCounts = {};
 
         // 그룹 채팅
-        const groupLastRead = readStatusMap[workspace.id];
+        const groupLastRead = readStatusMap[workspaceId];
         if (groupLastRead) {
-            newCounts[workspace.id] = allWorkspaceMessages.filter(m =>
+            newCounts[workspaceId] = allWorkspaceMessages.filter(m =>
                 (m.type === "group" || !m.type) &&
                 m.senderEmail !== myEmail &&
                 m.timestamp?.toDate() > groupLastRead
@@ -131,7 +138,19 @@ export default function Chat({ workspace, currentUser, onClose }) {
         });
 
         setUnreadCounts(newCounts);
-    }, [allWorkspaceMessages, readStatusMap, allMemberEmails, myEmail, workspace.id, hasLoadedStatus]);
+    }, [allWorkspaceMessages, readStatusMap, allMemberEmails, myEmail, workspaceId, hasLoadedStatus, getChatId]);
+
+    const markAsRead = useCallback(async (chatId) => {
+        if (!chatId || !currentUser?.uid || !workspaceId) return;
+
+        // 즉시 로컬 상태를 업데이트하여 UI 깜빡임 방지 (Optimistic Update는 아니지만, Firestore 쓰기 후 리스너가 돌기 전 시점 보강)
+        try {
+            await setDoc(doc(db, "chat_status", `${currentUser.uid}_${chatId}`), {
+                lastReadAt: serverTimestamp(),
+                workspaceId: workspaceId
+            }, { merge: true });
+        } catch (e) { }
+    }, [currentUser?.uid, workspaceId]);
 
     // 5. 현재 대화방 메시지 정렬 표시
     useEffect(() => {
@@ -150,31 +169,19 @@ export default function Chat({ workspace, currentUser, onClose }) {
         if (msgs.length > 0 || chatType) {
             markAsRead(currentChatId);
         }
-    }, [allWorkspaceMessages, chatType, currentChatId]);
-
-    const markAsRead = async (chatId) => {
-        if (!chatId || !currentUser.uid) return;
-
-        // 즉시 로컬 상태를 업데이트하여 UI 깜빡임 방지 (Optimistic Update는 아니지만, Firestore 쓰기 후 리스너가 돌기 전 시점 보강)
-        try {
-            await setDoc(doc(db, "chat_status", `${currentUser.uid}_${chatId}`), {
-                lastReadAt: serverTimestamp(),
-                workspaceId: workspace.id
-            }, { merge: true });
-        } catch (e) { }
-    };
+    }, [allWorkspaceMessages, chatType, currentChatId, markAsRead]);
 
     useEffect(() => {
-        if (workspace.id) {
+        if (workspaceId) {
             markAsRead(currentChatId);
         }
-    }, [currentChatId, workspace.id]);
+    }, [currentChatId, workspaceId, markAsRead]);
 
     useEffect(() => { scrollRef.current?.scrollIntoView({ behavior: "smooth" }); }, [messages]);
 
     const handleSendMessage = async (e) => {
         e.preventDefault();
-        if (!newMessage.trim()) return;
+        if (!newMessage.trim() || !currentUser?.uid || !workspaceId) return;
         try {
             await addDoc(collection(db, "messages"), {
                 senderId: currentUser.uid,
@@ -183,7 +190,7 @@ export default function Chat({ workspace, currentUser, onClose }) {
                 text: newMessage.trim(),
                 timestamp: serverTimestamp(),
                 type: chatType,
-                workspaceId: workspace.id,
+                workspaceId: workspaceId,
                 chatId: chatType === "direct" ? currentChatId : null,
             });
             setNewMessage("");
@@ -199,10 +206,13 @@ export default function Chat({ workspace, currentUser, onClose }) {
     const getDisplayName = (email) => {
         if (!email) return "Unknown";
         const baseName = userNameMap[email.toLowerCase()] || email.split('@')[0];
-        return email.toLowerCase() === (workspace.ownerEmail || "").toLowerCase() ? `${baseName} (Leader)` : baseName;
+        return email.toLowerCase() === (workspace?.ownerEmail || "").toLowerCase() ? `${baseName} (Leader)` : baseName;
     };
 
     const filteredMembers = allMemberEmails.filter(e => e !== myEmail);
+
+    // ⭐ Final Null Check BEFORE Render
+    if (!currentUser || !workspace) return null;
 
     return (
         <div className="chat-container">
@@ -213,8 +223,8 @@ export default function Chat({ workspace, currentUser, onClose }) {
                     onClick={() => { setChatType('group'); setSelectedTarget(null); }}
                 >
                     🌐 Group Chat
-                    {hasLoadedStatus && chatType !== 'group' && unreadCounts[workspace.id] > 0 && (
-                        <span className="unread-badge">{unreadCounts[workspace.id]}</span>
+                    {hasLoadedStatus && chatType !== 'group' && unreadCounts[workspaceId] > 0 && (
+                        <span className="unread-badge">{unreadCounts[workspaceId]}</span>
                     )}
                 </div>
                 <div className="direct-header">1:1 Chat</div>

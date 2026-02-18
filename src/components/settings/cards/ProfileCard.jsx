@@ -25,7 +25,18 @@ export default function ProfileCard() {
     if (!name.trim()) return;
     try {
       setLoading(true);
-      await updateProfile(auth.currentUser, { displayName: name });
+      const user = auth.currentUser;
+
+      // 1. Auth Profile 업데이트
+      await updateProfile(user, { displayName: name });
+
+      // 2. Firestore 사용자 정보 동기화 (Chat 등에서 사용됨)
+      const { doc, setDoc } = await import("firebase/firestore");
+      const { db } = await import("../../../firebase/firebase");
+      await setDoc(doc(db, "users", user.uid), {
+        displayName: name
+      }, { merge: true });
+
       alert("Name change completed 👍");
     } catch (err) {
       console.error(err);

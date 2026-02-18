@@ -1,8 +1,7 @@
 // src/components/timer/ReportModal.jsx
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo } from "react";
 import { useTimer } from "../../context/TimerContext";
-import { db } from "../../firebase/firebase";
-import { doc, getDoc } from "firebase/firestore";
+
 import "./ReportModal.css";
 import {
   ResponsiveContainer,

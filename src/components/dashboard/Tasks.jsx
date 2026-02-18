@@ -152,7 +152,7 @@ export default function Tasks({
       collection(db, "workspaces"),
       or(
         where("userId", "==", currentUser.uid),
-        where("members", "array-contains", currentUser.email)
+        where("members", "array-contains", currentUser.email.toLowerCase())
       )
     );
 

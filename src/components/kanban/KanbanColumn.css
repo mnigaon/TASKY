@@ -66,7 +66,7 @@
 }
 
 .kanban-column-header h3 {
-  font-family: 'Patrick Hand', cursive;
+  font-family: 'Gaegu', cursive;
   /* 손글씨 폰트 */
   font-size: 1.3rem;
   font-weight: 700;
@@ -90,7 +90,7 @@
 }
 
 .column-title-input {
-  font-family: 'Patrick Hand', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 1.2rem;
   text-align: center;
   background: transparent;
@@ -114,7 +114,7 @@
 
 .count {
   font-size: 0.9rem;
-  font-family: 'Patrick Hand', cursive;
+  font-family: 'Gaegu', cursive;
   background: #eee;
   color: #555;
   padding: 2px 8px;
@@ -170,7 +170,7 @@
 
 .kanban-column-body:empty::after {
   content: "Empty Space 🍃";
-  font-family: 'Patrick Hand', cursive;
+  font-family: 'Gaegu', cursive;
   opacity: 0.5;
   font-size: 1.2rem;
   text-align: center;

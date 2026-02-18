@@ -87,7 +87,7 @@
 
 /* Customizing React Big Calendar */
 .rbc-calendar {
-  font-family: 'Patrick Hand', 'Inter', sans-serif;
+  font-family: 'Gaegu', sans-serif;
   /* Handwritten font */
   flex: 1;
   color: #444;
@@ -104,7 +104,7 @@
 
 /* Day Headers */
 .rbc-header {
-  font-family: 'Chewy', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 18px;
   color: #5d4037;
   border-bottom: 2px solid #5d4037 !important;
@@ -159,7 +159,7 @@
   font-weight: 400;
   margin: 0;
   color: #3e2723;
-  font-family: 'Chewy', cursive;
+  font-family: 'Gaegu', cursive;
   text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5);
 }
 
@@ -167,7 +167,7 @@
 .calendar-header .btn.primary {
   background: #3e2723;
   color: #fff;
-  font-family: 'Chewy', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 18px;
   border-radius: 30px;
   padding: 8px 20px;
@@ -184,7 +184,7 @@
 .calendar-header .btn.secondary {
   background: #fff;
   color: #3e2723;
-  font-family: 'Chewy', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 18px;
   border-radius: 30px;
   padding: 8px 20px;
@@ -309,7 +309,7 @@
 
 /* Toolbar Controls */
 .rbc-toolbar button {
-  font-family: 'Patrick Hand', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 16px;
   border: 1px solid #d7ccc8;
   color: #5d4037;

@@ -19,7 +19,7 @@ import MobileRestrictedView from "./components/common/MobileRestrictedView";
 // TimerProvider 제거됨 (index.js로 이동)
 import TimerPage from "./components/timer/TimerPage";
 import "./styles/theme.css";
-import "@fontsource/jua"; // Jua 폰트 import
+import "@fontsource/gaegu"; // Gaegu 폰트 import
 
 
 function Home() {

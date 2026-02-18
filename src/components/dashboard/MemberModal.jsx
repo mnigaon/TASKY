@@ -1,7 +1,7 @@
 // src/components/dashboard/MemberModal.jsx
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { db } from "../../firebase/firebase";
-import { doc, updateDoc, arrayUnion, arrayRemove, getDoc } from "firebase/firestore";
+import { doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
 import emailjs from "emailjs-com"; // ⭐ 추가
 import "./MemberModal.css";
 
@@ -30,7 +30,7 @@ export default function MemberModal({ workspace, currentUser, onClose }) {
         try {
             const wsRef = doc(db, "workspaces", workspace.id);
             await updateDoc(wsRef, {
-                members: arrayUnion(email.trim())
+                members: arrayUnion(email.trim().toLowerCase())
             });
 
             // ⭐ EmailJS로 실제 초대 메일 발송
@@ -39,8 +39,8 @@ export default function MemberModal({ workspace, currentUser, onClose }) {
                     "service_tga0uyi", // ContactSales와 동일한 서비스 ID
                     "template_lhkjqsa", // 템플릿 ID (기존 템플릿 활용)
                     {
-                        to_email: email.trim(),
-                        to_name: email.trim().split('@')[0],
+                        to_email: email.trim().toLowerCase(),
+                        to_name: email.trim().toLowerCase().split('@')[0],
 
                         // Template variable aliases (User uses {{name}}, {{email}})
                         name: currentUser.displayName || currentUser.email,
@@ -61,9 +61,9 @@ export default function MemberModal({ workspace, currentUser, onClose }) {
                 // 메일 발송 실패해도 DB 업데이트는 성공했으므로 멤버 추가는 유지
             }
 
-            setMembers(prev => [...prev, email.trim()]);
+            setMembers(prev => [...prev, email.trim().toLowerCase()]);
             setEmail("");
-            alert(`We've sent an invitation email to ${email.trim()}!`);
+            alert(`We've sent an invitation email to ${email.trim().toLowerCase()}!`);
         } catch (err) {
             console.error("Error inviting member:", err);
             alert("Failed to send invitation.");

@@ -4,7 +4,7 @@
     width: 420px;
     background: #fdfaf0;
     /* Softer paper cream */
-    font-family: 'Patrick Hand', cursive;
+    font-family: 'Gaegu', cursive;
     /* Metal/Plastic Panel Removed */
     border-radius: 20px;
     box-shadow:
@@ -48,7 +48,7 @@
     margin: 0;
     font-size: 1.2rem;
     color: #444;
-    font-family: 'Chewy', cursive;
+    font-family: 'Gaegu', cursive;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
@@ -137,7 +137,7 @@
     border: 2px solid #dcaebb;
     border-radius: 8px;
     background: #fff;
-    font-family: 'Patrick Hand', cursive;
+    font-family: 'Gaegu', cursive;
     font-size: 1.1rem;
     color: #5d4037;
     text-align: center;
@@ -155,7 +155,7 @@
     color: white;
     border: none;
     border-radius: 8px;
-    font-family: 'Patrick Hand', cursive;
+    font-family: 'Gaegu', cursive;
     font-size: 1.1rem;
     cursor: pointer;
     transition: all 0.2s;
@@ -171,7 +171,7 @@
     margin: 0 0 12px 0;
     font-size: 0.95rem;
     color: #666;
-    font-family: 'Patrick Hand', cursive;
+    font-family: 'Gaegu', cursive;
     text-transform: uppercase;
     border-bottom: 1px dashed #ddd;
     padding-bottom: 6px;
@@ -258,7 +258,7 @@
     background: #f9f9f9;
     font-size: 1rem;
     color: #444;
-    font-family: 'Patrick Hand', cursive;
+    font-family: 'Gaegu', cursive;
     cursor: pointer;
 }
 

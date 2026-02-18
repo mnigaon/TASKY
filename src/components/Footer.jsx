@@ -21,7 +21,7 @@ function Footer() {
         </Link>
         <p className="footer-tagline">Decorate your day, master your life.</p>
         <div className="social-links">
-          <a href="#" onClick={(e) => e.preventDefault()} aria-label="Instagram">
+          <a href="/" onClick={(e) => e.preventDefault()} aria-label="Instagram">
             <FaInstagram />
           </a>
 

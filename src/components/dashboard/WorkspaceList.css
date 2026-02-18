@@ -53,7 +53,7 @@
 }
 
 .workspace-header-main h2 {
-  font-family: 'Chewy', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 42px;
   font-weight: 400;
   color: #3e2723;
@@ -92,7 +92,7 @@
 .workspace-add input {
   flex: 1;
   border: none !important;
-  font-family: 'Patrick Hand', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 1.2rem;
   outline: none !important;
   font-weight: 500;
@@ -116,7 +116,7 @@
   justify-content: center;
   transition: all 0.2s;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  font-family: 'Chewy', cursive;
+  font-family: 'Gaegu', cursive;
   padding-bottom: 4px;
   /* text centering fix */
 }
@@ -205,7 +205,7 @@
 }
 
 .workspace-card .name {
-  font-family: 'Chewy', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 22px;
   font-weight: 400;
   margin-bottom: 20px;
@@ -228,7 +228,7 @@
 .progress-text {
   display: block;
   text-align: right;
-  font-family: 'Patrick Hand', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 13px;
   color: #795548;
   font-weight: 700;
@@ -269,7 +269,7 @@
   background: transparent;
   border: 2px dashed #999;
   border-radius: 12px;
-  font-family: 'Patrick Hand', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 16px;
   font-weight: 600;
   color: #555;
@@ -285,7 +285,7 @@
 }
 
 .page-info {
-  font-family: 'Patrick Hand', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 16px;
   color: #718096;
 }
@@ -329,7 +329,7 @@
   /* Silver Ring Color */
   word-break: break-word;
   text-align: center;
-  font-family: sans-serif;
+  font-family: 'Gaegu', sans-serif;
   text-shadow: 1px 0px 0px rgba(0, 0, 0, 0.3);
 }
 
@@ -379,7 +379,7 @@
 }
 
 .selected-project-info .label {
-  font-family: 'Patrick Hand', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 10px;
   /* Smaller label */
   opacity: 0.8;
@@ -389,7 +389,7 @@
 }
 
 .selected-project-info .project-title {
-  font-family: 'Chewy', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 20px;
   /* Smaller title */
   font-weight: 400;
@@ -405,7 +405,7 @@
   background: #aed581;
   color: #1b5e20;
   border-radius: 12px;
-  font-family: 'Patrick Hand', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 10px;
   font-weight: 700;
 }
@@ -450,7 +450,7 @@
 
 .percentage {
   fill: #333;
-  font-family: 'Chewy', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 9px;
   font-weight: 400;
   text-anchor: middle;
@@ -458,7 +458,7 @@
 
 .progress-circle-info .description {
   margin-top: 10px;
-  font-family: 'Patrick Hand', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 15px;
   color: #555;
 }
@@ -471,7 +471,7 @@
 }
 
 .section-title {
-  font-family: 'Chewy', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 18px;
   color: #5d4037;
   margin: 0 0 4px 4px;
@@ -504,13 +504,13 @@
 }
 
 .cat-card .count {
-  font-family: 'Chewy', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 26px;
   color: #333;
 }
 
 .cat-card .label {
-  font-family: 'Patrick Hand', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 13px;
   color: #777;
 }
@@ -596,7 +596,7 @@
 
 .urgent-badge {
   display: inline-block;
-  font-family: 'Special Elite', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 10px;
   /* Smaller */
   font-weight: 700;
@@ -611,7 +611,7 @@
 }
 
 .urgent-task-info .task-title {
-  font-family: 'Patrick Hand', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 15px;
   /* Smaller */
   font-weight: 600;
@@ -621,7 +621,7 @@
 }
 
 .task-meta {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Gaegu', sans-serif;
   font-size: 12px;
   color: #e57373;
   font-weight: 600;

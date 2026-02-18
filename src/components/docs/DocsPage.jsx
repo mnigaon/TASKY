@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { db } from "../../firebase/firebase";
-import { collection, query, where, onSnapshot, addDoc, orderBy, serverTimestamp, deleteDoc, doc, setDoc } from "firebase/firestore";
+import { collection, query, where, onSnapshot, serverTimestamp, deleteDoc, doc, setDoc } from "firebase/firestore";
 import { useAuth } from "../../firebase/AuthContext";
 import DocEditor from "./DocEditor";
 import "./Docs.css";
@@ -119,7 +119,22 @@ export default function DocsPage() {
 
     return (
         <div className="docs-container">
-            {/* Sidebar List - Wire Tray */}
+            {/* Editor Area - Desk Surface */}
+            <main className="docs-main">
+                {selectedDocId ? (
+                    <DocEditor
+                        key={selectedDocId}
+                        docId={selectedDocId}
+                        onTitleChange={updateLocalDocTitle}
+                    />
+                ) : (
+                    <div className="no-doc-selected">
+                        <h2>Select a draft to edit</h2>
+                    </div>
+                )}
+            </main>
+
+            {/* Sidebar List - Wire Tray (Moved to Right) */}
             <aside className="docs-sidebar">
                 <div className="docs-sidebar-header">
                     <h3>📑 INBOX</h3>
@@ -143,22 +158,6 @@ export default function DocsPage() {
                     {docs.length === 0 && <li className="empty-msg">Inbox Empty</li>}
                 </ul>
             </aside>
-
-            {/* Editor Area - Desk Surface */}
-            <main className="docs-main">
-                {selectedDocId ? (
-                    <DocEditor
-                        key={selectedDocId}
-                        docId={selectedDocId}
-                        onTitleChange={updateLocalDocTitle}
-                    />
-                ) : (
-                    <div className="no-doc-selected">
-                        <h2>Select a draft to edit</h2>
-                        <p>Written on a cold rainy night...</p>
-                    </div>
-                )}
-            </main>
         </div>
     );
 }

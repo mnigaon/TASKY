@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 import { doc, updateDoc, serverTimestamp, deleteDoc } from "firebase/firestore";
 import { db, storage } from "../../firebase/firebase"; // Import storage
 import { ref, uploadString, getDownloadURL } from "firebase/storage";
@@ -78,12 +78,13 @@ export default function WhiteboardCanvas({ board, onClose }) {
             context.clearRect(0, 0, canvas.width, canvas.height);
             saveHistory(context);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     /* =========================
        History Logic (Canvas Only)
     ================================ */
-    const saveHistory = (context = ctx) => {
+    const saveHistory = useCallback((context = ctx) => {
         if (!context || !canvasRef.current) return;
         const dataUrl = canvasRef.current.toDataURL();
 
@@ -93,9 +94,9 @@ export default function WhiteboardCanvas({ board, onClose }) {
         if (newHistory.length > 20) newHistory.shift();
         setHistory(newHistory);
         setHistoryStep(newHistory.length - 1);
-    };
+    }, [ctx, history, historyStep]);
 
-    const undo = () => {
+    const undo = useCallback(() => {
         if (historyStep > 0) {
             const prevStep = historyStep - 1;
             const img = new Image();
@@ -106,9 +107,9 @@ export default function WhiteboardCanvas({ board, onClose }) {
                 setHistoryStep(prevStep);
             };
         }
-    };
+    }, [history, historyStep, ctx]);
 
-    const redo = () => {
+    const redo = useCallback(() => {
         if (historyStep < history.length - 1) {
             const nextStep = historyStep + 1;
             const img = new Image();
@@ -119,7 +120,7 @@ export default function WhiteboardCanvas({ board, onClose }) {
                 setHistoryStep(nextStep);
             };
         }
-    };
+    }, [history, historyStep, ctx]);
 
     /* =========================
        🎨 Tool Settings
@@ -161,7 +162,7 @@ export default function WhiteboardCanvas({ board, onClose }) {
         };
         window.addEventListener("keydown", handleKeyDown);
         return () => window.removeEventListener("keydown", handleKeyDown);
-    }, [selectedId, elements, historyStep]);
+    }, [selectedId, elements, historyStep, undo, redo]);
 
     /* =========================
        🖱️ Canvas Interactions

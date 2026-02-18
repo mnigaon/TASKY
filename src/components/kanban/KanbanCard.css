@@ -72,7 +72,7 @@
    title & content
 ========================= */
 .card-title {
-  font-family: 'Patrick Hand', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 1.1rem;
   font-weight: 700;
   color: #3e2723;
@@ -83,7 +83,7 @@
 
 /* description */
 .card-desc {
-  font-family: 'Patrick Hand', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 0.95rem;
   color: #5d4037;
   margin: 6px 0 12px;
@@ -150,7 +150,7 @@
 ========================= */
 .card-input {
   width: 100%;
-  font-family: 'Patrick Hand', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 1.1rem;
   font-weight: 700;
   border: none;

@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { formatDate } from '../../utils/dateFormat';
+
 
 export default function TodaysBriefingWidget({ tasks, onToggleTask, onTaskClick }) {
 
@@ -361,7 +361,7 @@ export default function TodaysBriefingWidget({ tasks, onToggleTask, onTaskClick 
                     resize: none;
                     background: #fff9c4; /* Softer yellow */
                     color: #444;
-                    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+                    font-family: 'Gaegu', sans-serif;
                     box-shadow: inset 0 2px 4px rgba(0,0,0,0.03);
                     border-top: 3px solid #fbc02d; /* Header accent */
                     transition: all 0.2s;

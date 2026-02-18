@@ -117,7 +117,7 @@
 }
 
 .whiteboard-header h2 {
-    font-family: 'Chewy', cursive;
+    font-family: 'Gaegu', cursive;
     font-size: 3.5rem;
     font-weight: 400;
     color: #4e342e;
@@ -128,7 +128,7 @@
 }
 
 .whiteboard-header p {
-    font-family: 'Patrick Hand', cursive;
+    font-family: 'Gaegu', cursive;
     color: #795548;
     /* Medium Brown */
     font-size: 1.4rem;
@@ -227,7 +227,7 @@
 }
 
 .new-whiteboard-card p {
-    font-family: 'Patrick Hand', cursive;
+    font-family: 'Gaegu', cursive;
     font-size: 1.5rem;
     font-weight: 700;
     color: #8d6e63;
@@ -244,7 +244,7 @@
     padding: 10px;
     background: rgba(255, 255, 255, 0.9);
     border: 2px dashed #aaa;
-    font-family: 'Patrick Hand', cursive;
+    font-family: 'Gaegu', cursive;
     font-size: 1.4rem;
     text-align: center;
     outline: none;
@@ -287,7 +287,7 @@
 }
 
 .whiteboard-info h3 {
-    font-family: 'Indie Flower', cursive;
+    font-family: 'Gaegu', cursive;
     font-size: 1.3rem;
     font-weight: 700;
     color: #4e342e;
@@ -419,7 +419,7 @@
 }
 
 .wb-title-input {
-    font-family: 'Indie Flower', cursive;
+    font-family: 'Gaegu', cursive;
     background: transparent;
     border: none;
     font-size: 1.5rem;
@@ -484,7 +484,7 @@
 
 /* Action Buttons */
 .wb-action-btn {
-    font-family: 'Patrick Hand', cursive;
+    font-family: 'Gaegu', cursive;
     font-size: 1.1rem;
     padding: 6px 16px;
     border-radius: 4px;
@@ -542,7 +542,7 @@
 .resize-hint {
     background: #333;
     color: #fff;
-    font-family: 'Patrick Hand', cursive;
+    font-family: 'Gaegu', cursive;
     padding: 2px 6px;
     border-radius: 4px;
     font-size: 12px;

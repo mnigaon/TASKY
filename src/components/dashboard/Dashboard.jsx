@@ -7,7 +7,7 @@ import { db, auth } from "../../firebase/firebase";
 import { doc, onSnapshot, collection, query, where, or } from "firebase/firestore";
 
 import "./Dashboard.css";
-import "@fontsource/chewy"; // Bubbly 로고 스타일 폰트
+
 
 import DashboardHome from "./DashboardHome";
 import WorkspaceList from "./WorkspaceList";
@@ -87,7 +87,7 @@ export default function Dashboard() {
       collection(db, "workspaces"),
       or(
         where("userId", "==", currentUser.uid),
-        where("members", "array-contains", currentUser.email)
+        where("members", "array-contains", currentUser.email.toLowerCase())
       )
     );
 

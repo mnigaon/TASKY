@@ -37,7 +37,7 @@ export default function KanbanPage({
     };
 
     load();
-  }, []);
+  }, [currentUser]);
 
   /* =========================
      칸반 드롭 → status 변경
@@ -62,7 +62,7 @@ export default function KanbanPage({
               <span
                 className="back-arrow"
                 onClick={() => setSelectedCategory(null)}
-                style={{ cursor: 'pointer', marginRight: '10px', fontSize: '0.8em', color: '#888' }}
+                style={{ cursor: 'pointer', marginRight: '10px', fontSize: '0.8em', color: '#888', WebkitTextFillColor: 'initial' }}
               >
                 ◀ Categories
               </span>

@@ -125,7 +125,7 @@ function SettingRow({ label, control }) {
         marginBottom: 14,
       }}
     >
-      <span style={{ fontFamily: "'Patrick Hand', cursive", fontSize: "1.2rem" }}>{label}</span>
+      <span style={{ fontFamily: "'Gaegu', cursive", fontSize: "1.2rem" }}>{label}</span>
       {control}
     </div>
   );

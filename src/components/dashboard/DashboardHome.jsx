@@ -3,7 +3,7 @@ import "./DashboardHome.css";
 import { useTimer } from "../../context/TimerContext";
 import { useState, useEffect } from "react";
 import { db } from "../../firebase/firebase";
-import { collection, query, where, getDocs, limit, or, addDoc, deleteDoc, doc, onSnapshot, serverTimestamp, orderBy } from "firebase/firestore";
+import { collection, query, where, getDocs, or, addDoc, deleteDoc, doc, onSnapshot, serverTimestamp, orderBy } from "firebase/firestore";
 import { useAuth } from "../../firebase/AuthContext";
 import { formatDate } from "../../utils/dateFormat";
 
@@ -37,7 +37,7 @@ export default function DashboardHome({ setActiveTab, setActiveWorkspace }) {
           collection(db, "workspaces"),
           or(
             where("userId", "==", currentUser.uid),
-            where("members", "array-contains", currentUser.email)
+            where("members", "array-contains", currentUser.email.toLowerCase())
           )
         );
         const wsSnap = await getDocs(wsQuery);

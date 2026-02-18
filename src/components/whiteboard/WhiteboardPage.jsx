@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { db } from "../../firebase/firebase";
-import { collection, addDoc, deleteDoc, doc, onSnapshot, query, where, serverTimestamp, orderBy } from "firebase/firestore";
+import { collection, addDoc, deleteDoc, doc, onSnapshot, query, where, serverTimestamp } from "firebase/firestore";
 import { useAuth } from "../../firebase/AuthContext";
 import "./Whiteboard.css";
 

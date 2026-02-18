@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { db } from "../../firebase/firebase";
-import { collection, addDoc, deleteDoc, doc, onSnapshot, updateDoc, serverTimestamp, query, where, or, getDocs } from "firebase/firestore";
+import { collection, addDoc, deleteDoc, doc, onSnapshot, updateDoc, serverTimestamp, query, where, or } from "firebase/firestore";
 import { useAuth } from "../../firebase/AuthContext";
 import WorkspaceCard from "./WorkspaceCard";
 import "./WorkspaceList.css";
@@ -21,7 +21,7 @@ export default function WorkspaceList({ onSelectWorkspace }) {
       collection(db, "workspaces"),
       or(
         where("userId", "==", currentUser.uid),
-        where("members", "array-contains", currentUser.email)
+        where("members", "array-contains", currentUser.email.toLowerCase())
       )
     );
     return onSnapshot(q, (snapshot) => {

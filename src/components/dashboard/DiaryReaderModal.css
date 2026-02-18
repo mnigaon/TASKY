@@ -42,7 +42,7 @@
     flex-direction: column;
     padding: 60px 50px 40px 60px;
     /* Left padding for red line margin */
-    font-family: 'Patrick Hand', cursive;
+    font-family: 'Gaegu', cursive;
     transform-origin: center;
     animation: popBook 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28);
 }

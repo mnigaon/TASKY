@@ -140,14 +140,14 @@
   color: #666;
   cursor: pointer;
   transition: all 0.2s;
-  font-family: 'Patrick Hand', cursive;
+  font-family: 'Gaegu', cursive;
   z-index: 20;
 }
 
 /* 🔍 Google Maps Autocomplete Fix */
 .pac-container {
   z-index: 10000 !important;
-  font-family: 'Patrick Hand', cursive;
+  font-family: 'Gaegu', cursive;
   border-radius: 8px;
   margin-top: 5px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
@@ -170,7 +170,7 @@
 }
 
 .modal-workspace-header {
-  font-family: 'Chewy', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 1.2rem;
   color: #795548;
   display: flex;
@@ -194,7 +194,7 @@
 }
 
 .task-title-input {
-  font-family: 'Chewy', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 2rem;
   color: #3e2723;
   background: transparent;
@@ -206,7 +206,7 @@
 }
 
 .task-desc-textarea {
-  font-family: 'Patrick Hand', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 1.2rem;
   line-height: var(--line-height, 32px);
   /* Matches paper grid */
@@ -232,7 +232,7 @@
 }
 
 .input-group label {
-  font-family: 'Patrick Hand', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 0.9rem;
   font-weight: 700;
   color: #8d6e63;
@@ -248,7 +248,7 @@
   padding: 6px 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  font-family: 'Patrick Hand', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 1.1rem;
   background: #fff;
   color: #333;
@@ -269,7 +269,7 @@
 
 .task-location-row input {
   flex: 1;
-  font-family: 'Patrick Hand', cursive;
+  font-family: 'Gaegu', cursive;
   padding: 8px 12px;
   border-radius: 4px;
   border: 1px solid #ccc;
@@ -286,7 +286,7 @@
 
 /* 🔘 Tape Buttons */
 .btn {
-  font-family: 'Patrick Hand', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 1.1rem;
   padding: 8px 20px;
   border-radius: 2px;
@@ -343,7 +343,7 @@
   margin: 4px;
   border: 1px solid #eee;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
-  font-family: 'Patrick Hand', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 1rem;
 }
 
@@ -354,14 +354,14 @@
   border: 2px dashed #bbb;
   border-radius: 4px;
   cursor: pointer;
-  font-family: 'Patrick Hand', cursive;
+  font-family: 'Gaegu', cursive;
   font-weight: 600;
   color: #777;
 }
 
 /* 🗯️ Comments Section */
 .comments-section h3 {
-  font-family: 'Chewy', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 1.6rem;
   color: #3e2723;
   margin-bottom: 20px;
@@ -439,14 +439,14 @@
 }
 
 .comment-meta {
-  font-family: 'Patrick Hand', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 0.9rem;
   color: #888;
   margin-bottom: 6px;
 }
 
 .comment-body p {
-  font-family: 'Patrick Hand', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 1.1rem;
   color: #333;
   margin: 0;
@@ -455,7 +455,7 @@
 .add-comment textarea {
   width: 100%;
   padding: 15px;
-  font-family: 'Patrick Hand', cursive;
+  font-family: 'Gaegu', cursive;
   font-size: 1.1rem;
   background: white;
   border: 1px solid #eee;
@@ -513,7 +513,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Patrick Hand', cursive;
+  font-family: 'Gaegu', cursive;
   font-weight: 700;
   font-size: 1.2rem;
   color: #4a5568;

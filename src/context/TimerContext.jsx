@@ -1,7 +1,7 @@
 // src/context/TimerContext.jsx
-import React, { createContext, useContext, useState, useEffect, useRef } from "react";
+import React, { createContext, useContext, useState, useEffect, useRef, useCallback } from "react";
 import { db } from "../firebase/firebase";
-import { collection, getDocs, doc, setDoc, getDoc, addDoc, deleteDoc, query, where, onSnapshot, limit } from "firebase/firestore";
+import { collection, getDocs, doc, setDoc, getDoc, addDoc, deleteDoc, query, where, onSnapshot, limit, increment, updateDoc } from "firebase/firestore";
 import { useAuth } from "../firebase/AuthContext";
 import { PLANT_TYPES } from "../components/timer/PlantData";
 
@@ -145,6 +145,16 @@ export const TimerProvider = ({ children }) => {
     }
   };
 
+  const incrementWater = useCallback(async () => {
+    if (!currentUser) return;
+    try {
+      const gardenRef = doc(db, "users", currentUser.uid, "garden", "data");
+      await updateDoc(gardenRef, { water: increment(1) });
+    } catch (e) {
+      console.error("Failed to increment water", e);
+    }
+  }, [currentUser]);
+
 
   /* =========================
      ⏳ Timer Interval
@@ -183,30 +193,9 @@ export const TimerProvider = ({ children }) => {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [isRunning, mode, currentUser, customPomodoro, customBreak]); // Removed 'water' dependency to avoid reset
+  }, [isRunning, mode, currentUser, customPomodoro, customBreak, incrementWater]);
 
-  const incrementWater = async () => {
-    if (!currentUser) return;
-    // We can just use Firestore update.
-    const gardenRef = doc(db, "users", currentUser.uid, "garden", "data");
-    // Use setDoc with merge to avoid overwriting everything if not loaded
-  };
 
-  // Real implementation of Water Increment inside effect with correct dependency management or ref
-  // Let's separate the Water Logic to a different Effect that depends on 'secondsLeft'
-  useEffect(() => {
-    if (!isRunning || mode !== 'pomodoro' || !currentUser) return;
-
-    // If a minute passed (checking secondsLeft change)
-    // Initial: 1500. Next: 1499. 
-    // We want: 1440 (1 min passed).
-    const elapsed = (customPomodoro * 60) - secondsLeft;
-    if (elapsed > 0 && elapsed % 60 === 0) {
-      // 1 minute passed!
-      // Atomic increment or just save water + 1
-      saveGarden({ water: water + 1 });
-    }
-  }, [secondsLeft]); // This runs every second, but only triggers save every 60s
 
 
   // =========================

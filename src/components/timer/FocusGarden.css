@@ -85,7 +85,7 @@
 .garden-title {
     font-size: 20px;
     font-weight: 400;
-    font-family: 'Indie Flower', 'Chewy', cursive;
+    font-family: 'Gaegu', cursive;
     /* Handwritten feel */
     color: #4e342e;
     /* Ink Color */
@@ -101,7 +101,7 @@
     /* Oval stamp shape */
     cursor: pointer;
     font-size: 14px;
-    font-family: 'Patrick Hand', cursive;
+    font-family: 'Gaegu', cursive;
     transition: all 0.2s;
     font-weight: 700;
 }
@@ -184,7 +184,7 @@
 .plant-label {
     margin-top: 20px;
     font-size: 20px;
-    font-family: 'Patrick Hand', cursive;
+    font-family: 'Gaegu', cursive;
     /* Handwritten */
     color: #3e2723;
     border-bottom: 2px solid #8d6e63;
@@ -206,7 +206,7 @@
 .water-status {
     font-size: 16px;
     color: #0277bd;
-    font-family: 'Patrick Hand', cursive;
+    font-family: 'Gaegu', cursive;
     background: transparent;
     border: 1px dotted #0277bd;
     padding: 6px 16px;
@@ -222,7 +222,7 @@
     /* Slightly rounded rect */
     font-size: 16px;
     font-weight: 400;
-    font-family: 'Chewy', cursive;
+    font-family: 'Gaegu', cursive;
     cursor: pointer;
     transition: all 0.2s;
     display: flex;
@@ -395,7 +395,7 @@
     font-size: 24px;
     font-weight: 400;
     margin: 0;
-    font-family: 'Chewy', cursive;
+    font-family: 'Gaegu', cursive;
     color: #4e342e;
     text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.5);
     display: flex;
@@ -414,7 +414,7 @@
     background: #795548;
     padding: 4px 10px;
     border-radius: 12px;
-    font-family: 'Patrick Hand', cursive;
+    font-family: 'Gaegu', cursive;
     box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
     margin-left: 10px;
 }
@@ -441,7 +441,7 @@
     font-size: 20px;
     font-weight: 700;
     color: #3e2723;
-    font-family: 'Chewy', cursive;
+    font-family: 'Gaegu', cursive;
 }
 
 .garden-stat-lab {
@@ -449,7 +449,7 @@
     font-weight: 700;
     color: #6d4c41;
     text-transform: uppercase;
-    font-family: 'Patrick Hand', cursive;
+    font-family: 'Gaegu', cursive;
 }
 
 /* Enlarged Inventory Grid */
@@ -546,7 +546,7 @@
     right: 20px;
     background: transparent;
     border: none;
-    font-family: 'Patrick Hand', cursive;
+    font-family: 'Gaegu', cursive;
     font-size: 24px;
     color: #8d6e63;
     cursor: pointer;
@@ -573,7 +573,7 @@
     border: none;
     transform: translate(-50%, -100%) rotate(-2deg);
     margin-top: -20px;
-    font-family: 'Patrick Hand', cursive;
+    font-family: 'Gaegu', cursive;
 }
 
 .nature-tooltip::after {
@@ -650,7 +650,7 @@
     border-bottom: none;
     background: #eceff1;
     font-size: 12px;
-    font-family: 'Patrick Hand', cursive;
+    font-family: 'Gaegu', cursive;
     color: #78909c;
     cursor: pointer;
     transition: all 0.2s;
@@ -684,7 +684,7 @@
     font-size: 12px;
     font-weight: 700;
     color: #5d4037;
-    font-family: 'Patrick Hand', cursive;
+    font-family: 'Gaegu', cursive;
     margin-bottom: 8px;
     text-align: center;
 }
@@ -697,7 +697,7 @@
     padding: 4px;
     border-radius: 4px;
     color: #3e2723;
-    font-family: 'Patrick Hand', cursive;
+    font-family: 'Gaegu', cursive;
     background: transparent;
     border: 1px solid transparent;
 }
